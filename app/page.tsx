@@ -9,7 +9,7 @@ import News from '@/sections/home/News'
 
 const page = () => {
   return (
-    <main>
+    <main className='grid gap-18'>
       <Hero />
       <BestSeller />
       <CategoryGrid />
