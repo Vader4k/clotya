@@ -11,13 +11,15 @@ const page = () => {
   return (
     <main className='grid gap-18'>
       <Hero />
-      <BestSeller />
-      <CategoryGrid />
-      <Categories />
-      <Advert />
-      <CategoryGrid />
-      <News />
-      <Contact />
+      <div className='w-full max-w-7xl mx-auto'>
+        <BestSeller variant='wide'/>
+        <CategoryGrid />
+        <Categories />
+        <Advert />
+        <CategoryGrid />
+        <News />
+        <Contact />
+      </div>
     </main>
   )
 }
