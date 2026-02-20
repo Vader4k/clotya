@@ -17,7 +17,11 @@
     "radix-ui": "^1.4.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "tailwind-merge": "^3.5.0"
+    "tailwind-merge": "^3.5.0",
+    "@tanstack/react-query": "^5.85.5",
+    "@tanstack/react-query-devtools": "^5.81.5",
+    "motion": "^12.23.24",
+    "axios": "^1.11.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
