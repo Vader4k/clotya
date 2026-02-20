@@ -6,12 +6,12 @@ import { progressValue } from "@/features/products/utils/product.utils"
 import { ProductCardProps } from "../types/product.types"
 
 
-const ProductCard = ({ name, price, images, reviews, discountPrice, discount, inventory, sold, slug }: ProductCardProps) => {
+const ProductCard = ({ name, price, images, reviews, discountPrice, discount, inventory, sold, slug, showRange }: ProductCardProps) => {
   return (
     <div className="w-full h-145 flex flex-col justify-between gap-2 relative">
       <Link href={`/product/${slug}`} className="w-full h-[80%]">
         <div className="relative w-full h-full">
-          <Image src={images[0]} alt={name} fill className="object-cover" />
+          <Image src={images[0]} alt={name} fill className="object-cover"sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
         </div>
       </Link>
       {discount && (
@@ -34,7 +34,7 @@ const ProductCard = ({ name, price, images, reviews, discountPrice, discount, in
         <Star size={14} fill="gold" stroke="gold" />
         <p className="text-xs font-semibold">{reviews} review</p>
       </div>
-      {inventory && sold && (
+      {inventory && sold && showRange && (
         <div className="font-jost">
           <Progress value={progressValue({ inventory, sold })} />
           <div className="mt-2 flex items-center justify-between">

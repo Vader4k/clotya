@@ -21,7 +21,7 @@ const BestSeller = async ({ variant }: BestSellerProps) => {
         <>
           <div className="mt-10 flex items-start justify-between gap-6 w-full">
             <div className="w-[45%]">
-              <ProductCard {...bestSellerProducts[0]} />
+              <ProductCard {...bestSellerProducts[0]} showRange={true} />
             </div>
             <div className="w-[25%] min-h-156 banner3 font-jost p-14 text-white flex flex-col gap-4 items-start justify-center">
               <span className="font-semibold">Winter 2022 collection</span>
@@ -32,7 +32,7 @@ const BestSeller = async ({ variant }: BestSellerProps) => {
               </Link>
             </div>
             <div className="w-[45%]">
-              <ProductCard {...bestSellerProducts[1]} />
+              <ProductCard {...bestSellerProducts[1]} showRange={true} />
             </div>
           </div>
 
@@ -44,7 +44,7 @@ const BestSeller = async ({ variant }: BestSellerProps) => {
         <div className="mt-10 flex items-start justify-between gap-6 w-full">
           <div className="w-full max-w-1/2 flex items-start gap-6">
             {bestSellerProducts.slice(0, 2).map((product) => (
-              <ProductCard key={product.id} {...product} />
+              <ProductCard key={product.id} {...product} showRange={true} />
             ))}
           </div>
           <div className="w-full max-w-1/2  min-h-156 banner4 font-jost p-10 text-black flex flex-col gap-4 items-start ">
