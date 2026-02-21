@@ -9,14 +9,19 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.85.5",
+    "@tanstack/react-query-devtools": "^5.81.5",
+    "axios": "^1.11.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide": "^0.575.0",
     "lucide-react": "^0.575.0",
+    "motion": "^12.23.24",
     "next": "16.1.6",
     "radix-ui": "^1.4.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "swiper": "^12.1.2",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {

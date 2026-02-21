@@ -16,7 +16,7 @@ const page = () => {
         <CategoryGrid />
         <Categories />
         <Advert />
-        <CategoryGrid />
+        <BestSeller variant='close'/>
         <News />
         <Contact />
       </div>

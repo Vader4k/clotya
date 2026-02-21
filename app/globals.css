@@ -85,6 +85,69 @@ body {
   height: 100%;
 }
 
+.banner4 {
+  background-image: url("/home/close-banner.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
+.womenCat {
+  background-image: url("/home/women-cat.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
+.menCat {
+  background-image: url("/home/men-cat.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
+.shoeCat {
+  background-image: url("/home/shoe-cat.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
+.accessCat {
+  background-image: url("/home/accessories-cat.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
+.advert1 {
+  background-image: url("/home/advert1.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
+.advert2 {
+  background-image: url("/home/advert2.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
 .text-outline {
   -webkit-text-stroke: 3px white;
 }

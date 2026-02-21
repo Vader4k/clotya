@@ -1,4 +1,4 @@
-import { allProducts, Product } from "@/data/products";
+import { allProducts, type Product } from "@/data/products";
 
 export const productServices = {
     // get all products

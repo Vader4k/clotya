@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/shared/ui/Navbar";
 import Footer from "@/shared/ui/Footer";
 import PageHeader from "@/shared/ui/PageHeader";
+import Providers from "./Provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,7 +33,9 @@ export default function RootLayout({
       >
         <PageHeader />
         <Navbar />
-        {children}
+        <Providers>
+          {children}
+        </Providers>
         <Footer />
       </body>
     </html>

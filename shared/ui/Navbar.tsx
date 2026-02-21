@@ -10,7 +10,7 @@ const Navbar = () => {
         {/* links */}
         <div className="flex items-center gap-6">
           <Menu strokeWidth={1} />
-          <Image src="/logo.png" alt="logo" width={120} height={120} />
+          <Image src="/logo.png" alt="logo" width={120} height={120} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
           <div className="flex items-center gap-8 ml-4">
             {navLinks.map((link) => (
               <Link href={link.href} key={link.id} className="uppercase font-medium text-[0.9rem]">

@@ -1,4 +1,4 @@
-import { productServices } from "@/features/products/services/product.services";
+import { productServices } from "@/features/products/services/product.service";
 import ProductCard from "@/features/products/components/ProductCard";
 import { BestSellerProps } from "./types/home.types";
 import Link from "next/link";
@@ -21,7 +21,7 @@ const BestSeller = async ({ variant }: BestSellerProps) => {
         <>
           <div className="mt-10 flex items-start justify-between gap-6 w-full">
             <div className="w-[45%]">
-              <ProductCard {...bestSellerProducts[0]} />
+              <ProductCard {...bestSellerProducts[0]} showRange={true} />
             </div>
             <div className="w-[25%] min-h-156 banner3 font-jost p-14 text-white flex flex-col gap-4 items-start justify-center">
               <span className="font-semibold">Winter 2022 collection</span>
@@ -32,12 +32,30 @@ const BestSeller = async ({ variant }: BestSellerProps) => {
               </Link>
             </div>
             <div className="w-[45%]">
-              <ProductCard {...bestSellerProducts[1]} />
+              <ProductCard {...bestSellerProducts[1]} showRange={true} />
             </div>
           </div>
 
           <Discount />
         </>
+      )}
+
+      {variant === 'close' && (
+        <div className="mt-10 flex items-start justify-between gap-6 w-full">
+          <div className="w-full max-w-1/2 flex items-start gap-6">
+            {bestSellerProducts.slice(0, 2).map((product) => (
+              <ProductCard key={product.id} {...product} showRange={true} />
+            ))}
+          </div>
+          <div className="w-full max-w-1/2  min-h-156 banner4 font-jost p-10 text-black flex flex-col gap-4 items-start ">
+            <span className="font-semibold">Winter 2022 collection</span>
+            <h3 className="text-4xl font-medium">Valentin Paul <br />Essential Collection</h3>
+            <p className="text-sm text-balance font-inter font-light">Discover the latest trends in fashion with our new collection. Handpicked pieces that combine style, comfort, and quality...</p>
+            <Link href={'/shop'} className="mt-4 font-medium flex items-center gap-3">
+              Shop Collection <MoveRight />
+            </Link>
+          </div>
+        </div>
       )}
     </section>
   )
