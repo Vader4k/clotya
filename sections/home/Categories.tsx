@@ -2,7 +2,7 @@
 
 import CategoriesTab from "@/features/categories/components/CategoriesTab";
 import { useGetProductsByCategory } from "@/features/products/hooks/useProducts";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import ProductCard from "@/features/products/components/ProductCard";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -23,7 +23,13 @@ const Categories = () => {
   const [selected, setSelected] = useState(PRODUCT_CATEGORIES[0])
   const swiperRef = useRef<SwiperType>(null);
 
-  const { data: products, isLoading } = useGetProductsByCategory(selected)
+  const { data: products, isLoading, isError } = useGetProductsByCategory(selected)
+
+  const isEmpty = products?.length === 0
+
+  useEffect(() => {
+    swiperRef.current?.slideTo(0);
+  }, [selected])
 
 
   return (
@@ -83,6 +89,17 @@ const Categories = () => {
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-white/50 z-30">
             <div className="w-8 h-8 border-4 border-black border-t-transparent rounded-full animate-spin" />
+          </div>
+        )}
+        {isError && (
+          <div className="absolute inset-0 flex items-center justify-center bg-white/50 z-30 font-jost">
+            <p className="text-red-500">Error fetching products</p>
+          </div>
+        )}
+
+        {!isLoading && isEmpty && (
+          <div className="absolute inset-0 flex items-center justify-center bg-white/50 z-30 font-jost">
+            <p className="text-red-500">No products found for this category at this time</p>
           </div>
         )}
       </div>

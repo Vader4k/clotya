@@ -6,6 +6,7 @@ export const useGetProductsByCategory = (category: string) => {
         queryKey: ['products', category],
         queryFn: () => productServices.getByCategory(category),
         enabled: !!category,
+        placeholderData: (previousData) => previousData,
     })
 }
 
