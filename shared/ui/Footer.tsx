@@ -18,9 +18,9 @@ const Footer = () => {
   return (
     <footer className='2xl:h-[110vh] font-jost'>
       <div className='w-full bg-black text-white h-1/2 flex items-center justify-start py-10 2xl:py-0 px-5'>
-        <div className='w-full max-w-7xl mx-auto flex items-start justify-between gap-10'>
+        <div className='w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-start justify-between gap-10'>
           <div className='w-full flex-1 flex flex-col gap-3'>
-            <h3 className="text-3xl font-medium">Get our emails for info on <br />new items, sales and more.</h3>
+            <h3 className="text-2xl lg:text-3xl font-medium">Get our emails for info on <br className="hidden lg:block"/>new items, sales and more.</h3>
             <p className="text-neutral-300/60">We'll email you a voucher worth $10 off your first order over $50.</p>
 
             <div className="flex item-center mt-6">
@@ -32,7 +32,7 @@ const Footer = () => {
 
           <div>
             <div className='w-full flex-1 flex flex-col items-start gap-3'>
-              <h3 className="text-3xl font-medium">Need help? <br /> {phone}</h3>
+              <h3 className="text-2xl lg:text-3xl font-medium">Need help? <br /> {phone}</h3>
               <p className="text-neutral-300/60">We are available 8:00am — 7:00pm</p>
 
               <div className=" mt-4 flex items-center gap-2">
@@ -55,9 +55,9 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className='w-full bg-white text-black h-full max-h-1/2 py-20 2xl:py-10 px-5'>
+      <div className='w-full bg-white text-black h-full max-h-1/2 py-10 xl:py-20 2xl:py-10 px-5'>
         <div className='w-full max-w-7xl mx-auto h-full flex flex-col justify-between'>
-          <div className="grid grid-cols-6 gap-10 w-full">
+          <div className="grid 2xl:grid-cols-6 gap-10 w-full">
             <div className="col-span-2 grid gap-1">
               <Image src="/logo.png" alt="Logo" width={150} height={150} />
               <p className="text-neutral-600 font-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>

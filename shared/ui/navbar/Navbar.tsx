@@ -6,10 +6,10 @@ import CartIndicator from "./CartIndicator";
 
 const Navbar = () => {
   return (
-    <nav className="w-full border-y border-gray-200 font-jost px-3">
-      <div className="w-full max-w-7xl mx-auto flex items-center justify-between py-6">
+    <nav className="w-full border-y border-gray-200 font-jost px-3 sticky top-0 bg-white z-50">
+      <div className="w-full max-w-7xl mx-auto flex items-center justify-between py-4 lg:py-6">
         {/* links */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-6 w-full">
           <NavSheet />
           <div className="hidden 2xl:block">
             <Image src="/logo.png" alt="logo" width={120} height={120} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
@@ -19,7 +19,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="block 2xl:hidden">
+        <div className="block 2xl:hidden w-full">
           <Image src="/logo.png" alt="logo" width={120} height={120} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
         </div>
 

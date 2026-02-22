@@ -5,8 +5,8 @@ import Link from 'next/link'
 
 const BlogCard = ({ categories, intro, slug, title, date, image }: BlogCardProps) => {
   return (
-    <div className='w-full h-[430px] relative group overflow-hidden flex flex-col items-start justify-between font-jost'>
-      <Link href={`/blogs/${slug}`} className='block w-full h-[70%] relative'>
+    <div className='w-full h-[650px] lg:h-[430px] relative group overflow-hidden flex flex-col gap-4 items-start justify-between font-jost'>
+      <Link href={`/blogs/${slug}`} className='block w-full h-[85%] lg:h-[70%] relative'>
         <Image
           src={image}
           alt={title}
