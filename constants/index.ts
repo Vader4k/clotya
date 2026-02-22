@@ -1,4 +1,4 @@
-import { Truck, RefreshCcw, PhoneCall, CreditCard } from "lucide-react"
+import { Truck, RefreshCcw, PhoneCall, CreditCard, Store, User } from "lucide-react"
 
 export const navLinks = [
     {
@@ -132,3 +132,8 @@ export const sheetLinks: Record<string, SheetLink[]> = {
         { name: 'ready to wear', href: '/shop?category=ready to wear', tag: null },
     ]
 }
+
+export const bottomNavLinks = [
+    { name: "store", href: "/shop", icon: Store },
+    { name: "account", href: '/account', icon: User }
+]
