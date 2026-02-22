@@ -20,9 +20,9 @@ const BestSeller = async ({ variant }: BestSellerProps) => {
       {variant === 'wide' && (
         <>
           <div className="mt-10 flex flex-col 2xl:flex-row items-start justify-between gap-10 2xl:gap-6 w-full">
-            <div className="w-full flex 2xl:flex-none 2xl:w-[45%] gap-6">
+            <div className="w-full flex 2xl:flex-none 2xl:w-[25%] gap-6">
               <ProductCard {...bestSellerProducts[0]} showRange={true} />
-              <div className="w-full 2xl:hidden">
+              <div className="w-full 2xl:hidden 2xl:w-0">
                 <ProductCard {...bestSellerProducts[1]} showRange={true} />
               </div>
             </div>
