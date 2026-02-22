@@ -10,7 +10,7 @@ const CategoriesTab = ({ selected, setSelected, categories }: TabProps) => {
                     <button
                         key={category}
                         onClick={() => setSelected(category)}
-                        className={`${selected === category ? "text-black" : "text-gray-300 hover:text-gray-400"} text-2xl capitalize font-jost font-medium transition-colors duration-300`}
+                        className={`${selected === category ? "text-black" : "text-gray-300 hover:text-gray-400"} text-xl md:text-2xl capitalize font-jost font-medium transition-colors duration-300`}
                     >
                         {category}
                     </button>

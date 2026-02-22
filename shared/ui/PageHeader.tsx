@@ -14,7 +14,7 @@ const PageHeader = () => {
   return (
     <header className='w-full font-jost'>
       <div className='uppercase text-xs text-center py-3 bg-[#1a4744] text-white'>summer sale for all swim suits and free express international delivery - off 50%! <span className='font-bold'>shop now</span></div>
-      <div className='w-full max-w-7xl mx-auto flex items-center justify-between py-1'>
+      <div className='w-full max-w-7xl mx-auto hidden 2xl:flex items-center justify-between py-1'>
         <div className='flex items-center gap-10'>
           <button className='flex items-center gap-2 text-xs text-black'>
             <Instagram size={16} strokeWidth={2} />

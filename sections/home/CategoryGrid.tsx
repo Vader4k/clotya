@@ -45,25 +45,25 @@ const CategoryGrid = async () => {
   const access = getCat("accessories");
 
   return (
-    <section className="h-160 w-full flex items-start gap-8">
+    <section className="h-300 lg:h-160 w-full flex flex-col lg:flex-row items-start gap-4 2xl:gap-8">
       {/* PRIMARY FEATURE (Greatest Visual Weight) */}
-      <div className="w-1/2 h-full">
+      <div className="w-full lg:w-1/2 h-full">
         <CategoryCard category={women!} className="womenCat" />
       </div>
 
       {/* SECONDARY & TERTIARY AREA */}
-      <div className="w-1/2 h-full flex flex-col gap-8">
+      <div className="w-full lg:w-1/2 h-full flex flex-col gap-4 2xl:gap-8">
         {/* Secondary Focus */}
         <div className="h-1/2">
           <CategoryCard category={men!} className="menCat" />
         </div>
 
         {/* Supporting Categories */}
-        <div className="h-1/2 flex items-start gap-8">
-          <div className="w-1/2 h-full">
+        <div className="h-1/2 flex flex-col md:flex-row items-start gap-4 2xl:gap-8">
+          <div className="w-full md:w-1/2 h-full">
             <CategoryCard category={shoes!} className="shoeCat" />
           </div>
-          <div className="w-1/2 h-full">
+          <div className="w-full md:w-1/2 h-full">
             <CategoryCard category={access!} className="accessCat" />
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { Truck, RefreshCcw, PhoneCall, CreditCard } from "lucide-react"
+import { Truck, RefreshCcw, PhoneCall, CreditCard, Store, User } from "lucide-react"
 
 export const navLinks = [
     {
@@ -98,3 +98,42 @@ export const footerLinks = {
 
 export const phone = "(+800) 1234 5678 90"
 export const email = "info@gmail.com"
+
+export interface SheetLink {
+    name: string
+    href: string
+    tag?: string | null
+}
+
+export const sheetLinks: Record<string, SheetLink[]> = {
+    'main menu': [
+        { name: 'home', href: '/' },
+        { name: 'shop', href: '/shop' },
+        { name: 'women', href: '/shop?category=women' },
+        { name: 'men', href: '/shop?category=men' },
+        { name: 'outerwear', href: '/shop?category=outerwear' },
+        { name: 'blog', href: '/blog' },
+        { name: 'contact', href: '/contact' }
+    ],
+    'categories': [
+        { name: 'kids', href: '/shop?category=kids', tag: null },
+        { name: 'baby', href: '/shop?category=baby', tag: null },
+        { name: 'shoes', href: '/shop?category=shoes', tag: 'hot' },
+        { name: 'bags', href: '/shop?category=bags', tag: null },
+        { name: 'accessories', href: '/shop?category=accessories', tag: null },
+        { name: 'watches', href: '/shop?category=watches', tag: null },
+        { name: 'cargo trousers', href: '/shop?category=cargo trousers', tag: 'new' },
+        { name: 'outerwear', href: '/shop?category=outerwear', tag: null },
+        { name: 'wallets', href: '/shop?category=wallets', tag: null },
+        { name: 'belts', href: '/shop?category=belts', tag: null },
+        { name: 'best sellers', href: '/shop?category=best sellers', tag: null },
+        { name: 'featured products', href: '/shop?category=featured products', tag: null },
+        { name: 'new arrivals', href: '/shop?category=new arrivals', tag: 'save 25%' },
+        { name: 'ready to wear', href: '/shop?category=ready to wear', tag: null },
+    ]
+}
+
+export const bottomNavLinks = [
+    { name: "store", href: "/shop", icon: Store },
+    { name: "account", href: '/account', icon: User }
+]

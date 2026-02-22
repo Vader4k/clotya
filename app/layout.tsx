@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Inter, Jost } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/shared/ui/Navbar";
+import Navbar from "@/shared/ui/navbar/Navbar";
 import Footer from "@/shared/ui/Footer";
 import PageHeader from "@/shared/ui/PageHeader";
 import Providers from "./Provider";
+import BottomNav from "@/shared/ui/navbar/BottomNav";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -70,6 +71,9 @@ export default function RootLayout({
         <Providers>
           {children}
         </Providers>
+        <div className="xl:hidden">
+          <BottomNav />
+        </div>
         <Footer />
       </body>
     </html>
