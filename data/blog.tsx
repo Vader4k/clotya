@@ -36,7 +36,7 @@ export const blogs: BlogDetails[] = [
         title: "New finds from tuckerneck",
         slug: 'new-finds-from-tuckerneck',
         intro: 'Discover the latest trends and styles in fashion. From runway looks to everyday wear, we bring you the best products that shape the world of fashion.',
-        categories: ['collection', 'clothing', 'dresses', 'fashion'],
+        categories: ['fashion', 'clothing', 'dresses'],
         tags: ['clothing', 'fashion', 'products', 'store'],
         date: 'April 12, 2026',
         image: '/blog/blog-2.webp',
