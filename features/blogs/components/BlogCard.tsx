@@ -16,7 +16,7 @@ const BlogCard = ({ categories, id, intro, slug, title, date, image }: BlogCardP
         />
       </Link>
       <div className='w-full flex items-center gap-2'>
-        <p className='text-sm font-medium text-gray-500'>{categories[0].toUpperCase()}</p>
+        <p className='text-xs font-semibold text-gray-500'>{categories[0].toUpperCase()}</p>
         <p className='text-xs text-gray-500'>—</p>
         <p className='text-xs text-gray-500 capitalize'>{date}</p>
       </div>
