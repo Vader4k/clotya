@@ -18,7 +18,7 @@ const page = () => {
         <Advert />
         <BestSeller variant='close' />
         <News />
-        <Contact />
+        {/* <Contact /> */}
       </div>
     </main>
   )
