@@ -8,8 +8,8 @@ import { ProductCardProps } from "../types/product.types"
 
 const ProductCard = ({ name, price, images, reviews, discountPrice, discount, inventory, sold, slug, showRange }: ProductCardProps) => {
   return (
-    <div className="w-full h-145 flex flex-col justify-between gap-2 relative">
-      <Link href={`/product/${slug}`} className="w-full h-[80%]">
+    <div className="w-full h-200 2xl:h-145 flex flex-col justify-between gap-2 relative">
+      <Link href={`/product/${slug}`} className="w-full h-[85%] 2xl:h-[80%]">
         <div className="relative w-full h-full">
           <Image src={images[0]} alt={name} fill className="object-cover"sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
         </div>

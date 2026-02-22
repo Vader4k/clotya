@@ -11,7 +11,7 @@ const page = () => {
   return (
     <main className='grid gap-18'>
       <Hero />
-      <div className='w-full max-w-7xl mx-auto'>
+      <div className='w-full max-w-7xl mx-auto px-3 min-w-0'>
         <BestSeller variant='wide' />
         <CategoryGrid />
         <Categories />

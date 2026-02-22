@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { BlogCardProps } from '../types/blog.types'
 import Link from 'next/link'
 
-const BlogCard = ({ categories, id, intro, slug, title, date, image }: BlogCardProps) => {
+const BlogCard = ({ categories, intro, slug, title, date, image }: BlogCardProps) => {
   return (
     <div className='w-full h-[430px] relative group overflow-hidden flex flex-col items-start justify-between font-jost'>
       <Link href={`/blogs/${slug}`} className='block w-full h-[70%] relative'>
@@ -21,7 +21,7 @@ const BlogCard = ({ categories, id, intro, slug, title, date, image }: BlogCardP
         <p className='text-xs text-gray-500 capitalize'>{date}</p>
       </div>
 
-      <h4 className='text-xl font-semibold text-gray-900 capitalize'>{title}</h4>
+      <h4 className='text-xl font-semibold text-gray-900 capitalize line-clamp-1'>{title}</h4>
       <p className='text-sm font-light text-gray-600 line-clamp-2 font-inter'>{intro}</p>
     </div>
   )

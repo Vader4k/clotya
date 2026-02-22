@@ -6,7 +6,7 @@ const News = async () => {
   const blogData = await blogService.getAll()
 
   return (
-    <section className="h-screen w-full max-w-7xl mx-auto my-14 py-14 border-y">
+    <section className="2xl:h-screen w-full max-w-7xl mx-auto my-14 py-14 border-y">
       <div className="flex flex-col items-center justify-center text-center">
         <h3 className="text-3xl font-medium font-jost">Our Latest News</h3>
         <p className=" font-light text-gray-600 mt-4 max-w-3xl text-sm">
@@ -16,7 +16,7 @@ const News = async () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 2xl:gap-6 mt-16">
         {blogData.map((blog) => (
           <BlogCard key={blog.id} {...blog} />
         ))}

@@ -16,8 +16,8 @@ const StoreLinks = ({ href, children, icon }: { href: string, children: React.Re
 
 const Footer = () => {
   return (
-    <footer className='h-[110vh] font-jost'>
-      <div className='w-full bg-black text-white h-1/2 flex items-center justify-start'>
+    <footer className='2xl:h-[110vh] font-jost'>
+      <div className='w-full bg-black text-white h-1/2 flex items-center justify-start py-10 2xl:py-0 px-5'>
         <div className='w-full max-w-7xl mx-auto flex items-start justify-between gap-10'>
           <div className='w-full flex-1 flex flex-col gap-3'>
             <h3 className="text-3xl font-medium">Get our emails for info on <br />new items, sales and more.</h3>
@@ -55,7 +55,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className='w-full bg-white text-black h-full max-h-1/2 py-10'>
+      <div className='w-full bg-white text-black h-full max-h-1/2 py-20 2xl:py-10 px-5'>
         <div className='w-full max-w-7xl mx-auto h-full flex flex-col justify-between'>
           <div className="grid grid-cols-6 gap-10 w-full">
             <div className="col-span-2 grid gap-1">

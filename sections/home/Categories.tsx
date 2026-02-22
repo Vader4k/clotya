@@ -33,19 +33,19 @@ const Categories = () => {
 
 
   return (
-    <section className="w-full max-w-7xl mx-auto mt-14 px-4 overflow-x-hidden">
+    <section className="w-full max-w-7xl mx-auto mt-14 overflow-x-hidden">
       <div className="w-full">
         <CategoriesTab selected={selected} setSelected={setSelected} categories={PRODUCT_CATEGORIES} />
       </div>
 
-      <div className="my-12 relative group swiper-container-custom">
-        <div className="w-full">
+      <div className="my-12 relative group swiper-container-custom min-w-0">
+        <div className="w-full min-w-0">
           <Swiper
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
             modules={[Navigation, Pagination]}
-            spaceBetween={32}
+            spaceBetween={16}
             slidesPerView={1}
             breakpoints={{
               640: { slidesPerView: 2 },
