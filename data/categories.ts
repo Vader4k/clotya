@@ -53,5 +53,69 @@ export const allCategories: Category[] = [
         desc: "",
         totalProducts: 1,
         tags: ['']
-    }
+    },
+    {
+        id: '5',
+        slug: 'bags',
+        name: 'bags',
+        desc: "",
+        totalProducts: 1,
+        tags: ['']
+    },
+    {
+        id: '6',
+        slug: 'belts',
+        name: 'belts',
+        desc: "",
+        totalProducts: 1,
+        tags: ['']
+    },
+    {
+        id: '7',
+        slug: 'outerwear',
+        name: 'outerwear',
+        desc: "",
+        totalProducts: 1,
+        tags: ['']
+    },
+    {
+        id: '8',
+        slug: 'cargo-trousers',
+        name: 'cargo trousers',
+        desc: "",
+        totalProducts: 1,
+        tags: ['']
+    },
+    {
+        id: '9',
+        slug: 'baby',
+        name: 'baby',
+        desc: "",
+        totalProducts: 1,
+        tags: ['']
+    },
+    {
+        id: '10',
+        slug: 'kids',
+        name: 'kids',
+        desc: "",
+        totalProducts: 1,
+        tags: ['']
+    },
+    {
+        id: '11',
+        slug: 'wallets',
+        name: 'wallets',
+        desc: "",
+        totalProducts: 1,
+        tags: ['']
+    },
+    {
+        id: '12',
+        slug: 'watches',
+        name: 'watches',
+        desc: "",
+        totalProducts: 1,
+        tags: ['']
+    },
 ]

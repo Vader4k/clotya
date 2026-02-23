@@ -20,9 +20,14 @@ export const normalizeParams = (
         ? Number(params.page)
         : 1,
 
-    price:
-      typeof params.price === "string"
-        ? Number(params.price)
+    min_price:
+      typeof params.min_price === "string"
+        ? Number(params.min_price)
+        : undefined,
+
+    max_price:
+      typeof params.max_price === "string"
+        ? Number(params.max_price)
         : undefined,
   }
 }

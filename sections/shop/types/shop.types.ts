@@ -1,3 +1,3 @@
 export type PageProp = {
-    searchParams: Record<string, string | string[] | undefined>
-}
+    searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
