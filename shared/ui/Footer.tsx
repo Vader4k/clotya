@@ -55,7 +55,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className='w-full bg-white text-black h-full max-h-1/2 py-10 xl:py-20 2xl:py-10 px-3'>
+      <div className='w-full bg-white text-black h-full max-h-1/2 py-10 xl:py-20 2xl:py-10 px-3 mb-16 xl:mb-0'>
         <div className='w-full max-w-7xl mx-auto h-full flex flex-col justify-between'>
           <div className="grid 2xl:grid-cols-6 gap-10 w-full">
             <div className="col-span-2 grid gap-2">
@@ -77,7 +77,7 @@ const Footer = () => {
             ))}
           </div>
 
-          <div className="w-full border-t border-neutral-200 mt-10 pt-5">
+          <div className="w-full border-t border-neutral-200 mt-10 pt-5 hidden xl:block">
             <p className="text-center text-sm text-neutral-600">© 2026 Clotya. All rights reserved.</p>
           </div>
         </div>

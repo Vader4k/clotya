@@ -14,13 +14,13 @@ const BestSeller = async ({ variant }: BestSellerProps) => {
     <section className='w-full max-w-7xl mx-auto'>
       <div className='w-full flex items-center flex-col justify-center'>
         <h2 className='text-3xl font-jost font-medium'>Best Seller Products</h2>
-        <p className='my-4 font-jost text-gray-500 text-center text-balance font-light'>Explore our exclusive collection of premium handpicked products that have been carefully selected just for you to ensure that every single item exceeds your highest expectations in both timeless quality and style</p>
+        <p className='my-4 font-jost text-gray-500 text-center md:text-balance font-light text-sm md:text-base'>Explore our exclusive collection of premium handpicked products that have been carefully selected just for you to ensure that every single item exceeds your highest expectations in both timeless quality and style</p>
       </div>
 
       {variant === 'wide' && (
         <>
           <div className="mt-10 flex flex-col 2xl:flex-row items-start justify-between gap-10 2xl:gap-6 w-full">
-            <div className="w-full flex flex-col sm:flex-row 2xl:flex-none 2xl:w-[22%] gap-6">
+            <div className="w-full flex flex-row 2xl:flex-none 2xl:w-[22%] gap-4">
               <ProductCard {...bestSellerProducts[0]} showRange={true} />
               <div className="w-full 2xl:hidden 2xl:w-0">
                 <ProductCard {...bestSellerProducts[1]} showRange={true} />
@@ -45,7 +45,7 @@ const BestSeller = async ({ variant }: BestSellerProps) => {
 
       {variant === 'close' && (
         <div className="mt-10 flex flex-col 2xl:flex-row items-start justify-between gap-10 2xl:gap-6 w-full">
-          <div className="w-full 2xl:max-w-1/2 flex flex-col sm:flex-row items-start gap-6">
+          <div className="w-full 2xl:max-w-1/2 flex items-start gap-4">
             {bestSellerProducts.slice(0, 2).map((product) => (
               <ProductCard key={product.id} {...product} showRange={true} />
             ))}
