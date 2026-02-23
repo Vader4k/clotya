@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 const DisplaySelector = ({ display, setDisplay, handleLimitChange, handleSortChange, limit, sort }: DisplaySelectorProps) => {
 
   return (
-    <div className='flex items-center justify-between'>
+    <div className='hidden md:flex items-center justify-between'>
       <div className='flex items-center gap-6'>
         <div className='flex items-center gap-6'>
           <button title='Grid view' onClick={() => setDisplay('grid')} className={`cursor-pointer transition-colors ${display === 'grid' ? 'text-black' : 'text-gray-400'}`}><LayoutGrid size={18} strokeWidth={1.5} /></button>

@@ -20,7 +20,7 @@ const NavbarLogo = ({width, height}: {width: number, height: number}) => {
 
 const Navbar = () => {
   return (
-    <nav className="w-full border-y border-gray-200 font-jost px-3 sticky lg:relative top-0 bg-white z-50">
+    <nav className="w-full border-y border-gray-200 font-jost px-3 sticky xl:relative top-0 bg-white z-50">
       <div className="w-full max-w-7xl mx-auto flex items-center justify-between py-4 lg:py-6">
         {/* links */}
         <div className="flex items-center gap-8 w-full flex-1">
