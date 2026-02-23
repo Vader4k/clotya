@@ -1,3 +1,5 @@
+import { Category } from "@/data/categories";
+
 export type ProductCardProps = {
   id: string,
   name: string,
@@ -13,5 +15,27 @@ export type ProductCardProps = {
   }[],
   sold?: number,
   slug: string
-  showRange: boolean
+  showRange?: boolean
+  description?: string
+}
+
+export type ProductFilters = {
+  category?: string
+  color?: string
+  size?: string
+  price?: number
+  page?: number
+  limit?: number
+}
+
+export interface FilterProps {
+  categories: Category[]
+  selectedCategories: string;
+  setSelectedCategories: (categories: string) => void
+}
+
+export interface PriceFilterProps {
+  price?: number[]
+  setPrice?: (price: number[]) => void
+  onFilter?: (price: number[]) => void
 }

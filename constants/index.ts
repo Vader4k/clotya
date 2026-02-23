@@ -137,3 +137,19 @@ export const bottomNavLinks = [
     { name: "store", href: "/shop", icon: Store },
     { name: "account", href: '/account', icon: User }
 ]
+
+export const colors = [
+    { name: 'red', hex: '#ef4444' },
+    { name: 'blue', hex: '#3b82f6' },
+    { name: 'green', hex: '#10b981' },
+    { name: 'yellow', hex: '#f59e0b' },
+    { name: 'purple', hex: '#8b5cf6' },
+    { name: 'pink', hex: '#ec4899' },
+    { name: 'orange', hex: '#f97316' },
+    { name: 'black', hex: '#1f2937' },
+    { name: 'white', hex: '#f9fafb' },
+    { name: 'gray', hex: '#6b7280' },
+    { name: 'brown', hex: '#7c2d12' },
+]
+
+export const sizes = ['xss', 'xs', 's', 'm', 'l', 'xl', 'xxl', 'xxxl']

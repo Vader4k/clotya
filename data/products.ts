@@ -42,7 +42,8 @@ export const allProducts: Product[] = [
                 size: 'XL',
                 quantity: 25,
             },
-        ]
+        ],
+        description: 'A chic and comfortable sleeveless ribbed short dress, perfect for casual outings and warm summer days. Effortlessly stylish.'
     },
     {
         id: '2',
@@ -75,7 +76,8 @@ export const allProducts: Product[] = [
                 size: 'XL',
                 quantity: 25,
             },
-        ]
+        ],
+        description: 'Experience ultimate comfort with these basic relax-fit leggings. Ideal for lounging or light workouts, they offer a flattering fit.'
     },
     {
         id: '3',
@@ -85,7 +87,7 @@ export const allProducts: Product[] = [
         tags: ['shirts', 'men', 'overshirt', 'Tshirt'],
         discountPrice: 112.00,
         discount: 14,
-        images: ['/overshirt1.webp', '/overshirt2.webp'],
+        images: ['/overshirt1.webp', '/overshirt2.jpg'],
         reviews: 1,
         isBestSeller: false,
         price: 129.90,
@@ -115,7 +117,8 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
-        ]
+        ],
+        description: 'This check overshirt features unique pocket details, combining a rugged aesthetic with modern functionality for a versatile layering piece.'
     },
     {
         id: '4',
@@ -155,7 +158,8 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
-        ]
+        ],
+        description: 'Express your style with this world wide cup print t-shirt. Crafted from soft cotton for all-day comfort and breathability.'
     },
     {
         id: '5',
@@ -195,7 +199,8 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
-        ]
+        ],
+        description: 'Stay cozy and trendy in this slogan hoodie, featuring subtle label details and a relaxed fit for a modern look.'
     },
     {
         id: '6',
@@ -235,7 +240,8 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
-        ]
+        ],
+        description: 'Brighten your wardrobe with this vibrant orange pouch pocket hoodie. A bold choice that combines comfort with a striking color.'
     },
     {
         id: '7',
@@ -245,7 +251,7 @@ export const allProducts: Product[] = [
         tags: ['men', 'trousers', 'cargo'],
         discountPrice: 49.99,
         discount: 29,
-        images: ['/pocket1.jpeg', '/pocket2.jpeg'],
+        images: ['/trousers1.jpeg', '/trousers2.jpeg'],
         reviews: 1,
         isBestSeller: false,
         price: 69.99,
@@ -275,7 +281,8 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
-        ]
+        ],
+        description: 'Durable and practical, these ripstop cargo trousers feature multiple pockets and a rugged design for all your outdoor adventures.'
     },
     {
         id: '8',
@@ -313,7 +320,8 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
-        ]
+        ],
+        description: 'A classic relaxed fit plaid flannel shirt that never goes out of style. Perfect for layering over your favorite t-shirt.'
     },
     {
         id: '9',
@@ -353,14 +361,15 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
-        ]
+        ],
+        description: 'This quilted bomber jacket with ribbed trims provides both warmth and a sleek, contemporary silhouette for any urban explorer.'
     },
     {
         id: '10',
         slug: 'pouch-pocket-hoodie',
         name: 'Pouch pocket hoodie',
         category: ['men', 'women'],
-        tags: [ 'hoodie', 'pouch', 'ribbed'],
+        tags: ['hoodie', 'pouch', 'ribbed'],
         images: ['/pocket1.jpeg', '/pocket2.jpeg'],
         reviews: 1,
         discountPrice: 27.40,
@@ -393,6 +402,7 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
-        ]
+        ],
+        description: 'A versatile pouch pocket hoodie that offers a perfect blend of style and comfort, making it an essential everyday staple.'
     }
 ]

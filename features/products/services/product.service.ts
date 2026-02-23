@@ -1,8 +1,9 @@
 import { allProducts, type Product } from "@/data/products";
+import { ProductFilters } from "../types/product.types";
 
 export const productServices = {
     // get all products
-    getAll: async (): Promise<Product[]> => {
+    getAll: async (filters: ProductFilters): Promise<Product[]> => {
         return Promise.resolve(allProducts);
     },
 
