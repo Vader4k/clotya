@@ -50,7 +50,6 @@ const PriceFilter = ({ price = [0, 2000], onFilter }: PriceFilterProps) => {
           step={10}
           value={localPrice}
           onValueChange={handleValueChange}
-          className="mb-8"
         />
       </div>
 
