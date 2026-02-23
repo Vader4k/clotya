@@ -17,7 +17,7 @@ export function NavSheet() {
         <Sheet>
             <SheetTrigger asChild>
                 <button>
-                    <Menu strokeWidth={1} />
+                    <Menu size={25} strokeWidth={0.7} />
                 </button>
             </SheetTrigger>
             <SheetContent side="left">

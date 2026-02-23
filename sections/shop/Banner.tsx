@@ -2,8 +2,8 @@ import React from "react";
 
 const Banner = () => {
   return (
-    <div className="w-full min-h-82 shopBg flex flex-col gap-6 p-16">
-      <h2 className="font-jost text-4xl">
+    <div className="w-ful min-h-40 lg:min-h-82 shopBg flex flex-col gap-6 p-10 md:p-16">
+      <h2 className="font-jost text-2xl md:text-4xl">
         Plus-Size Style for <br />
         Every Season
       </h2>

@@ -66,15 +66,15 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jost.variable} antialiased`}
       >
-        <PageHeader />
-        <Navbar />
         <Providers>
+          <PageHeader />
+          <Navbar />
           {children}
+          <div className="xl:hidden">
+            <BottomNav />
+          </div>
+          <Footer />
         </Providers>
-        <div className="xl:hidden">
-          <BottomNav />
-        </div>
-        <Footer />
       </body>
     </html>
   );
