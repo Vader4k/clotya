@@ -6,14 +6,14 @@ const ContactForm = () => {
         <form className="font-jost">
             <div className="space-y-3">
                 <span className="text-red-600 text-lg">Contact us</span>
-                <h1 className="text-4xl font-medium mt-3">Get in touch</h1>
-                <p className="text-gray-700">
+                <h1 className="md:text-4xl text-3xl font-medium mt-3">Get in touch</h1>
+                <p className="text-gray-700 text-sm xl:text-base">
                     We are always happy to help you with any questions or concerns you may have. Send us a message and we'll get back to you as soon as possible.
                 </p>
             </div>
 
             <div className="mt-10 grid gap-6">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid xl:grid-cols-2 gap-6 xl:gap-4">
                     <div>
                         <label htmlFor="name" className="text-sm">Your Name*</label>
                         <Input placeholder="Your Name" className="mt-2" />
