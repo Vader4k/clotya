@@ -23,7 +23,7 @@ const Navbar = () => {
     <nav className="w-full border-y border-gray-200 font-jost px-3 sticky top-0 bg-white z-50">
       <div className="w-full max-w-7xl mx-auto flex items-center justify-between py-4 lg:py-6">
         {/* links */}
-        <div className="flex items-center gap-6 w-full flex-1">
+        <div className="flex items-center gap-8 w-full flex-1">
           <NavSheet />
           <div className="hidden xl:block">
             <NavbarLogo width={120} height={120} />

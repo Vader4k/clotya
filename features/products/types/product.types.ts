@@ -15,3 +15,12 @@ export type ProductCardProps = {
   slug: string
   showRange: boolean
 }
+
+export type ProductFilters = {
+  category?: string
+  color?: string
+  size?: string
+  price?: number
+  page?: number
+  limit?: number
+}
