@@ -15,7 +15,8 @@ export type ProductCardProps = {
   }[],
   sold?: number,
   slug: string
-  showRange: boolean
+  showRange?: boolean
+  description?: string
 }
 
 export type ProductFilters = {

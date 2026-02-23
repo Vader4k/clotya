@@ -10,8 +10,9 @@ const ProductCard = ({ name, price, images, reviews, discountPrice, discount, in
   return (
     <div className="w-full h-150 lg:h-200 2xl:h-145 flex flex-col justify-between gap-2 relative">
       <Link href={`/product/${slug}`} className="w-full h-[85%] 2xl:h-[80%]">
-        <div className="relative w-full h-full">
-          <Image src={images[0]} alt={name} fill className="object-cover object-top"sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+        <div className="relative w-full h-full group">
+          <Image src={images[0]} alt={name} fill className="object-cover object-top z-1" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+          {images[1] && <Image src={images[1]} alt={name} fill className="object-cover object-top absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:z-2" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />}
         </div>
       </Link>
       {discount && (
