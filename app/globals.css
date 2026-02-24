@@ -58,24 +58,6 @@ body {
   font-family: var(--font-inter);
 }
 
-.banner1 {
-  background-image: url("/home/men-banner.webp");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
-}
-
-.banner2 {
-  background-image: url("/home/women-banner.webp");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
-}
-
 .banner3 {
   background-image: url("/home/wide-banner.jpg");
   background-size: cover;
