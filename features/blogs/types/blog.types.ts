@@ -6,11 +6,13 @@ export type BlogCardProps = {
     date: string;
     image: string;
     intro: string;
+    style: string;
+    blogPage?: boolean;
+    tags: string[];
 }
 
 export interface BlogDetails extends BlogCardProps {
     details: string;
-    tags: string[];
     author: string;
     authorImage: string;
     authorBio: string;
@@ -24,3 +26,4 @@ export interface Comment {
     comment: string;
     date: string;
 }
+
