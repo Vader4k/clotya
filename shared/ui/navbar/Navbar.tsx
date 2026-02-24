@@ -12,6 +12,7 @@ const NavbarLogo = ({width, height}: {width: number, height: number}) => {
       width={width}
       height={height}
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      className="aspect-[4.49]"
       priority
     />
   )
@@ -26,7 +27,7 @@ const Navbar = () => {
         <div className="flex items-center gap-8 w-full flex-1">
           <NavSheet />
           <div className="hidden xl:block">
-            <NavbarLogo width={120} height={120} />
+            <NavbarLogo width={120} height={120}/>
           </div>
           <div className="hidden xl:block">
             <NavLinks />

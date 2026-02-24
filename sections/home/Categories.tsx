@@ -38,7 +38,7 @@ const Categories = () => {
         <CategoriesTab selected={selected} setSelected={setSelected} categories={PRODUCT_CATEGORIES} />
       </div>
 
-      <div className="my-12 relative group swiper-container-custom min-w-0">
+      <div className="my-12 relative swiper-container-custom min-w-0">
         <div className="w-full min-w-0">
           <Swiper
             onSwiper={(swiper) => {

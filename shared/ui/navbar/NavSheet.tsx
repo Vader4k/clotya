@@ -16,7 +16,7 @@ export function NavSheet() {
     return (
         <Sheet>
             <SheetTrigger asChild>
-                <button>
+                <button name="menu-open" title="menu-open">
                     <Menu size={25} strokeWidth={0.7} />
                 </button>
             </SheetTrigger>
@@ -28,7 +28,7 @@ export function NavSheet() {
                     <SheetDescription>
                     </SheetDescription>
                 </SheetHeader>
-                <div className="mask-[linear-gradient(to_bottom,#000,#000_80%,transparent_100%)] grid flex-1 auto-rows-min gap-6 px-6 pb-12 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarGutter: 'stable' }}>
+                <div className="mask-[linear-gradient(to_bottom,#000,#000_80%,transparent_100%)] grid flex-1 auto-rows-min gap-6 px-6 pb-12 overflow-y-auto" aria-hidden="false" aria-label="progress-bar" style={{ scrollbarWidth: 'thin', scrollbarGutter: 'stable' }}>
                     {Object.entries(sheetLinks).map(([key, value]) => (
                         <div key={key} className="grid gap-4 font-jost">
                             <h3 className="text-sm font-medium capitalize">{key}</h3>
