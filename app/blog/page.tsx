@@ -11,11 +11,11 @@ const BlogPage = async() => {
 
   return (
     <main className='w-full h-full'>
-      <div className='w-full max-w-7xl mx-auto my-14 px-3 flex items-start justify-between gap-14'>
-        <div className='w-[75%]'>
-          <BlogDisplay blogPosts={blogPosts} />
+      <div className='w-full max-w-7xl mx-auto xl:my-14 my-8 px-3 md:px-14 lg:px-10 xl:px-3 flex flex-col lg:flex-row items-start justify-between xl:gap-14 gap-8'>
+        <div className='w-full lg:w-[75%]'>
+          <BlogDisplay blogPosts={blogPosts}/>
         </div>
-        <aside className='w-[25%] sticky top-5'>
+        <aside className='w-full lg:w-[25%] sticky top-5'>
           <BlogFilters relatedPosts={relatedPosts} categories={categories} tags={tags}/>
         </aside>
       </div>
