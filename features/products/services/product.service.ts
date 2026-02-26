@@ -41,4 +41,11 @@ export const productServices = {
             allProducts.filter((product) => product.isBestSeller),
         );
     },
+
+    // get related products
+    getRelated: async (slug: string, category: string[]): Promise<Product[]> => {
+        return Promise.resolve(
+            allProducts.filter((product) => product.slug !== slug && product.category.some((cat) => category.includes(cat))),
+        );
+    },
 };

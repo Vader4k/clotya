@@ -173,10 +173,6 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
-            {
-                size: 'XXL',
-                quantity: 25,
-            },
         ],
                 colors: [
             {
@@ -231,10 +227,6 @@ export const allProducts: Product[] = [
             },
             {
                 size: 'XL',
-                quantity: 25,
-            },
-            {
-                size: 'XXL',
                 quantity: 25,
             },
             {
@@ -301,10 +293,6 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
-            {
-                size: 'XXL',
-                quantity: 25,
-            },
         ],
                 colors: [
             {
@@ -359,10 +347,6 @@ export const allProducts: Product[] = [
             },
             {
                 size: 'XL',
-                quantity: 25,
-            },
-            {
-                size: 'XXL',
                 quantity: 25,
             },
             {
@@ -429,10 +413,6 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
-            {
-                size: 'XXL',
-                quantity: 25,
-            },
         ],
                 colors: [
             {
@@ -485,10 +465,6 @@ export const allProducts: Product[] = [
             },
             {
                 size: 'XL',
-                quantity: 25,
-            },
-            {
-                size: 'XXL',
                 quantity: 25,
             },
             {
@@ -555,10 +531,6 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
-            {
-                size: 'XXL',
-                quantity: 25,
-            },
         ],
                 colors: [
             {
@@ -613,10 +585,6 @@ export const allProducts: Product[] = [
             },
             {
                 size: 'XL',
-                quantity: 25,
-            },
-            {
-                size: 'XXL',
                 quantity: 25,
             },
             {
