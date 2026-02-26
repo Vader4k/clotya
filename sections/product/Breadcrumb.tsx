@@ -1,6 +1,6 @@
-import React from 'react'
+import Link from "next/link"
 
-const Breadcrumb = () => {
+const Breadcrumb = ({category, tags}: {category: string[], tags: string[]}) => {
   return (
     <div>Breadcrumb</div>
   )

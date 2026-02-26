@@ -8,8 +8,8 @@ export const productServices = {
     },
 
     // get product by id
-    getById: async (id: string): Promise<Product | undefined> => {
-        return Promise.resolve(allProducts.find((product) => product.id === id));
+    getBySlug: async (slug: string): Promise<Product | undefined> => {
+        return Promise.resolve(allProducts.find((product) => product.slug === slug));
     },
 
     // get products by category

@@ -5,7 +5,7 @@ import BlogFilters from "@/sections/blog/BlogFilters"
 import Lorem from "@/sections/blog/Lorem"
 import Image from "next/image"
 
-const BlogDetails = async ({ params }: { params: { slug: string } }) => {
+const BlogDetails = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params
     const blogPost = await blogService.getBySlug(slug)
 

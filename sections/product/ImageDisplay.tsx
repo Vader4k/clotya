@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ImageDisplay = () => {
+const ImageDisplay = ({images}: {images: string[]}) => {
   return (
     <div>ImageDisplay</div>
   )
