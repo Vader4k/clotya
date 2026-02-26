@@ -1,5 +1,10 @@
 import { ProductCardProps } from "@/features/products/types/product.types";
 
+export type Color = {
+    name: string;
+    hex: string;
+}
+
 export interface Product extends ProductCardProps {
     category: string[];
     tags?: string[];
@@ -8,6 +13,7 @@ export interface Product extends ProductCardProps {
         size: string;
         quantity: number;
     }[];
+    colors?: Color[];
 }
 
 export const allProducts: Product[] = [
@@ -27,6 +33,10 @@ export const allProducts: Product[] = [
         sku: 'SKU001',
         inventory: [
             {
+                size: 'XS',
+                quantity: 25,
+            },
+            {
                 size: 'S',
                 quantity: 25,
             },
@@ -42,8 +52,35 @@ export const allProducts: Product[] = [
                 size: 'XL',
                 quantity: 25,
             },
+            {
+                size: 'XXL',
+                quantity: 25,
+            },
         ],
-        description: 'A chic and comfortable sleeveless ribbed short dress, perfect for casual outings and warm summer days. Effortlessly stylish.'
+        description: 'A chic and comfortable sleeveless ribbed short dress, perfect for casual outings and warm summer days. Effortlessly stylish.',
+        colors: [
+            {
+                name: 'black',
+                hex: '#000000',
+            },
+            {
+                name: 'white',
+                hex: '#FFFFFF',
+            },
+            {
+                name: 'red',
+                hex: '#FF0000',
+            },
+            {
+                name: 'green',
+                hex: '#00FF00',
+            },
+            {
+                name: 'blue',
+                hex: '#0000FF',
+            },
+
+        ]
     },
     {
         id: '2',
@@ -76,6 +113,29 @@ export const allProducts: Product[] = [
                 size: 'XL',
                 quantity: 25,
             },
+        ],
+        colors: [
+            {
+                name: 'black',
+                hex: '#000000',
+            },
+            {
+                name: 'white',
+                hex: '#FFFFFF',
+            },
+            {
+                name: 'red',
+                hex: '#FF0000',
+            },
+            {
+                name: 'green',
+                hex: '#00FF00',
+            },
+            {
+                name: 'blue',
+                hex: '#0000FF',
+            },
+
         ],
         description: 'Experience ultimate comfort with these basic relax-fit leggings. Ideal for lounging or light workouts, they offer a flattering fit.'
     },
@@ -113,10 +173,29 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
+        ],
+                colors: [
             {
-                size: 'XXL',
-                quantity: 25,
+                name: 'black',
+                hex: '#000000',
             },
+            {
+                name: 'white',
+                hex: '#FFFFFF',
+            },
+            {
+                name: 'red',
+                hex: '#FF0000',
+            },
+            {
+                name: 'green',
+                hex: '#00FF00',
+            },
+            {
+                name: 'blue',
+                hex: '#0000FF',
+            },
+            
         ],
         description: 'This check overshirt features unique pocket details, combining a rugged aesthetic with modern functionality for a versatile layering piece.'
     },
@@ -154,10 +233,29 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
+        ],
+                colors: [
             {
-                size: 'XXL',
-                quantity: 25,
+                name: 'black',
+                hex: '#000000',
             },
+            {
+                name: 'white',
+                hex: '#FFFFFF',
+            },
+            {
+                name: 'red',
+                hex: '#FF0000',
+            },
+            {
+                name: 'green',
+                hex: '#00FF00',
+            },
+            {
+                name: 'blue',
+                hex: '#0000FF',
+            },
+            
         ],
         description: 'Express your style with this world wide cup print t-shirt. Crafted from soft cotton for all-day comfort and breathability.'
     },
@@ -195,10 +293,29 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
+        ],
+                colors: [
             {
-                size: 'XXL',
-                quantity: 25,
+                name: 'black',
+                hex: '#000000',
             },
+            {
+                name: 'white',
+                hex: '#FFFFFF',
+            },
+            {
+                name: 'red',
+                hex: '#FF0000',
+            },
+            {
+                name: 'green',
+                hex: '#00FF00',
+            },
+            {
+                name: 'blue',
+                hex: '#0000FF',
+            },
+            
         ],
         description: 'Stay cozy and trendy in this slogan hoodie, featuring subtle label details and a relaxed fit for a modern look.'
     },
@@ -236,10 +353,29 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
+        ],
+                colors: [
             {
-                size: 'XXL',
-                quantity: 25,
+                name: 'black',
+                hex: '#000000',
             },
+            {
+                name: 'white',
+                hex: '#FFFFFF',
+            },
+            {
+                name: 'red',
+                hex: '#FF0000',
+            },
+            {
+                name: 'green',
+                hex: '#00FF00',
+            },
+            {
+                name: 'blue',
+                hex: '#0000FF',
+            },
+            
         ],
         description: 'Brighten your wardrobe with this vibrant orange pouch pocket hoodie. A bold choice that combines comfort with a striking color.'
     },
@@ -277,10 +413,29 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
+        ],
+                colors: [
             {
-                size: 'XXL',
-                quantity: 25,
+                name: 'black',
+                hex: '#000000',
             },
+            {
+                name: 'white',
+                hex: '#FFFFFF',
+            },
+            {
+                name: 'red',
+                hex: '#FF0000',
+            },
+            {
+                name: 'green',
+                hex: '#00FF00',
+            },
+            {
+                name: 'blue',
+                hex: '#0000FF',
+            },
+            
         ],
         description: 'Durable and practical, these ripstop cargo trousers feature multiple pockets and a rugged design for all your outdoor adventures.'
     },
@@ -316,10 +471,29 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
+        ],
+                colors: [
             {
-                size: 'XXL',
-                quantity: 25,
+                name: 'black',
+                hex: '#000000',
             },
+            {
+                name: 'white',
+                hex: '#FFFFFF',
+            },
+            {
+                name: 'red',
+                hex: '#FF0000',
+            },
+            {
+                name: 'green',
+                hex: '#00FF00',
+            },
+            {
+                name: 'blue',
+                hex: '#0000FF',
+            },
+            
         ],
         description: 'A classic relaxed fit plaid flannel shirt that never goes out of style. Perfect for layering over your favorite t-shirt.'
     },
@@ -357,10 +531,29 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
+        ],
+                colors: [
             {
-                size: 'XXL',
-                quantity: 25,
+                name: 'black',
+                hex: '#000000',
             },
+            {
+                name: 'white',
+                hex: '#FFFFFF',
+            },
+            {
+                name: 'red',
+                hex: '#FF0000',
+            },
+            {
+                name: 'green',
+                hex: '#00FF00',
+            },
+            {
+                name: 'blue',
+                hex: '#0000FF',
+            },
+            
         ],
         description: 'This quilted bomber jacket with ribbed trims provides both warmth and a sleek, contemporary silhouette for any urban explorer.'
     },
@@ -398,10 +591,29 @@ export const allProducts: Product[] = [
                 size: 'XXL',
                 quantity: 25,
             },
+        ],
+                colors: [
             {
-                size: 'XXL',
-                quantity: 25,
+                name: 'black',
+                hex: '#000000',
             },
+            {
+                name: 'white',
+                hex: '#FFFFFF',
+            },
+            {
+                name: 'red',
+                hex: '#FF0000',
+            },
+            {
+                name: 'green',
+                hex: '#00FF00',
+            },
+            {
+                name: 'blue',
+                hex: '#0000FF',
+            },
+            
         ],
         description: 'A versatile pouch pocket hoodie that offers a perfect blend of style and comfort, making it an essential everyday staple.'
     }

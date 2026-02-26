@@ -1,8 +1,51 @@
-import React from 'react'
+import Breadcrumb from "@/sections/product/Breadcrumb"
+import DetailedInformation from "@/sections/product/DetailedInformation"
+import ImageDisplay from "@/sections/product/ImageDisplay"
+import { productServices } from "@/features/products/services/product.service"
+import RecentViews from "@/sections/product/RecentViews"
+import DetailsView from "@/sections/product/DetailsView"
+import RelatedProducts from "@/sections/product/RelatedProducts"
 
-const ProductPage = () => {
+const ProductPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params
+  const product = await productServices.getBySlug(slug)
+
+  const relatedProducts = await productServices.getRelated(slug, product?.category || [])
+
+  if (!product) {
+    return <div>Product not found</div>
+  }
+
   return (
-    <div>ProductPage</div>
+    <main className='w-full max-w-7xl mx-auto px-3'>
+      <div className="mb-8 mt-4">
+        {product.category && product.tags &&
+          <Breadcrumb category={product.category} tags={product.tags} name={product.name} />
+        }
+      </div>
+      <div className="w-full flex items-start justify-between gap-10">
+        <div className="w-full max-w-[40%]">
+          <ImageDisplay images={product?.images || []} name={product.name} />
+        </div>
+        <div className="w-full max-w-[40%]">
+          <DetailedInformation product={product} />
+        </div>
+        {/* recent views */}
+        <div className="w-full max-w-[20%]">
+          <RecentViews />
+        </div>
+      </div>
+
+      {/* description, reviews */}
+      <div className="my-14">
+        <DetailsView reviews={product.reviews} name={product.name} />
+      </div>
+
+      {/* related products */}
+      {relatedProducts.length > 0 && <div className="my-14">
+        <RelatedProducts products={relatedProducts} />
+      </div>}
+    </main>
   )
 }
 
