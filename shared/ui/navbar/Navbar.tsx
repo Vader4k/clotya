@@ -1,8 +1,9 @@
-import { Heart, Search, UserRound } from "lucide-react";
+import { Heart, UserRound } from "lucide-react";
 import Image from "next/image";
 import NavLinks from "./NavLinks";
 import { NavSheet } from "./NavSheet";
 import CartIndicator from "./CartIndicator";
+import SearchModal from "@/features/search/componets/SearchModal";
 
 const NavbarLogo = ({width, height}: {width: number, height: number}) => {
   return (
@@ -43,9 +44,9 @@ const Navbar = () => {
           <button>
             <UserRound strokeWidth={1.5} size={22} />
           </button>
-          <button>
-            <Search strokeWidth={1.5} size={22} />
-          </button>
+          <div>
+            <SearchModal/>
+          </div>
           <button>
             <Heart strokeWidth={1.5} size={22} />
           </button>
