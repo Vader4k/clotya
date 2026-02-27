@@ -6,8 +6,8 @@ const RelatedProducts = ({ products }: { products: ProductCardProps[] }) => {
     <div>
         <p className="font-jost font-medium text-lg pb-4 border-b">Related products</p>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
-            {products.map((product) => (
-                <ProductCard key={product.slug} {...product} />
+            {products.slice(0,4).map((product) => (
+                <ProductCard key={product.slug} {...product}/>
             ))}
         </div>
     </div>

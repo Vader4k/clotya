@@ -11,7 +11,7 @@ const ImageDisplay = ({ images, name }: { images: string[], name: string }) => {
     <div className="w-full h-full grid gap-3">
       <div className="w-full h-screen relative">
         <Image
-          src={images[0]}
+          src={currentImage}
           alt={name}
           fill
           fetchPriority="high"
