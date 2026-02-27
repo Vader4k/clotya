@@ -1,4 +1,4 @@
-import { blogs } from "@/data/blog";
+import { blogs, blogCategories, blogTags } from "@/data/blog";
 import { BlogDetails } from "../types/blog.types";
 
 export const blogService = {
@@ -23,5 +23,15 @@ export const blogService = {
             blog.categories.some((cat) => currentBlog.categories.includes(cat))
         );
         return Promise.resolve(relatedBlogs);
+    },
+
+    //get blog categories
+    getCategories: async (): Promise<string[]> => {
+        return Promise.resolve(blogCategories);
+    },
+
+    //get blog tags
+    getTags: async (): Promise<string[]> => {
+        return Promise.resolve(blogTags);
     },
 }

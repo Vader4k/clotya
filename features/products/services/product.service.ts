@@ -8,8 +8,8 @@ export const productServices = {
     },
 
     // get product by id
-    getById: async (id: string): Promise<Product | undefined> => {
-        return Promise.resolve(allProducts.find((product) => product.id === id));
+    getBySlug: async (slug: string): Promise<Product | undefined> => {
+        return Promise.resolve(allProducts.find((product) => product.slug === slug));
     },
 
     // get products by category
@@ -39,6 +39,13 @@ export const productServices = {
     getBestSeller: async (): Promise<Product[]> => {
         return Promise.resolve(
             allProducts.filter((product) => product.isBestSeller),
+        );
+    },
+
+    // get related products
+    getRelated: async (slug: string, category: string[]): Promise<Product[]> => {
+        return Promise.resolve(
+            allProducts.filter((product) => product.slug !== slug && product.category.some((cat) => category.includes(cat))),
         );
     },
 };
