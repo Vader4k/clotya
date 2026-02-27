@@ -5,6 +5,7 @@ import { productServices } from "@/features/products/services/product.service"
 import RecentViews from "@/sections/product/RecentViews"
 import DetailsView from "@/sections/product/DetailsView"
 import RelatedProducts from "@/sections/product/RelatedProducts"
+import RecentlyViewedTracker from "@/features/recently-viewed/services/recently-viewed-tracker"
 
 const ProductPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params
@@ -17,22 +18,23 @@ const ProductPage = async ({ params }: { params: Promise<{ slug: string }> }) =>
   }
 
   return (
-    <main className='w-full max-w-7xl mx-auto px-3'>
+    <main className='w-full max-w-7xl mx-auto px-3 sm:px-10 lg:px-14 xl:px-3'>
+      <RecentlyViewedTracker productId={product.id} />
       <div className="mb-8 mt-4">
         {product.category && product.tags &&
           <Breadcrumb category={product.category} tags={product.tags} name={product.name} />
         }
       </div>
-      <div className="w-full flex items-start justify-between gap-10">
-        <div className="w-full max-w-[40%]">
+      <div className="w-full flex flex-col xl:flex-row items-start justify-between gap-10">
+        <div className="w-full xl:max-w-[45%]">
           <ImageDisplay images={product?.images || []} name={product.name} />
         </div>
-        <div className="w-full max-w-[40%]">
+        <div className="w-full xl:max-w-[35%]">
           <DetailedInformation product={product} />
         </div>
         {/* recent views */}
-        <div className="w-full max-w-[20%]">
-          <RecentViews />
+        <div className="w-full xl:max-w-[20%]">
+          <RecentViews currentProductId={product.id} />
         </div>
       </div>
 
