@@ -9,7 +9,7 @@ const RecentProductCard = ({ product }: { product: Product }) => {
         <Image src={product.images[0]} alt={product.name} fill className='object-cover object-top' />
       </div>
       <div className="flex-1 grid gap-3">
-        <h3 className="text-sm line-clamp-2">{product.name}</h3>
+        <h3 className="text-sm line-clamp-2 capitalize">{product.name}</h3>
         <div>
           {product.discountPrice ? (
             <div className="flex items-center gap-2">
