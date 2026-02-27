@@ -9,7 +9,7 @@ const ImageDisplay = ({ images, name }: { images: string[], name: string }) => {
 
   return (
     <div className="w-full h-full grid gap-3">
-      <div className="w-full h-screen relative">
+      <div className="w-full h-150 sm:h-screen 2xl:h-200 relative">
         <Image
           src={currentImage}
           alt={name}

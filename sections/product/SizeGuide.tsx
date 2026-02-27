@@ -18,10 +18,10 @@ const SizeGuide = () => {
                 <GlobeLock size={16} strokeWidth={1} />
                 <p>Size Guide</p>
             </DialogTrigger>
-            <DialogContent className="font-jost min-w-3xl rounded-none px-10">
+            <DialogContent className="font-jost rounded-none px-10">
                 <DialogHeader>
-                    <DialogTitle className="text-2xl font-medium">All Sizes for This Product</DialogTitle>
-                    <DialogDescription className="leading-5 my-3 text-base text-black">
+                    <DialogTitle className="text-xl lg:text-2xl font-medium">All Sizes for This Product</DialogTitle>
+                    <DialogDescription className="leading-5 my-3 text-start md:text-center text-base text-black">
                         Measure around the fullest part, place the tape closer under the arms and make sure the tape is flat across the back.
                     </DialogDescription>
                 </DialogHeader>
