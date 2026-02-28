@@ -45,7 +45,7 @@ const DetailedInformation = ({ product }: { product: Product }) => {
 
   return (
     <div className='font-jost grid gap-4'>
-      <h1 className='text-2xl capitalize leading-3'>{product.name}</h1>
+      <h1 className='text-2xl capitalize xl:leading-3'>{product.name}</h1>
       <div className='flex items-center gap-0.5 text-sm'>
         {[...Array(5)].map((_, index) => (
           <Star key={index} size={11} fill='gold' stroke='gold' />
