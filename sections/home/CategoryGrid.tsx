@@ -1,15 +1,15 @@
 import { categoriesService } from "@/features/categories/services/categories.service";
 import { Category } from "@/data/categories";
+import Link from "next/link";
 
 /**
- * REUSABLE CARD COMPONENT
- * Handles the internal layout and visual hierarchy of each category
+ Handles the internal layout and visual hierarchy of each category
  */
 const CategoryCard = ({ category, className = "" }: { category: Category; className?: string }) => {
   if (!category) return null;
 
   return (
-    <div className={`w-full h-full p-10 flex flex-col items-start gap-1 ${className}`}>
+    <Link href={`/shop?category=${category.slug}`} className={`w-full h-full p-10 flex flex-col items-start gap-1 ${className}`}>
       {/* 1. Meta Information (Low weight) */}
       <span className="text-xs text-black">{category.totalProducts} products</span>
 
@@ -29,7 +29,7 @@ const CategoryCard = ({ category, className = "" }: { category: Category; classN
           ))}
         </div>
       )}
-    </div>
+    </Link>
   );
 };
 
