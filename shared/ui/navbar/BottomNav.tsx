@@ -13,7 +13,7 @@ const BottomNav = () => {
     const links = isShopPage ? shopNavLinks : bottomNavLinks
 
     return (
-        <nav className='w-full bg-white z-50 fixed bottom-0 left-0 py-3 px-10 border-t'>
+        <nav className='w-full bg-white z-50 fixed bottom-0 left-0 py-3 px-10 border-t border-gray-300'>
             <div className="w-full max-w-lg mx-auto flex items-center justify-between text-gray-600 font-jost">
                 {links.map((link) => (
                     <Link key={link.name} href={link.href} className="flex flex-col items-center justify-center gap-1.5">

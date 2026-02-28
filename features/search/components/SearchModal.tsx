@@ -65,9 +65,13 @@ const SearchModal = ({ isMobile }: { isMobile: boolean }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="absolute w-screen inset-0 h-[89vh] xl:h-[90vh] xl:mt-20 -mt-204 z-10 bg-white border-t font-jost"
+            className={
+              isMobile
+                ? "fixed inset-0 z-1 bg-white h-screen font-jost pt-5"
+                : "absolute w-screen inset-0 h-[90vh] mt-20 z-10 bg-white border-t font-jost"
+            }
           >
-            <div className="w-full max-w-7xl mx-auto mt-10 px-3">
+            <div className={`w-full max-w-7xl mx-auto px-5 ${isMobile ? "mt-4" : "mt-10"}`}>
               <div className="flex items-center justify-between">
                 <p>What are you looking for?</p>
                 <button onClick={closeSearchModal}>

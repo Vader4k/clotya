@@ -23,7 +23,7 @@ const SearchModalContent = ({ data, error, debounceValue }: { data: ProductCardP
   }
 
   return (
-    <div className="w-full mt-3 font-jost grid gap-3 h-50 overflow-y-scroll px-1 border p-2" style={{ scrollbarWidth: 'thin' }}>
+    <div className="w-full mt-3 font-jost grid gap-3 h-[80vh] xl:h-50 overflow-y-scroll px-1 border p-2" style={{ scrollbarWidth: 'thin' }}>
       {data.map((product, index) => (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
