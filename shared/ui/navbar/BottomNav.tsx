@@ -1,11 +1,11 @@
 'use client'
 
-import { Search } from "lucide-react"
 import { bottomNavLinks, shopNavLinks } from "@/constants"
 import Link from "next/link"
 import { NavSheet } from "./NavSheet"
 import FilterSheet from "./FilterSheet"
 import { usePathname } from "next/navigation"
+import SearchModal from "@/features/search/components/SearchModal"
 
 const BottomNav = () => {
     const pathname = usePathname()
@@ -21,10 +21,10 @@ const BottomNav = () => {
                         <p className="text-[0.6rem] uppercase font-medium">{link.name}</p>
                     </Link>
                 ))}
-                <button className="flex flex-col items-center justify-center gap-1.5">
-                    <Search size={25} strokeWidth={0.7} />
+                <div className="flex flex-col items-center justify-center">
+                    <SearchModal isMobile={true} />
                     <p className="text-[0.6rem] uppercase font-medium">Search</p>
-                </button>
+                </div>
 
                 {isShopPage ?
                     <FilterSheet /> :

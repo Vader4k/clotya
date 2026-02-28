@@ -9,7 +9,7 @@ import { useSearchResults } from "../hooks/useSearchResults"
 import { usePathname, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
-const SearchModal = () => {
+const SearchModal = ({ isMobile }: { isMobile: boolean }) => {
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -46,11 +46,15 @@ const SearchModal = () => {
 
   return (
     <div>
-      <button onClick={() => setIsOpen((prev) => !prev)} className="mt-1">
+      <button onClick={() => setIsOpen((prev) => !prev)} className={`${isMobile ? "mt-0" : "mt-1"}`}>
         {!isOpen ? (
-          <Search strokeWidth={1.5} size={22} />
+          <div>
+            {isMobile ? <Search size={25} strokeWidth={0.7} /> : <Search strokeWidth={1.5} size={22} />}
+          </div>
         ) : (
-          <X strokeWidth={1.5} size={22} />
+          <div>
+            {isMobile ? <X size={25} strokeWidth={0.7} /> : <X strokeWidth={1.5} size={22} />}
+          </div>
         )}
       </button>
 
@@ -61,7 +65,7 @@ const SearchModal = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="absolute w-screen inset-0 h-[90vh] mt-20 z-10 bg-white border-t font-jost"
+            className="absolute w-screen inset-0 h-[89vh] xl:h-[90vh] xl:mt-20 -mt-204 z-10 bg-white border-t font-jost"
           >
             <div className="w-full max-w-7xl mx-auto mt-10 px-3">
               <div className="flex items-center justify-between">

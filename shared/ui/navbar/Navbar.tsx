@@ -45,7 +45,7 @@ const Navbar = () => {
             <UserRound strokeWidth={1.5} size={22} />
           </button>
           <div>
-            <SearchModal/>
+            <SearchModal isMobile={false}/>
           </div>
           <button>
             <Heart strokeWidth={1.5} size={22} />
