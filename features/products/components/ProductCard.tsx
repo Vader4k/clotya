@@ -4,11 +4,12 @@ import { Progress } from "@/components/ui/progress"
 import Link from "next/link"
 import { progressValue } from "@/features/products/utils/product.utils"
 import { ProductCardProps } from "../types/product.types"
+import ProductActions from "./ProductActions"
 
 
 const ProductCard = ({ name, price, images, reviews, discountPrice, discount, inventory, sold, slug, showRange }: ProductCardProps) => {
   return (
-    <div className="w-full h-120 sm:h-150 lg:h-200 2xl:h-145 flex flex-col justify-between gap-2 relative">
+    <div className="w-full h-120 sm:h-150 lg:h-200 2xl:h-145 flex flex-col justify-between gap-2 relative group">
       <Link href={`/product/${slug}`} className="w-full h-[85%] 2xl:h-[80%]">
         <div className="relative w-full h-full group">
           <Image src={images[0]} alt={name} fill className="object-cover object-top z-1" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
@@ -44,6 +45,10 @@ const ProductCard = ({ name, price, images, reviews, discountPrice, discount, in
           </div>
         </div>
       )}
+
+      <div className="absolute right-3 top-3 z-10">
+        <ProductActions />
+      </div>
     </div>
   )
 }
