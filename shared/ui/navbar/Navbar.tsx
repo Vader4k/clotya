@@ -3,7 +3,7 @@ import Image from "next/image";
 import NavLinks from "./NavLinks";
 import { NavSheet } from "./NavSheet";
 import CartIndicator from "./CartIndicator";
-import SearchModal from "@/features/search/componets/SearchModal";
+import SearchModal from "@/features/search/components/SearchModal";
 
 const NavbarLogo = ({width, height}: {width: number, height: number}) => {
   return (
