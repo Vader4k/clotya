@@ -139,6 +139,15 @@ body {
   height: 100%;
 }
 
+.not-found-bg {
+  background-image: url("/404.jpg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
 .text-outline {
   -webkit-text-stroke: 3px white;
 }
