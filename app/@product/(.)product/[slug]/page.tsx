@@ -7,6 +7,7 @@ import { useProductBySlug } from "@/features/products/services/product.client"
 import ImageDisplay from "@/sections/product/ImageDisplay"
 import DetailedInformation from "@/sections/product/DetailedInformation"
 import { Loader } from "lucide-react"
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 const InterceptedProductPage = ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = use(params)
@@ -22,13 +23,15 @@ const InterceptedProductPage = ({ params }: { params: Promise<{ slug: string }> 
         router.back()
       }
     }}>
-      <DialogContent className="w-full h-[90vh] overflow-y-auto rounded-none font-jost no-scrollbar">
-        <DialogHeader className="md:px-5">
-          <DialogTitle>Quick View</DialogTitle>
-          <DialogDescription className="capitalize font-medium text-gray-600">
-            {slug}
-          </DialogDescription>
-        </DialogHeader>
+      <DialogContent className="w-full h-[90vh] overflow-y-auto rounded-none font-jost no-scrollbar py-10">
+        <VisuallyHidden>
+          <DialogHeader>
+            <DialogTitle>Quick View</DialogTitle>
+            <DialogDescription className="capitalize font-medium text-gray-600">
+              {slug}
+            </DialogDescription>
+          </DialogHeader>
+        </VisuallyHidden>
         <div className="w-full flex flex-col lg:flex-row items-start gap-5 md:px-5">
           <div className="w-full lg:w-1/2">
             <ImageDisplay images={product?.images || []} name={product?.name || ""} />
