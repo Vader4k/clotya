@@ -1,10 +1,9 @@
 import { ProductCardProps } from '@/features/products/types/product.types'
 import Image from 'next/image'
-import Link from 'next/link'
 
 const RecentProductCard = ({ product }: { product: ProductCardProps }) => {
   return (
-    <Link href={`/product/${product.slug}`} className='flex items-center gap-3 font-jost hover:bg-gray-50 p-2 transition-colors'>
+    <a href={`/product/${product.slug}`} className='flex items-center gap-3 font-jost hover:bg-gray-50 p-2 transition-colors'>
       <div className="relative w-12 h-16 overflow-hidden">
         <Image src={product.images[0]} alt={product.name} fill className='object-cover object-top' />
       </div>
@@ -21,7 +20,7 @@ const RecentProductCard = ({ product }: { product: ProductCardProps }) => {
           )}
         </div>
       </div>
-    </Link>
+    </a>
   )
 }
 

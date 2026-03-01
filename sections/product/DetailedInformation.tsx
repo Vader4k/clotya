@@ -43,6 +43,8 @@ const DetailedInformation = ({ product }: { product: Product }) => {
     }
   }
 
+  const isDisabled = !selectedColor || !size || stock === 0
+
   return (
     <div className='font-jost grid gap-4'>
       <h1 className='text-2xl capitalize xl:leading-3'>{product.name}</h1>
@@ -103,9 +105,10 @@ const DetailedInformation = ({ product }: { product: Product }) => {
         quantity={quantity}
         decrease={decrease}
         increase={increase}
+        isDisabled={isDisabled}
       />
 
-      <div className='flex items-center gap-5 my-2'>
+      <div className='flex items-center flex-wrap sm:flex-nowrap gap-5 my-2'>
         <SizeGuide />
         <button className='flex items-center gap-1 text-sm'>
           <Heart size={16} strokeWidth={1} />

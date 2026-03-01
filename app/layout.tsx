@@ -58,8 +58,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  product
 }: Readonly<{
   children: React.ReactNode;
+  product: React.ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -70,6 +72,7 @@ export default function RootLayout({
           <PageHeader />
           <Navbar />
           {children}
+          {product} {/* this is the parallel route for the product page */}
           <div className="xl:hidden">
             <BottomNav />
           </div>
