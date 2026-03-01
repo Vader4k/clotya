@@ -1,21 +1,20 @@
 import { Star } from "lucide-react"
 import Image from "next/image"
 import { Progress } from "@/components/ui/progress"
-import Link from "next/link"
 import { progressValue } from "@/features/products/utils/product.utils"
 import { ProductCardProps } from "../types/product.types"
 import ProductActions from "./ProductActions"
 
 
-const ProductCard = ({ name, price, images, reviews, discountPrice, discount, inventory, sold, slug, showRange }: ProductCardProps) => {
+const ProductCard = ({ name, id, price, images, reviews, discountPrice, discount, inventory, sold, slug, showRange }: ProductCardProps) => {
   return (
     <div className="w-full h-120 sm:h-150 lg:h-200 2xl:h-145 flex flex-col justify-between gap-2 relative group">
-      <Link href={`/product/${slug}`} className="w-full h-[85%] 2xl:h-[80%]">
+      <a href={`/product/${slug}`} className="w-full h-[85%] 2xl:h-[80%]">
         <div className="relative w-full h-full group">
           <Image src={images[0]} alt={name} fill className="object-cover object-top z-1" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
           {images[1] && <Image src={images[1]} alt={name} fill className="object-cover object-top absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:z-2" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />}
         </div>
-      </Link>
+      </a>
       {discount && (
         <div className="absolute top-2 z-5 left-2 bg-white text-xs text-green-600 font-medium font-jost px-2.5 py-1 rounded">
           {discount}%
@@ -47,7 +46,14 @@ const ProductCard = ({ name, price, images, reviews, discountPrice, discount, in
       )}
 
       <div className="absolute right-3 top-3 z-10">
-        <ProductActions />
+        <ProductActions
+          slug={slug}
+          id={id}
+          name={name}
+          image={images[0]}
+          rating={reviews}
+          price={price}
+          discountPrice={discountPrice} />
       </div>
     </div>
   )

@@ -7,7 +7,7 @@ export const productServices = {
         return Promise.resolve(allProducts);
     },
 
-    // get product by id
+    // get product by slug
     getBySlug: async (slug: string): Promise<Product | undefined> => {
         return Promise.resolve(allProducts.find((product) => product.slug === slug));
     },
