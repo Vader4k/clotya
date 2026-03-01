@@ -19,7 +19,7 @@ const ProductPage = async ({ params }: { params: Promise<{ slug: string }> }) =>
 
   return (
     <main className='w-full max-w-7xl mx-auto px-3 sm:px-10 lg:px-14 xl:px-3'>
-      <RecentlyViewedTracker productId={product.id} />
+      <RecentlyViewedTracker product={product} />
       <div className="mb-8 mt-4">
         {product.category && product.tags &&
           <Breadcrumb category={product.category} tags={product.tags} name={product.name} />

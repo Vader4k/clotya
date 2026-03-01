@@ -1,14 +1,15 @@
 "use client"
 
 import { useEffect } from "react"
-import { addRecentlyViewed } from "./add-recently-viewed"
+import { ProductCardProps } from "@/features/products/types/product.types"
+import { addRecentlyViewedProduct } from "../utils/indexedDb"
 
-const RecentlyViewedTracker = ({ productId }: { productId: string }) => {
+const RecentlyViewedTracker = ({ product }: { product: ProductCardProps }) => {
     useEffect(() => {
-        if (productId) {
-            addRecentlyViewed(productId);
+        if (product && product.id) {
+            addRecentlyViewedProduct(product);
         }
-    }, [productId]);
+    }, [product]);
 
     return null;
 }
