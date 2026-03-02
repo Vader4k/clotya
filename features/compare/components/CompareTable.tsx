@@ -1,7 +1,6 @@
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { X } from 'lucide-react'
 import Image from 'next/image'
-import Link from 'next/link'
 import StarRating from './StarRating'
 
 const CompareTable = ({ products, removeProduct }: { products: any[], removeProduct: (id: string) => void }) => {
@@ -32,7 +31,7 @@ const CompareTable = ({ products, removeProduct }: { products: any[], removeProd
                         </td>
                         {products.map((product) => (
                             <td key={product.id} className="px-4 py-4 border-r last:border-r-0 min-w-60">
-                                <Link href={`/product/${product.slug}`}>
+                                <a href={`/product/${product.slug}`}>
                                     <div className="relative w-full aspect-3/4 bg-gray-100 overflow-hidden">
                                         <Image
                                             src={product.image}
@@ -41,7 +40,7 @@ const CompareTable = ({ products, removeProduct }: { products: any[], removeProd
                                             className="object-cover hover:scale-105 transition-transform duration-300"
                                         />
                                     </div>
-                                </Link>
+                                </a>
                             </td>
                         ))}
                     </tr>
@@ -53,12 +52,12 @@ const CompareTable = ({ products, removeProduct }: { products: any[], removeProd
                         </td>
                         {products.map((product) => (
                             <td key={product.id} className="px-4 py-3 border-r last:border-r-0 min-w-48">
-                                <Link
+                                <a
                                     href={`/product/${product.slug}`}
                                     className="text-red-500 hover:text-red-700 transition-colors whitespace-normal leading-snug capitalize"
                                 >
                                     {product.name}
-                                </Link>
+                                </a>
                             </td>
                         ))}
                     </tr>

@@ -77,7 +77,7 @@ const Footer = () => {
             ))}
           </div>
 
-          <div className="w-full border-t border-neutral-200 mt-10 pt-5 hidden xl:block">
+          <div className="w-full border-t border-neutral-200 mt-10 mb-10 lg:mb-0 pt-5">
             <p className="text-center text-sm text-neutral-600">© 2026 Clotya. All rights reserved.</p>
           </div>
         </div>
