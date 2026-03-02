@@ -6,7 +6,8 @@ import Footer from "@/shared/ui/Footer";
 import PageHeader from "@/shared/ui/PageHeader";
 import Providers from "./Provider";
 import BottomNav from "@/shared/ui/navbar/BottomNav";
-
+import GoogleTranslatorInit from "@/features/language-selector/utils/GoogleTranslatorInit";
+import Script from "next/script";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -68,8 +69,10 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jost.variable} antialiased`}
       >
+        <div id="google_translate_element" className="hidden" />
         <Providers>
           <PageHeader />
+          <GoogleTranslatorInit />
           <Navbar />
           {children}
           {product} {/* this is the parallel route for the product page */}
@@ -78,6 +81,10 @@ export default function RootLayout({
           </div>
           <Footer />
         </Providers>
+        <Script
+          src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

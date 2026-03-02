@@ -54,8 +54,24 @@
   }
 } */
 
+html {
+  scroll-behavior: smooth;
+}
+
+.skiptranslate {
+  display: none !important;
+}
+
 body {
+  top: 0 !important;
+  position: static !important;
   font-family: var(--font-inter);
+}
+
+/* Specific fix for Google Translate's body injection */
+.translated-ltr body,
+.translated-rtl body {
+  top: 0 !important;
 }
 
 .banner3 {

@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import LanguageSelector from "@/features/language-selector/components/LanguageSelector"
 
 const PageHeader = () => {
   return (
@@ -27,6 +28,7 @@ const PageHeader = () => {
         {/*controls */}
         <div className='flex items-center gap-3 text-xs'>
           <p className='text-nowrap'>Order Tracking</p>
+          <LanguageSelector />
           <Select value='usd'>
             <SelectTrigger className="w-full max-w-20 bg-white text-xs outline-none">
               <SelectValue placeholder="Currency" />
