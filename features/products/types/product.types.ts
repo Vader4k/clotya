@@ -39,3 +39,13 @@ export interface PriceFilterProps {
   setPrice?: (price: number[]) => void
   onFilter?: (price: number[]) => void
 }
+
+export type ProductActionsProps = {
+  slug: string
+  id: string
+  name: string
+  image: string
+  rating: number
+  price: number
+  discountPrice?: number
+}
