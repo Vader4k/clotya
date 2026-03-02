@@ -6,7 +6,7 @@ export type BlogCardProps = {
     date: string;
     image: string;
     intro: string;
-    style: string;
+    style?: string;
     blogPage?: boolean;
     tags: string[];
 }

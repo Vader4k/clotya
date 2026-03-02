@@ -2,6 +2,7 @@
 
 import { bottomNavLinks, shopNavLinks } from "@/constants"
 import Link from "next/link"
+import { Suspense } from "react"
 import { NavSheet } from "./NavSheet"
 import FilterSheet from "./FilterSheet"
 import { usePathname } from "next/navigation"
@@ -22,7 +23,9 @@ const BottomNav = () => {
                     </Link>
                 ))}
                 <div className="flex flex-col items-center justify-center">
-                    <SearchModal isMobile={true} />
+                    <Suspense fallback={null}>
+                        <SearchModal isMobile={true} />
+                    </Suspense>
                     <p className="text-[0.6rem] uppercase font-medium">Search</p>
                 </div>
 

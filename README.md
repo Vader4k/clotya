@@ -20,6 +20,7 @@ A full-featured, modern e-commerce web application built with **Next.js 16**, **
 | 📰 **Blog**                | Blog listing and individual post pages                                                |
 | 📬 **Contact Page**        | Static contact page                                                                   |
 | ⚡ **Intercepting Routes** | Quick-view product modal using Next.js parallel/intercepting routes (`@product`)      |
+| 🌐 **Language Selector**   | Multilingual support via Google Translate API with custom Shadcn UI                   |
 
 ### Planned / In Progress
 
@@ -34,7 +35,7 @@ A full-featured, modern e-commerce web application built with **Next.js 16**, **
 
 Clotya uses a **feature-sliced** architecture: each domain is self-contained under `features/`, with its own components, hooks, services, stores, types, and utils.
 
-```
+```text
 clotya/
 ├── app/                        # Next.js App Router
 │   ├── @product/               # Intercepting route (quick-view modal)
@@ -53,7 +54,8 @@ clotya/
 │   ├── currency/               # Currency switching
 │   ├── products/               # Core product feature (card, filters, actions, hooks)
 │   ├── recently-viewed/        # Recently viewed product tracking
-│   └── search/                 # Search modal, hooks, and utilities
+│   ├── search/                 # Search modal, hooks, and utilities
+│   └── language-selector/      # Multilingual support (Google Translate integration)
 │
 ├── sections/                   # Page-level section components
 │   ├── home/                   # Hero, BestSeller, Categories, Advert, News, Discount

@@ -54,7 +54,57 @@ export const metadata: Metadata = {
     'gowns',
     'shirts',
     'gym wears'
-  ]
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: "https://clotya.vercel.app",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://clotya.vercel.app",
+    siteName: "Clotya",
+    title: "Clotya | Fashion Store",
+    description: "Clotya - Your one stop shop for all things fashion for all genders and occasions",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dpwljfhgl/image/upload/v1772491120/shop-banner_jmggvz.webp",
+        width: 1200,
+        height: 630,
+        alt: "Clotya | Fashion Store",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Clotya | Fashion Store",
+    description:
+      "Clotya - Your one stop shop for all things fashion for all genders and occasions",
+    creator: "@clotya",
+    site: "@clotya",
+    images: [
+      "https://res.cloudinary.com/dpwljfhgl/image/upload/v1772491120/shop-banner_jmggvz.webp",
+    ],
+  },
+  manifest: '/site.webmanifest',
+  metadataBase: new URL('https://clotya.vercel.app'),
+  category: 'business',
+  classification: 'Fashion Store',
+  other: {
+    'theme-color': '#000000',
+    'color-scheme': 'dark',
+    'format-detection': 'telephone=no',
+  },
 };
 
 export default function RootLayout({

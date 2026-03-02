@@ -1,11 +1,12 @@
 import { Heart, UserRound } from "lucide-react";
 import Image from "next/image";
+import { Suspense } from "react";
 import NavLinks from "./NavLinks";
 import { NavSheet } from "./NavSheet";
 import CartIndicator from "./CartIndicator";
 import SearchModal from "@/features/search/components/SearchModal";
 
-const NavbarLogo = ({width, height}: {width: number, height: number}) => {
+const NavbarLogo = ({ width, height }: { width: number, height: number }) => {
   return (
     <Image
       src="/logo.png"
@@ -28,7 +29,7 @@ const Navbar = () => {
         <div className="flex items-center gap-8 w-full flex-1">
           <NavSheet />
           <div className="hidden xl:block">
-            <NavbarLogo width={120} height={120}/>
+            <NavbarLogo width={120} height={120} />
           </div>
           <div className="hidden xl:block">
             <NavLinks />
@@ -45,7 +46,9 @@ const Navbar = () => {
             <UserRound strokeWidth={1.5} size={22} />
           </button>
           <div>
-            <SearchModal isMobile={false}/>
+            <Suspense fallback={null}>
+              <SearchModal isMobile={false} />
+            </Suspense>
           </div>
           <button>
             <Heart strokeWidth={1.5} size={22} />
