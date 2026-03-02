@@ -54,9 +54,6 @@
   }
 } */
 
-html {
-  scroll-behavior: smooth;
-}
 
 .skiptranslate {
   display: none !important;
