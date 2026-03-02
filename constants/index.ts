@@ -141,7 +141,7 @@ export const bottomNavLinks = [
 ]
 
 export const shopNavLinks = [
-    { name: "home", href: "/shop", icon: Birdhouse },
+    { name: "home", href: "/", icon: Birdhouse },
     accountNavLink
 ]
 
