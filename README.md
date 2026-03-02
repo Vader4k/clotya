@@ -1,36 +1,155 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Clotya — Modern E-Commerce Storefront
 
-## Getting Started
+A full-featured, modern e-commerce web application built with **Next.js 16**, **React 19**, and **TypeScript**. Clotya is a fashion-focused storefront with a feature-sliced architecture, rich product browsing experience, and a growing suite of commerce features.
 
-First, run the development server:
+---
+
+## ✨ Features
+
+### Currently Implemented
+
+| Feature                    | Description                                                                           |
+| -------------------------- | ------------------------------------------------------------------------------------- |
+| 🛍️ **Product Browsing**    | Shop page with filtering by category, size, color, and price range                    |
+| 🔍 **Search**              | Modal-based live product search with keyboard navigation                              |
+| 🔄 **Product Compare**     | Add up to N products to a side-by-side comparison table, persisted via `localStorage` |
+| 👁️ **Recently Viewed**     | Tracks and displays recently visited product pages                                    |
+| 📄 **Product Detail**      | Full product page with image gallery, size picker, color picker, and reviews          |
+| 🗂️ **Categories**          | Browsable category grid with dedicated category filtering                             |
+| 💱 **Currency Switcher**   | Client-side currency selection                                                        |
+| 📰 **Blog**                | Blog listing and individual post pages                                                |
+| 📬 **Contact Page**        | Static contact page                                                                   |
+| ⚡ **Intercepting Routes** | Quick-view product modal using Next.js parallel/intercepting routes (`@product`)      |
+
+### Planned / In Progress
+
+- 🛒 **Cart** — Add to cart, update quantities, remove items, cart drawer
+- ❤️ **Wishlist** — Save products for later, persistent across sessions
+- 📦 **Order Tracking** — View order status and history
+- 🔐 **Admin Panel** — Manage products, orders, and users
+
+---
+
+## 🏗️ Project Architecture
+
+Clotya uses a **feature-sliced** architecture: each domain is self-contained under `features/`, with its own components, hooks, services, stores, types, and utils.
+
+```
+clotya/
+├── app/                        # Next.js App Router
+│   ├── @product/               # Intercepting route (quick-view modal)
+│   ├── blog/                   # Blog listing & post pages
+│   ├── compare/                # Compare page
+│   ├── contact/                # Contact page
+│   ├── product/[slug]/         # Product detail page
+│   ├── shop/                   # Shop listing page
+│   ├── layout.tsx              # Root layout (fonts, providers)
+│   └── page.tsx                # Homepage
+│
+├── features/                   # Feature-sliced domain modules
+│   ├── blogs/                  # Blog feature (components, services, types)
+│   ├── categories/             # Category browsing & filtering
+│   ├── compare/                # Product comparison (store, modal, table)
+│   ├── currency/               # Currency switching
+│   ├── products/               # Core product feature (card, filters, actions, hooks)
+│   ├── recently-viewed/        # Recently viewed product tracking
+│   └── search/                 # Search modal, hooks, and utilities
+│
+├── sections/                   # Page-level section components
+│   ├── home/                   # Hero, BestSeller, Categories, Advert, News, Discount
+│   ├── shop/                   # ShopHeader, FiltersPanel, ProductGrid, Pagination
+│   ├── product/                # ProductGallery, ProductInfo, Reviews, RelatedProducts
+│   ├── blog/                   # BlogList, BlogCard, BlogPost sections
+│   └── contact/                # ContactForm section
+│
+├── components/
+│   └── ui/                     # Shared shadcn/ui primitives (Dialog, ScrollArea, etc.)
+│
+├── shared/
+│   └── ui/                     # Shared layout components (Navbar, Footer, BottomNav)
+│
+├── constants/                  # App-wide constants (nav links, categories, etc.)
+├── data/                       # Static data (products, blogs)
+└── lib/                        # Utility functions (cn, etc.)
+```
+
+---
+
+## 🛠️ Tech Stack
+
+| Category                    | Technology                                                                         |
+| --------------------------- | ---------------------------------------------------------------------------------- |
+| **Framework**               | [Next.js 16](https://nextjs.org/) (App Router, Turbopack)                          |
+| **Language**                | TypeScript 5                                                                       |
+| **UI Library**              | React 19                                                                           |
+| **Styling**                 | Tailwind CSS v4 + `tw-animate-css`                                                 |
+| **Component Primitives**    | [shadcn/ui](https://ui.shadcn.com/) + [Radix UI](https://www.radix-ui.com/)        |
+| **Icons**                   | [Lucide React](https://lucide.dev/)                                                |
+| **Animations**              | [Motion](https://motion.dev/) (Framer Motion v12)                                  |
+| **State Management**        | [Zustand v5](https://zustand-demo.pmnd.rs/) with `persist` middleware              |
+| **Server State / Fetching** | [TanStack Query v5](https://tanstack.com/query/latest) + Axios                     |
+| **Carousel / Slider**       | [Swiper.js](https://swiperjs.com/)                                                 |
+| **Image Optimization**      | Next.js `<Image>` + [Plaiceholder](https://plaiceholder.co/) for blur placeholders |
+| **Utilities**               | `clsx`, `tailwind-merge`, `class-variance-authority`                               |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js ≥ 18
+- npm ≥ 9
+
+### Installation
+
+```bash
+git clone https://github.com/your-username/clotya.git
+cd clotya
+npm install
+```
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+### Lint
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run lint
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📐 State Management
 
-## Deploy on Vercel
+Global client state is managed with **Zustand**, using the `persist` middleware with an SSR-safe `createJSONStorage` adapter to avoid hydration mismatches in Next.js.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Store                       | Purpose                                                  |
+| --------------------------- | -------------------------------------------------------- |
+| `compareStore`              | Tracks products added to the comparison list (persisted) |
+| `cartStore` _(planned)_     | Shopping cart items and quantities                       |
+| `wishlistStore` _(planned)_ | Saved/wishlisted products                                |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🗺️ Roadmap
+
+- [ ] Cart with drawer UI and quantity management
+- [ ] Wishlist with persistent storage
+- [ ] Checkout flow (address, payment, confirmation)
+- [ ] Order tracking page
+- [ ] Admin dashboard (product CRUD, order management, user management)
+- [ ] Authentication (NextAuth or Clerk)
+- [ ] Backend API integration (replace static data)
