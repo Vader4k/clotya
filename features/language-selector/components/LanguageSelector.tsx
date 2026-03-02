@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import { Earth } from "lucide-react";
 import { languages } from "@/data/languages";
 import {
     Select,
@@ -53,7 +52,6 @@ const LanguageSelector = () => {
     return (
         <Select value={currentLanguage} onValueChange={handleLanguageChange}>
             <SelectTrigger className="w-fit text-nowrap gap-2 notranslate bg-background data-[slot=select-value]:flex data-[slot=select-value]:items-center data-[slot=select-value]:gap-2">
-                <Earth className="h-4 w-4" />
                 <SelectValue translate="no" className="notranslate" placeholder="Language" />
             </SelectTrigger>
             <SelectContent className="z-50 notranslate">

@@ -30,17 +30,17 @@ const PageHeader = () => {
           <p className='text-nowrap'>Order Tracking</p>
           <LanguageSelector />
           <Select value='usd'>
-            <SelectTrigger className="w-full max-w-20 bg-white text-xs outline-none">
-              <SelectValue placeholder="Currency" />
+            <SelectTrigger translate='no' className="w-full max-w-20 bg-white text-xs outline-none notranslate">
+              <SelectValue translate='no' placeholder="Currency" />
             </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Currency</SelectLabel>
-                <SelectItem value="usd">USD</SelectItem>
-                <SelectItem value="eur">EUR</SelectItem>
-                <SelectItem value="gbp">GBP</SelectItem>
-                <SelectItem value="aud">AUD</SelectItem>
-                <SelectItem value="cad">CAD</SelectItem>
+            <SelectContent className="notranslate">
+              <SelectGroup className="notranslate">
+                <SelectLabel className="notranslate">Currency</SelectLabel>
+                <SelectItem value="usd" className="notranslate">USD</SelectItem>
+                <SelectItem value="eur" className="notranslate">EUR</SelectItem>
+                <SelectItem value="gbp" className="notranslate">GBP</SelectItem>
+                <SelectItem value="aud" className="notranslate">AUD</SelectItem>
+                <SelectItem value="cad" className="notranslate">CAD</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>

@@ -30,6 +30,7 @@ const Hero = async () => {
             className="object-cover"
             placeholder="blur"
             blurDataURL={base64Men}
+            draggable="false"
           />
           <h1 className="relative z-10 text-7xl md:text-9xl text-transparent text-outline">Men</h1>
         </div>
@@ -47,6 +48,7 @@ const Hero = async () => {
             className="object-cover"
             placeholder="blur"
             blurDataURL={base64Women}
+            draggable="false"
           />
           <h1 className="relative z-10 text-7xl md:text-9xl text-transparent text-outline">Women</h1>
         </div>
