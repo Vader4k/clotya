@@ -3,15 +3,21 @@
 import { Heart, Repeat, Maximize, Check } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useCompareStore } from "@/features/compare/store/compareStore"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import CompareModal from "@/features/compare/components/CompareModal"
+import { ProductActionsProps } from "../types/product.types"
 
-const ProductActions = ({ slug, id, name, image, rating, price, discountPrice }: { slug: string, id: string, name: string, image: string, rating: number, price: number, discountPrice?: number }) => {
+const ProductActions = ({ slug, id, name, image, rating, price, discountPrice }: ProductActionsProps) => {
     const router = useRouter()
     const { isInCompare, addProduct } = useCompareStore()
 
+    const [mounted, setMounted] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const [isDuplicate, setIsDuplicate] = useState(false)
+
+    useEffect(() => {
+        setMounted(true)
+    }, [])
 
     const maximizeAction = () => {
         router.push(`/product/${slug}`)
@@ -31,7 +37,7 @@ const ProductActions = ({ slug, id, name, image, rating, price, discountPrice }:
     const actions = [
         { icon: Heart, title: "Add to wishlist" },
         { icon: Maximize, title: "Quick view", onClick: maximizeAction },
-        { icon: isInCompare(id) ? Check : Repeat, title: "Add to compare", onClick: compareAction }
+        { icon: mounted && isInCompare(id) ? Check : Repeat, title: "Add to compare", onClick: compareAction }
     ]
 
     return (

@@ -14,3 +14,11 @@ export type CompareModalProps = {
     productName: string
     isDuplicate: boolean
 }
+
+export interface CompareState {
+    products: CompareProduct[];
+    addProduct: (product: CompareProduct) => void;
+    removeProduct: (id: string) => void;
+    isInCompare: (id: string) => boolean;
+    clearProducts: () => void;
+}

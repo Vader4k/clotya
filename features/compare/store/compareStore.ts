@@ -1,14 +1,19 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import { CompareProduct } from "../types/compare.types";
+import { createJSONStorage, persist } from "zustand/middleware";
+import { CompareProduct, CompareState } from "../types/compare.types";
 
-interface CompareState {
-    products: CompareProduct[];
-    addProduct: (product: CompareProduct) => void;
-    removeProduct: (id: string) => void;
-    isInCompare: (id: string) => boolean;
-    clearProducts: () => void;
-}
+const storage = createJSONStorage(() => {
+    if(typeof window === 'undefined'){
+        return {
+            getItem: () => null,
+            setItem: () => {},
+            removeItem: () => {},
+            isInCompare: () => false,
+            clearProducts: () => {},
+        }
+    }
+    return localStorage;
+})
 
 export const useCompareStore = create<CompareState>()(
     persist(
@@ -30,6 +35,7 @@ export const useCompareStore = create<CompareState>()(
         }),
         {
             name: "compare-storage",
+            storage, // use the SSR-safe storage
         }
     )
 )
