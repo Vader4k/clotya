@@ -10,6 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import LanguageSelector from "@/features/language-selector/components/LanguageSelector"
+import Link from 'next/link';
 
 const PageHeader = () => {
   return (
@@ -27,7 +28,7 @@ const PageHeader = () => {
 
         {/*controls */}
         <div className='flex items-center gap-3 text-xs'>
-          <p className='text-nowrap'>Order Tracking</p>
+          <Link href='/order-tracking' className='text-nowrap'>Order Tracking</Link>
           <LanguageSelector />
           <Select value='usd'>
             <SelectTrigger translate='no' className="w-full max-w-20 bg-white text-xs outline-none notranslate">
