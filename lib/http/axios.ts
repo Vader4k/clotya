@@ -1,0 +1,51 @@
+import axios from "axios";
+import axiosRetry from "axios-retry";
+
+const axiosInstance = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_API_URL!,
+    headers: {
+        "Content-Type": "application/json",
+    },
+    withCredentials: true,
+    timeout: 15000, // Reduced from 30s to 15s for faster failure under high load
+});
+
+// Add retry logic with exponential backoff to prevent thundering herd
+axiosRetry(axiosInstance, {
+    retries: 3,
+    retryDelay: (retryCount) => {
+        // Exponential backoff with jitter: base * 2^retryCount + random(0-1000ms)
+        const baseDelay = 1000;
+        const exponentialDelay = baseDelay * Math.pow(2, retryCount - 1);
+        const jitter = Math.random() * 1000;
+        return Math.min(exponentialDelay + jitter, 10000); // Cap at 10s
+    },
+    retryCondition: (error) => {
+        // Retry on network errors and 5xx server errors, but not 4xx client errors
+        const isSafeMethod = ["get", "head", "options"].includes(
+            error.config?.method?.toLowerCase() || ""
+        );
+
+        return (
+            isSafeMethod &&
+            (axiosRetry.isNetworkError(error) ||
+                (error.response?.status ? error.response.status >= 500 : false))
+        );
+    },
+    shouldResetTimeout: true, // Reset timeout on each retry
+});
+
+axiosInstance.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        const isLoginRequest = error.config?.url?.includes("/login");
+        if (error.response?.status === 401 && !isLoginRequest) {
+            if (typeof window !== "undefined") {
+                window.location.href = "/login";
+            }
+        }
+        return Promise.reject(error);
+    }
+);
+
+export default axiosInstance
