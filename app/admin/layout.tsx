@@ -1,10 +1,13 @@
 import AdminAuthGuard from "@/features/auth/components/AuthGuard"
+import { DashboardLayout } from "@/features/dashboard/components/DashboardLayout"
 
-const layout = ({children}: {children: React.ReactNode}) => {
+const layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <AdminAuthGuard>
+    // <AdminAuthGuard>
+      <DashboardLayout>
         {children}
-    </AdminAuthGuard>
+      </DashboardLayout>
+    // </AdminAuthGuard>
   )
 }
 

@@ -1,3 +1,5 @@
+"use client"
+
 import { Heart, UserRound } from "lucide-react";
 import Image from "next/image";
 import { Suspense } from "react";
@@ -5,6 +7,8 @@ import NavLinks from "./NavLinks";
 import { NavSheet } from "./NavSheet";
 import CartIndicator from "./CartIndicator";
 import SearchModal from "@/features/search/components/SearchModal";
+import { hideNavOnRoutes } from "@/constants";
+import { usePathname } from "next/navigation";
 
 const NavbarLogo = ({ width, height }: { width: number, height: number }) => {
   return (
@@ -22,6 +26,9 @@ const NavbarLogo = ({ width, height }: { width: number, height: number }) => {
 
 
 const Navbar = () => {
+  const pathname = usePathname()
+  if (hideNavOnRoutes.some((page) => pathname.includes(page))) return null
+
   return (
     <nav className="w-full border-b border-gray-200 font-jost px-3 sticky xl:relative top-0 bg-white z-50">
       <div className="w-full max-w-7xl mx-auto flex items-center justify-between py-4 lg:py-6">

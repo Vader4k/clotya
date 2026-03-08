@@ -1,4 +1,4 @@
-import { Truck, RefreshCcw, PhoneCall, CreditCard, Store, User, Birdhouse } from "lucide-react"
+import { Truck, RefreshCcw, PhoneCall, CreditCard, Store, User, Birdhouse, Tags, LayoutDashboard, Package, ShoppingCart } from "lucide-react"
 
 export const navLinks = [
     {
@@ -160,3 +160,13 @@ export const colors = [
 ]
 
 export const sizes = ['xss', 'xs', 's', 'm', 'l', 'xl', 'xxl', 'xxxl']
+
+
+export const hideNavOnRoutes = ['/admin', '/admin/products', '/admin/orders', '/login', '/register', '/forgot-password', '/reset-password', '/checkout', '/checkout/success', '/checkout/error']
+
+export const SIDEBAR_LINKS = [
+    { name: "Overview", href: "/admin", icon: LayoutDashboard },
+    { name: "Categories", href: "/admin/categories", icon: Tags },
+    { name: "Products", href: "/admin/products", icon: Package },
+    { name: "Orders", href: "/admin/orders", icon: ShoppingCart },
+]

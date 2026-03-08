@@ -1,3 +1,4 @@
+"use client"
 
 import { ChevronDown, Instagram } from 'lucide-react';
 import {
@@ -11,8 +12,13 @@ import {
 } from "@/components/ui/select"
 import LanguageSelector from "@/features/language-selector/components/LanguageSelector"
 import Link from 'next/link';
+import { hideNavOnRoutes } from '@/constants';
+import { usePathname } from 'next/navigation';
 
 const PageHeader = () => {
+  const pathname = usePathname()
+  if (hideNavOnRoutes.some((page) => pathname.includes(page))) return null
+
   return (
     <header className='w-full font-jost border-b'>
       <div className='uppercase text-xs text-center py-3 bg-[#1a4744] text-white'>summer sale for all swim suits and free express international delivery - off 50%! <span className='font-bold'>shop now</span></div>

@@ -1,8 +1,12 @@
+"use client"
+
 import { Input } from "@/components/ui/input"
 import { Apple, Play } from "lucide-react"
 import Link from "next/link"
 import { footerLinks, phone, email } from "@/constants"
 import Image from "next/image"
+import { hideNavOnRoutes } from "@/constants"
+import { usePathname } from "next/navigation"
 
 
 const StoreLinks = ({ href, children, icon }: { href: string, children: React.ReactNode, icon: React.ReactNode }) => {
@@ -15,12 +19,15 @@ const StoreLinks = ({ href, children, icon }: { href: string, children: React.Re
 }
 
 const Footer = () => {
+  const pathname = usePathname()
+  if (hideNavOnRoutes.some((page) => pathname.includes(page))) return null
+
   return (
     <footer className='2xl:h-[110vh] font-jost'>
       <div className='w-full bg-black text-white h-1/2 flex items-center justify-start py-10 2xl:py-0 px-3'>
         <div className='w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-start justify-between gap-10'>
           <div className='w-full flex-1 flex flex-col gap-3'>
-            <h3 className="text-2xl lg:text-3xl font-medium">Get our emails for info on <br className="hidden lg:block"/>new items, sales and more.</h3>
+            <h3 className="text-2xl lg:text-3xl font-medium">Get our emails for info on <br className="hidden lg:block" />new items, sales and more.</h3>
             <p className="text-neutral-300/60">We'll email you a voucher worth $10 off your first order over $50.</p>
 
             <div className="flex item-center mt-6">
