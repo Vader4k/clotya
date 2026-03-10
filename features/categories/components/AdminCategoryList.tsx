@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Plus, Edit2, Trash2, Search } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import {
@@ -85,7 +85,7 @@ export const AdminCategoryList = () => {
                 </button>
             </div>
 
-            <div className="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden">
+            <div className="border border-gray-200 bg-white overflow-hidden">
                 <div className="border-b border-gray-200 p-4">
                     <div className="relative max-w-sm">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />

@@ -2,10 +2,6 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
-    LayoutDashboard,
-    Tags,
-    Package,
-    ShoppingCart,
     Settings,
     LogOut
 } from "lucide-react"
@@ -35,7 +31,7 @@ export const Sidebar = () => {
                             <li key={link.name}>
                                 <Link
                                     href={link.href}
-                                    className={`flex items-center rounded-lg p-2 text-sm text-gray-900 hover:bg-gray-100 ${isActive ? "bg-gray-100 text-primary" : ""
+                                    className={`flex items-center p-2 text-sm text-gray-900 hover:bg-gray-100 ${isActive ? "bg-gray-100 text-primary" : ""
                                         }`}
                                 >
                                     <Icon strokeWidth={1} className={`h-5 w-5 transition-colors ${isActive ? "text-primary" : "text-gray-500"}`} />
