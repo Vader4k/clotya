@@ -31,11 +31,11 @@ export const Sidebar = () => {
                             <li key={link.name}>
                                 <Link
                                     href={link.href}
-                                    className={`flex items-center p-2 text-sm text-gray-900 hover:bg-gray-100 ${isActive ? "bg-gray-100 text-primary" : ""
+                                    className={`flex items-center p-2 text-xs text-gray-900 hover:bg-gray-100 ${isActive ? "bg-gray-100 text-primary" : ""
                                         }`}
                                 >
-                                    <Icon strokeWidth={1} className={`h-5 w-5 transition-colors ${isActive ? "text-primary" : "text-gray-500"}`} />
-                                    <span className="ml-3">{link.name}</span>
+                                    <Icon strokeWidth={1} className={`size-4.5 transition-colors ${isActive ? "text-primary" : "text-gray-500"}`} />
+                                    <span className={`ml-3 ${isActive ? "text-primary" : "text-gray-500"}`}>{link.name}</span>
                                 </Link>
                             </li>
                         )
@@ -46,17 +46,17 @@ export const Sidebar = () => {
                     <li>
                         <Link
                             href="/admin/settings"
-                            className="flex items-center rounded-lg p-2 text-sm text-gray-900 hover:bg-gray-100"
+                            className="flex items-center rounded-lg p-2 text-xs text-gray-900 hover:bg-gray-100"
                         >
-                            <Settings strokeWidth={1} className="h-5 w-5 text-gray-500 transition-colors" />
+                            <Settings strokeWidth={1} className="size-4.5 text-gray-500 transition-colors" />
                             <span className="ml-3">Settings</span>
                         </Link>
                     </li>
                     <li>
                         <button
-                            className="flex w-full items-center rounded-lg p-2 text-sm text-red-600 hover:bg-red-50"
+                            className="flex w-full items-center rounded-lg p-2 text-xs text-red-600 hover:bg-red-50"
                         >
-                            <LogOut strokeWidth={1} className="h-5 w-5 transition-colors" />
+                            <LogOut strokeWidth={1} className="size-4.5 transition-colors" />
                             <span className="ml-3">Logout</span>
                         </button>
                     </li>

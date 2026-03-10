@@ -12,7 +12,7 @@ export const Overview = () => {
         <div className="space-y-6">
             <div>
                 <h1 className="text-xl font-bold tracking-tight text-gray-900">Dashboard Overview</h1>
-                <p className="text-gray-500 text-sm mt-2">Welcome back. Here's what's happening with your store today.</p>
+                <p className="text-gray-500 text-xs">Welcome back. Here's what's happening with your store today.</p>
             </div>
 
             {/* Stats Grid */}
