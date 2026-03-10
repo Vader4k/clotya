@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+"use client"
+
+import { useState } from 'react'
 import { Plus, Edit2, Trash2, Search, Image as ImageIcon } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 
