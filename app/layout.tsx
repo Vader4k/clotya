@@ -8,6 +8,7 @@ import Providers from "./Provider";
 import BottomNav from "@/shared/ui/navbar/BottomNav";
 import GoogleTranslatorInit from "@/features/language-selector/utils/GoogleTranslatorInit";
 import Script from "next/script";
+import { Toaster } from "@/components/ui/sonner"
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -135,6 +136,7 @@ export default function RootLayout({
           src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
           strategy="afterInteractive"
         />
+        <Toaster />
       </body>
     </html>
   );
