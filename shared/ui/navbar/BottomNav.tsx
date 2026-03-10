@@ -7,11 +7,14 @@ import { NavSheet } from "./NavSheet"
 import FilterSheet from "./FilterSheet"
 import { usePathname } from "next/navigation"
 import SearchModal from "@/features/search/components/SearchModal"
+import { hideNavOnRoutes } from "@/constants";
 
 const BottomNav = () => {
     const pathname = usePathname()
     const isShopPage = pathname.startsWith('/shop')
     const links = isShopPage ? shopNavLinks : bottomNavLinks
+
+    if (hideNavOnRoutes.some((page) => pathname.includes(page))) return null
 
     return (
         <nav className='w-full bg-white z-50 fixed bottom-0 left-0 py-3 px-10 border-t border-gray-300'>

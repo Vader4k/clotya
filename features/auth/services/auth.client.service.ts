@@ -1,8 +1,9 @@
 import axiosInstance from "@/lib/http/axios";
 import { QUERIES } from "@/queries/queries";
+import { LoginSchemaType } from "@/schema/loginSchema";
 
 export const authClientService = {
-    login: async (data: any) => {
+    login: async (data: LoginSchemaType) => {
         const response = await axiosInstance.post(QUERIES.LOGIN, data, {
             headers: {
                 "Content-Type": "application/json",

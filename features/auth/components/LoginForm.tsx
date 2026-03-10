@@ -6,64 +6,57 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, LoginSchemaType } from '@/schema/loginSchema';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { authClientService } from '../services/auth.client.service';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { errorHandler } from '@/lib/http/errorHandler'
 
 export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitError, setSubmitError] = useState<string | null>(null);
+    const router = useRouter();
 
     const {
         register,
         handleSubmit,
-        formState: { errors }
+        formState: { errors, isSubmitting }
     } = useForm<LoginSchemaType>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
-            username: '',
+            email: '',
             password: '',
         }
     });
 
     const onSubmit = async (data: LoginSchemaType) => {
-        setIsSubmitting(true);
-        setSubmitError(null);
-
         try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            console.log('Login successful', data);
+            const response = await authClientService.login(data);
 
-            // Additional login logic can go here
+            toast.success(response.message || 'Logged in successfully');
+            router.push('/admin');
         } catch (error) {
-            setSubmitError('Invalid credentials. Please try again.');
-        } finally {
-            setIsSubmitting(false);
+            const errorMessage = errorHandler(error);
+            toast.error(errorMessage);
         }
     };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            {submitError && (
-                <div className="rounded-lg bg-red-50 dark:bg-red-900/20 p-4 border border-red-200 dark:border-red-900/50">
-                    <p className="text-sm font-medium text-red-800 dark:text-red-400">{submitError}</p>
-                </div>
-            )}
 
             <div className="space-y-5">
                 <div className="space-y-2">
-                    <label htmlFor="username" className="text-sm font-medium text-neutral-700 dark:text-neutral-200 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                    <label htmlFor="email" className="text-sm font-medium text-neutral-700 dark:text-neutral-200 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                         Email Address
                     </label>
                     <Input
-                        id="username"
+                        id="email"
                         type="email"
                         placeholder="admin@company.com"
                         disabled={isSubmitting}
-                        className={`h-11 transition-all ${errors.username ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
-                        {...register('username')}
+                        className={`h-11 transition-all ${errors.email ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
+                        {...register('email')}
                     />
-                    {errors.username && (
-                        <p className="text-xs font-medium text-red-500 animate-in fade-in slide-in-from-top-1">{errors.username.message}</p>
+                    {errors.email && (
+                        <p className="text-xs font-medium text-red-500 animate-in fade-in slide-in-from-top-1">{errors.email.message}</p>
                     )}
                 </div>
 

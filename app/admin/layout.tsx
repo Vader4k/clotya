@@ -3,11 +3,11 @@ import { DashboardLayout } from "@/features/dashboard/components/DashboardLayout
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    // <AdminAuthGuard>
+    <AdminAuthGuard>
       <DashboardLayout>
         {children}
       </DashboardLayout>
-    // </AdminAuthGuard>
+    </AdminAuthGuard>
   )
 }
 
