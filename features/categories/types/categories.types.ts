@@ -14,7 +14,7 @@ export interface CategoryFormDialogProps {
     description: string
 }
 
-export type DeleteCategoryDialogProps  = {
+export type DeleteCategoryDialogProps = {
     open: boolean
     onOpenChange: (open: boolean) => void
     onConfirm: () => void
@@ -25,4 +25,5 @@ export type DeleteCategoryDialogProps  = {
 export type Category = CategorySchemaType & {
     _id: number;
     items: number;
+    tags?: string[];
 };

@@ -16,7 +16,6 @@ import { categoriesService } from '../services/categories.service'
 import { errorHandler } from '@/lib/http/errorHandler'
 import { toast } from 'sonner'
 
-
 export const AdminCategoryList = () => {
 
     const { data, isPending, isError, refetch } = useCategories()
@@ -36,7 +35,7 @@ export const AdminCategoryList = () => {
         category.slug.toLowerCase().includes(searchTerm.toLowerCase())
     ) ?? []
 
-    const handleAdd = async(data: CategorySchemaType) => {
+    const handleAdd = async (data: CategorySchemaType) => {
         try {
             await categoriesService.addNewCategory(data)
             refetch()
@@ -46,13 +45,26 @@ export const AdminCategoryList = () => {
         }
     }
 
-    const handleEdit = (data: CategorySchemaType) => {
-        if (!currentCategory) return
+    const handleEdit = async (data: CategorySchemaType) => {
+        if (!currentCategory?._id) return
+        try {
+            await categoriesService.editCategory({ data, id: String(currentCategory._id) })
+            refetch()
+            setIsEditModalOpen(false)
+        } catch (error) {
+            toast.error(errorHandler(error))
+        }
     }
 
-    const handleDelete = () => {
-        if (!currentCategory) return
-        setIsDeleteModalOpen(false)
+    const handleDelete = async () => {
+        if (!currentCategory?._id) return
+        try {
+            await categoriesService.deleteCategory(String(currentCategory._id))
+            refetch()
+            setIsDeleteModalOpen(false)
+        } catch (error) {
+            toast.error(errorHandler(error))
+        }
     }
 
     return (

@@ -11,5 +11,11 @@ export const QUERIES = {
             GETNADD: '/categories/',
             EDITNDEL: '/categories/:id',
         }
+    },
+
+    public: {
+        categories: {
+            GET: '/public/categories',
+        }
     }
 }

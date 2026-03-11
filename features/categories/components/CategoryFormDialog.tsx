@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { categorySchema, CategorySchemaType } from '../schema/categorySchema'
@@ -15,7 +15,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Switch } from '@/components/ui/switch'
 import { CategoryFormDialogProps } from '../types/categories.types'
-import { Loader } from 'lucide-react'
+import { Loader, X, Plus } from 'lucide-react'
 
 
 export const CategoryFormDialog = ({
@@ -40,10 +40,32 @@ export const CategoryFormDialog = ({
             slug: '',
             description: '',
             isActive: true,
+            tags: []
         }
     })
 
+    const [tagInput, setTagInput] = useState('')
+    const tags = watch('tags') || []
     const nameValue = watch('name')
+
+    const addTag = () => {
+        const trimmed = tagInput.trim().toLowerCase()
+        if (trimmed && !tags.includes(trimmed)) {
+            setValue('tags', [...tags, trimmed], { shouldValidate: true })
+        }
+        setTagInput('')
+    }
+
+    const removeTag = (tagToRemove: string) => {
+        setValue('tags', tags.filter((t) => t !== tagToRemove), { shouldValidate: true })
+    }
+
+    const handleTagKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            e.preventDefault()
+            addTag()
+        }
+    }
 
     // Auto-generate slug from name
     useEffect(() => {
@@ -58,12 +80,14 @@ export const CategoryFormDialog = ({
 
     useEffect(() => {
         if (open) {
+            setTagInput('')
             if (initialData) {
                 reset({
                     name: initialData.name,
                     slug: initialData.slug,
                     description: initialData.description || '',
                     isActive: initialData.isActive,
+                    tags: initialData.tags || [],
                 })
             } else {
                 reset({
@@ -71,6 +95,7 @@ export const CategoryFormDialog = ({
                     slug: '',
                     description: '',
                     isActive: true,
+                    tags: [],
                 })
             }
         }
@@ -78,7 +103,6 @@ export const CategoryFormDialog = ({
 
     const handleFormSubmit = (data: CategorySchemaType) => {
         onSubmit(data)
-        onOpenChange(false)
     }
 
     return (
@@ -115,6 +139,45 @@ export const CategoryFormDialog = ({
                             className={errors.description ? 'border-red-500' : ''}
                         />
                         {errors.description && <p className="text-xs text-red-500">{errors.description.message}</p>}
+                    </div>
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium">Tags</label>
+                        <div className="flex gap-2">
+                            <Input
+                                value={tagInput}
+                                onChange={(e) => setTagInput(e.target.value)}
+                                onKeyDown={handleTagKeyDown}
+                                placeholder="Add a tag..."
+                            />
+                            <button
+                                type="button"
+                                onClick={addTag}
+                                disabled={!tagInput.trim()}
+                                className="px-3 py-2 border rounded-md hover:bg-gray-100 transition-colors disabled:opacity-50"
+                            >
+                                <Plus className="h-4 w-4" />
+                            </button>
+                        </div>
+                        {tags.length > 0 && (
+                            <div className="flex flex-wrap gap-2 mt-2">
+                                {tags.map((tag) => (
+                                    <span
+                                        key={tag}
+                                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-gray-100 text-sm"
+                                    >
+                                        {tag}
+                                        <button
+                                            type="button"
+                                            onClick={() => removeTag(tag)}
+                                            className="hover:text-red-500 transition-colors"
+                                        >
+                                            <X className="h-3 w-3" />
+                                        </button>
+                                    </span>
+                                ))}
+                            </div>
+                        )}
+                        {errors.tags && <p className="text-xs text-red-500">{errors.tags.message}</p>}
                     </div>
                     <div className="flex items-center justify-between rounded-lg border p-3 shadow-sm">
                         <div className="space-y-0.5">
