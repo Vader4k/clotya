@@ -1,4 +1,5 @@
-import { Category } from "@/data/categories";
+import { Category } from "@/features/categories/types/categories.types";
+
 
 export type ProductCardProps = {
   id: string,

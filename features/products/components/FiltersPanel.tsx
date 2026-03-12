@@ -6,7 +6,7 @@ import CategoryFilter from './CategoryFilter'
 import PriceFilter from './PriceFilter'
 import ColorFilter from './ColorFilter'
 import SizeFilter from './SizeFilter'
-import { Category } from '@/data/categories'
+import { Category } from "@/features/categories/types/categories.types";
 import { useUpdateParams } from '@/features/products/hooks/useUpdateParams'
 
 const FiltersPanel = ({ categories }: { categories: Category[] }) => {
@@ -28,7 +28,7 @@ const FiltersPanel = ({ categories }: { categories: Category[] }) => {
   }
 
   const handleCategoryFilter = (category: string) => {
-    const current = searchParams.get("category")
+    const current = searchParams.get("category")?.toLowerCase()
     updateParams({
       category: current === category ? null : category,
     })

@@ -25,5 +25,5 @@ export type DeleteCategoryDialogProps = {
 export type Category = CategorySchemaType & {
     _id: number;
     items: number;
-    tags?: string[];
+    tags?: { name: string, _id: number }[];
 };

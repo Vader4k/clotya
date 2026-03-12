@@ -1,11 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
 import { productServices } from '../services/product.service'
+import { QUERIES } from '@/queries/queries'
 
 export const useGetProductsByCategory = (category: string) => {
     return useQuery({
-        queryKey: ['products', category],
+        queryKey: [QUERIES.public.products.GET_BY_CATEGORY, category],
         queryFn: () => productServices.getByCategory(category),
         enabled: !!category,
+        retry: 1,
         placeholderData: (previousData) => previousData,
     })
 }

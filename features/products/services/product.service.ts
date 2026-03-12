@@ -1,5 +1,8 @@
 import { allProducts, type Product } from "@/data/products";
 import { ProductFilters } from "../types/product.types";
+import { QUERIES } from "@/queries/queries";
+import axiosInstance from "@/lib/http/axios";
+import { processUrlVariables } from "@/lib/utils";
 
 export const productServices = {
     // get all products
@@ -12,11 +15,10 @@ export const productServices = {
         return Promise.resolve(allProducts.find((product) => product.slug === slug));
     },
 
-    // get products by category
     getByCategory: async (category: string): Promise<Product[]> => {
-        return Promise.resolve(
-            allProducts.filter((product) => product.category.includes(category)),
-        );
+        const url = processUrlVariables(QUERIES.public.products.GET_BY_CATEGORY, { category });
+        const response = await axiosInstance.get(url);
+        return response.data.products;
     },
 
     // get products by search

@@ -16,6 +16,9 @@ export const QUERIES = {
     public: {
         categories: {
             GET: '/public/categories',
+        },
+        products: {
+            GET_BY_CATEGORY: '/public/products/category/:category',
         }
     }
 }
