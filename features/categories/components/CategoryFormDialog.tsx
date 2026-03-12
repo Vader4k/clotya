@@ -40,7 +40,7 @@ export const CategoryFormDialog = ({
             slug: '',
             description: '',
             isActive: true,
-            tags: []
+            tags: [{name: ''}]
         }
     })
 
@@ -50,14 +50,14 @@ export const CategoryFormDialog = ({
 
     const addTag = () => {
         const trimmed = tagInput.trim().toLowerCase()
-        if (trimmed && !tags.includes(trimmed)) {
-            setValue('tags', [...tags, trimmed], { shouldValidate: true })
+        if (trimmed && !tags.includes({name: trimmed})) {
+            setValue('tags', [...tags, {name: trimmed}], { shouldValidate: true })
         }
         setTagInput('')
     }
 
     const removeTag = (tagToRemove: string) => {
-        setValue('tags', tags.filter((t) => t !== tagToRemove), { shouldValidate: true })
+        setValue('tags', tags.filter((t) => t.name !== tagToRemove), { shouldValidate: true })
     }
 
     const handleTagKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -101,8 +101,8 @@ export const CategoryFormDialog = ({
         }
     }, [open, initialData, reset])
 
-    const handleFormSubmit = (data: CategorySchemaType) => {
-        onSubmit(data)
+    const handleFormSubmit = async (data: CategorySchemaType) => {
+        await onSubmit(data)
     }
 
     return (
@@ -162,13 +162,13 @@ export const CategoryFormDialog = ({
                             <div className="flex flex-wrap gap-2 mt-2">
                                 {tags.map((tag) => (
                                     <span
-                                        key={tag}
+                                        key={tag.name}
                                         className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-gray-100 text-sm"
                                     >
-                                        {tag}
+                                        {tag.name}
                                         <button
                                             type="button"
-                                            onClick={() => removeTag(tag)}
+                                            onClick={() => removeTag(tag.name)}
                                             className="hover:text-red-500 transition-colors"
                                         >
                                             <X className="h-3 w-3" />

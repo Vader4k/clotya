@@ -2,6 +2,7 @@ import axiosInstance from "@/lib/http/axios";
 import { QUERIES } from "@/queries/queries";
 import { CategorySchemaType } from "../schema/categorySchema";
 import { Category } from "../types/categories.types";
+import { processUrlVariables } from "@/lib/utils";
 
 export const categoriesService = {
     // Fetch all categories
@@ -18,19 +19,11 @@ export const categoriesService = {
         return response.data.categories
     },
     editCategory: async ({ data, id }: { data: CategorySchemaType, id: string }) => {
-        const res = await axiosInstance.put(QUERIES.admin.categories.EDITNDEL, data, {
-            params: {
-                id
-            }
-        })
+        const res = await axiosInstance.put(processUrlVariables(QUERIES.admin.categories.EDITNDEL, { id }), data)
         return res.data
     },
     deleteCategory: async (id: string) => {
-        const res = await axiosInstance.delete(QUERIES.admin.categories.EDITNDEL, {
-            params: {
-                id
-            }
-        })
+        const res = await axiosInstance.delete(processUrlVariables(QUERIES.admin.categories.EDITNDEL, { id }))
         return res.data
     }
 }

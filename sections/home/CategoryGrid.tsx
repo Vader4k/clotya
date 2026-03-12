@@ -24,7 +24,7 @@ const CategoryCard = ({ category, className = "" }: { category: Category; classN
         <div className="flex flex-col items-start gap-2 mt-8">
           {category.tags.map((tag, index) => (
             <span key={index} className="text-sm font-jost capitalize hover:underline cursor-pointer">
-              {tag}
+              {tag.name}
             </span>
           ))}
         </div>
