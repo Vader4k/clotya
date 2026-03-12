@@ -1,9 +1,29 @@
-import { allCategories, type Category } from "@/data/categories";
+import axiosInstance from "@/lib/http/axios";
+import { QUERIES } from "@/queries/queries";
+import { CategorySchemaType } from "../schema/categorySchema";
+import { Category } from "../types/categories.types";
+import { processUrlVariables } from "@/lib/utils";
 
 export const categoriesService = {
     // Fetch all categories
-    //TODO: replace with actual api call when available
     getAllCategories: async (): Promise<Category[]> => {
-        return Promise.resolve(allCategories);
+        const response = await axiosInstance.get(QUERIES.admin.categories.GETNADD)
+        return response.data.categories
+    },
+    addNewCategory: async (data: CategorySchemaType) => {
+        const response = await axiosInstance.post(QUERIES.admin.categories.GETNADD, data)
+        return response.data
+    },
+    getAllCategoriesPublic: async (): Promise<Category[]> => {
+        const response = await axiosInstance.get(QUERIES.public.categories.GET)
+        return response.data.categories
+    },
+    editCategory: async ({ data, id }: { data: CategorySchemaType, id: string }) => {
+        const res = await axiosInstance.put(processUrlVariables(QUERIES.admin.categories.EDITNDEL, { id }), data)
+        return res.data
+    },
+    deleteCategory: async (id: string) => {
+        const res = await axiosInstance.delete(processUrlVariables(QUERIES.admin.categories.EDITNDEL, { id }))
+        return res.data
     }
 }

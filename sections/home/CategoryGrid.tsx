@@ -1,5 +1,5 @@
 import { categoriesService } from "@/features/categories/services/categories.service";
-import { Category } from "@/data/categories";
+import { Category } from "@/features/categories/types/categories.types";
 import Link from "next/link";
 
 /**
@@ -11,20 +11,20 @@ const CategoryCard = ({ category, className = "" }: { category: Category; classN
   return (
     <Link href={`/shop?category=${category.slug}`} className={`w-full h-full p-10 flex flex-col items-start gap-1 ${className}`}>
       {/* 1. Meta Information (Low weight) */}
-      <span className="text-xs text-black">{category.totalProducts} products</span>
+      <span className="text-xs text-black">{category.items} products</span>
 
       {/* 2. Primary Title (High weight) */}
       <h3 className="font-jost text-3xl capitalize">{category.name}</h3>
 
       {/* 3. Description (Medium weight) */}
-      <p className="text-sm max-w-[400px] text-gray-500 line-clamp-2">{category.desc}</p>
+      <p className="text-sm max-w-[400px] text-gray-500 line-clamp-2">{category.description}</p>
 
       {/* 4. Tags (Contextual details) */}
-      {category.tags && category.tags.length > 0 && (
+      {category?.tags && category.tags.length > 0 && (
         <div className="flex flex-col items-start gap-2 mt-8">
           {category.tags.map((tag, index) => (
             <span key={index} className="text-sm font-jost capitalize hover:underline cursor-pointer">
-              {tag}
+              {tag.name}
             </span>
           ))}
         </div>
@@ -34,7 +34,7 @@ const CategoryCard = ({ category, className = "" }: { category: Category; classN
 };
 
 const CategoryGrid = async () => {
-  const categories = await categoriesService.getAllCategories();
+  const categories = await categoriesService.getAllCategoriesPublic();
 
   // Helper to find category by slug (more resilient than index)
   const getCat = (slug: string) => categories.find((c) => c.slug === slug);

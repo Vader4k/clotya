@@ -13,7 +13,7 @@ const page = async ({ searchParams }: PageProp) => {
   const products = await productServices.getAll(filters);
 
   // TODO: will be replaced with a proper fetch api with a cache
-  const categories = await categoriesService.getAllCategories();
+  const categories = await categoriesService.getAllCategoriesPublic();
 
   const totalPages = Math.ceil(products.length / 12);
   const currentPage = Number(resolvedSearchParams.page) || 1;

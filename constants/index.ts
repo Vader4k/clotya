@@ -122,14 +122,14 @@ export const sheetLinks: Record<string, SheetLink[]> = {
         { name: 'bags', href: '/shop?category=bags', tag: null },
         { name: 'accessories', href: '/shop?category=accessories', tag: null },
         { name: 'watches', href: '/shop?category=watches', tag: null },
-        { name: 'cargo trousers', href: '/shop?category=cargo trousers', tag: 'new' },
+        { name: 'cargo trousers', href: '/shop?category=cargo-trousers', tag: 'new' },
         { name: 'outerwear', href: '/shop?category=outerwear', tag: null },
         { name: 'wallets', href: '/shop?category=wallets', tag: null },
         { name: 'belts', href: '/shop?category=belts', tag: null },
-        { name: 'best sellers', href: '/shop?category=best sellers', tag: null },
-        { name: 'featured products', href: '/shop?category=featured products', tag: null },
-        { name: 'new arrivals', href: '/shop?category=new arrivals', tag: 'save 25%' },
-        { name: 'ready to wear', href: '/shop?category=ready to wear', tag: null },
+        { name: 'best sellers', href: '/shop?category=best-sellers', tag: null },
+        { name: 'featured products', href: '/shop?category=featured-products', tag: null },
+        { name: 'new arrivals', href: '/shop?category=new-arrivals', tag: 'save 25%' },
+        { name: 'ready to wear', href: '/shop?category=ready-to-wear', tag: null },
     ]
 }
 
