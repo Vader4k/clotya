@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { Plus, Edit2, Trash2, Search, Image as ImageIcon } from 'lucide-react'
 import { Input } from '@/components/ui/input'
+import { ProductFormSheet } from './ProductFormSheet'
+import { ProductSchemaType } from '../schema/productSchema'
 
 // Dummy Data
 const INITIAL_PRODUCTS = [
@@ -16,6 +18,11 @@ const INITIAL_PRODUCTS = [
 export const AdminProductList = () => {
     const [products, setProducts] = useState(INITIAL_PRODUCTS)
     const [searchTerm, setSearchTerm] = useState('')
+
+    // Modal States
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false)
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+    const [currentProduct, setCurrentProduct] = useState<any>(null) // TODO: type this properly once API is wired
 
     const filteredProducts = products.filter(product =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -31,6 +38,18 @@ export const AdminProductList = () => {
         }
     }
 
+    const handleAdd = async (data: ProductSchemaType) => {
+        console.log("Adding Product (Not wired yet)", data);
+        // await addProduct(data)
+        setIsAddModalOpen(false);
+    }
+
+    const handleEdit = async (data: ProductSchemaType) => {
+        console.log("Editing Product (Not wired yet)", data);
+        // await editProduct(data)
+        setIsEditModalOpen(false);
+    }
+
     return (
         <div className="space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -38,7 +57,10 @@ export const AdminProductList = () => {
                     <h1 className="text-2xl font-bold tracking-tight text-gray-900">Products</h1>
                     <p className="text-gray-500 text-xs">Manage your product inventory and details.</p>
                 </div>
-                <button className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors">
+                <button 
+                    onClick={() => setIsAddModalOpen(true)}
+                    className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
+                >
                     <Plus className="mr-2 size-4" />
                     Add Product
                 </button>
@@ -102,6 +124,25 @@ export const AdminProductList = () => {
                     </table>
                 </div>
             </div>
+
+            {/* Add Modal */}
+            <ProductFormSheet
+                open={isAddModalOpen}
+                onOpenChange={setIsAddModalOpen}
+                onSubmit={handleAdd}
+                title="Add New Product"
+                description="Create a new product for your catalog by filling out the details below."
+            />
+
+            {/* Edit Modal */}
+            <ProductFormSheet
+                open={isEditModalOpen}
+                onOpenChange={setIsEditModalOpen}
+                onSubmit={handleEdit}
+                initialData={currentProduct || undefined}
+                title="Edit Product"
+                description="Update the details for this product."
+            />
         </div>
     )
 }
