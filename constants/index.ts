@@ -128,8 +128,8 @@ export const sheetLinks: Record<string, SheetLink[]> = {
         { name: 'belts', href: '/shop?category=belts', tag: null },
         { name: 'best sellers', href: '/shop?category=best-sellers', tag: null },
         { name: 'featured products', href: '/shop?category=featured-products', tag: null },
-        { name: 'new arrivals', href: '/shop?category=new arrivals', tag: 'save 25%' },
-        { name: 'ready to wear', href: '/shop?category=ready to wear', tag: null },
+        { name: 'new arrivals', href: '/shop?category=new-arrivals', tag: 'save 25%' },
+        { name: 'ready to wear', href: '/shop?category=ready-to-wear', tag: null },
     ]
 }
 
