@@ -225,7 +225,7 @@ export const ProductFormSheet = ({
                                 name="category"
                                 render={({ field }) => (
                                     <Select onValueChange={field.onChange} value={field.value}>
-                                        <SelectTrigger className={errors.category ? 'border-red-500' : '' + "text-xs"}>
+                                        <SelectTrigger className={errors.category ? 'border-red-500' : '' + "text-xs ring-1 ring-gray-300! mt-1 rounded-none"}>
                                             <SelectValue placeholder="Select a category" />
                                         </SelectTrigger>
                                         <SelectContent>
@@ -244,7 +244,7 @@ export const ProductFormSheet = ({
                                 <label className="text-xs font-medium">Tags (for {selectedCategory?.name})</label>
                                 <div className="mb-2 flex flex-wrap gap-2">
                                     {currentTags.map(tagId => {
-                                        const tag = availableTags.find((t: any) => String(t._id) === tagId)
+                                        const tag = availableTags.find((t) => String(t._id) === tagId)
                                         if (!tag) return null;
                                         return (
                                             <div key={tagId} className="flex items-center gap-1 bg-primary text-white px-2 py-1 rounded-md text-xs">
@@ -259,11 +259,11 @@ export const ProductFormSheet = ({
                                 <Select onValueChange={(val) => {
                                     if (val) toggleTag(val);
                                 }}>
-                                    <SelectTrigger>
+                                    <SelectTrigger className='ring-1 rounded-none ring-gray-300 text-xs'>
                                         <SelectValue placeholder="Select a tag to add/remove..." />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        {availableTags.map((tag: any) => {
+                                        {availableTags.map((tag) => {
                                             const isSelected = currentTags.includes(String(tag._id));
                                             return (
                                                 <SelectItem key={tag._id} value={String(tag._id)}>
