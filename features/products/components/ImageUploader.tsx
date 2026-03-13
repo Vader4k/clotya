@@ -1,5 +1,6 @@
 import React from 'react'
 import { X, Image as ImageIcon } from 'lucide-react'
+import { optimizeImage } from '../utils/image.utils'
 
 export interface ImageUploaderProps {
   value?: string[];
@@ -8,25 +9,21 @@ export interface ImageUploaderProps {
 
 export const ImageUploader = ({ value = [], onChange }: ImageUploaderProps) => {
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const newFiles = Array.from(e.target.files);
-      
-      const promises = newFiles.map(file => {
-        return new Promise<string>((resolve) => {
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            resolve(reader.result as string);
-          };
-          reader.readAsDataURL(file);
-        });
-      });
 
-      Promise.all(promises).then(base64Files => {
+      try {
+        const optimizedFiles = await Promise.all(
+          newFiles.map(file => optimizeImage(file))
+        );
+
         if (onChange) {
-          onChange([...value, ...base64Files]);
+          onChange([...value, ...optimizedFiles]);
         }
-      });
+      } catch (error) {
+        console.error("Error optimizing images:", error);
+      }
     }
   }
 
@@ -56,12 +53,12 @@ export const ImageUploader = ({ value = [], onChange }: ImageUploaderProps) => {
         <label className="border-2 border-dashed border-gray-300 rounded-lg aspect-square flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors">
           <ImageIcon className="w-8 h-8 text-gray-400 mb-2" />
           <span className="text-xs text-gray-500 font-medium">Upload</span>
-          <input 
-            type="file" 
-            multiple 
-            accept="image/*" 
-            className="hidden" 
-            onChange={handleFileChange} 
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            className="hidden"
+            onChange={handleFileChange}
           />
         </label>
       </div>

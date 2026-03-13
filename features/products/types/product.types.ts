@@ -88,6 +88,30 @@ export type AdminProductResponse = {
     totalProducts: number;
     currentPage: number;
     totalPages: number;
-    limit: number;
   };
+}
+
+export interface AdminProductTableProps {
+  products: AdminProductResponse | undefined;
+  isLoading: boolean;
+  isError: boolean;
+  refetch: () => void;
+  onEdit: (product: AdminProduct) => void;
+  onDelete: (product: AdminProduct) => void;
+}
+
+export interface AdminProductPaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}
+
+export interface AdminProductSearchProps {
+    value: string;
+    onChange: (value: string) => void;
+}
+
+export interface AdminProductLimitSelectProps {
+    limit: number;
+    onLimitChange: (limit: string) => void;
 }

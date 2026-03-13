@@ -31,3 +31,39 @@ export const normalizeParams = (
         : undefined,
   }
 }
+
+export const calculateTotalStock = (inventory: { size: string; quantity: number }[]) => {
+  return inventory.reduce((acc, item) => acc + item.quantity, 0)
+}
+
+export const getProductStatus = (product: {
+  isBestSeller?: boolean;
+  isNewArrival?: boolean;
+  isTrending?: boolean;
+  isDiscount?: boolean;
+  inventory: { size: string; quantity: number }[];
+}) => {
+  const totalStock = calculateTotalStock(product.inventory)
+  
+  if (totalStock === 0) return 'Out of Stock'
+  if (totalStock < 10) return 'Low Stock'
+  if (product.isBestSeller) return 'Best Seller'
+  if (product.isNewArrival) return 'New Arrival'
+  if (product.isTrending) return 'Trending'
+  if (product.isDiscount) return 'Discount'
+  
+  return 'Active'
+}
+
+export const getStatusStyles = (status: string) => {
+  switch (status) {
+    case 'Active': return 'bg-green-100 text-green-800'
+    case 'Low Stock': return 'bg-yellow-100 text-yellow-800'
+    case 'Out of Stock': return 'bg-red-100 text-red-800'
+    case 'Best Seller': return 'bg-purple-100 text-purple-800'
+    case 'New Arrival': return 'bg-blue-100 text-blue-800'
+    case 'Trending': return 'bg-orange-100 text-orange-800'
+    case 'Discount': return 'bg-pink-100 text-pink-800'
+    default: return 'bg-gray-100 text-gray-800'
+  }
+}
