@@ -120,6 +120,7 @@ export const AdminProductList = () => {
                 open={isAddModalOpen}
                 onOpenChange={setIsAddModalOpen}
                 onSubmit={handleAdd}
+                refetch={refetch}
                 title="Add New Product"
                 description="Create a new product for your catalog by filling out the details below."
             />
@@ -129,6 +130,7 @@ export const AdminProductList = () => {
                 open={isEditModalOpen}
                 onOpenChange={setIsEditModalOpen}
                 onSubmit={handleEdit}
+                refetch={refetch}
                 initialData={currentProduct ? {
                     ...currentProduct,
                     category: currentProduct.category._id

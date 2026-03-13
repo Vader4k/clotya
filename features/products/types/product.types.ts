@@ -59,6 +59,7 @@ export type ProductFormSheetProps = {
   initialData?: Partial<ProductSchemaType>;
   title: string;
   description: string;
+  refetch: () => void;
 }
 
 export type AdminProductFilters = {
@@ -114,4 +115,10 @@ export interface AdminProductSearchProps {
 export interface AdminProductLimitSelectProps {
     limit: number;
     onLimitChange: (limit: string) => void;
+}
+
+
+export interface ImageUploaderProps {
+  value?: (string | File)[];
+  onChange?: (urls: (string | File)[]) => void;
 }

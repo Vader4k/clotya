@@ -1,3 +1,5 @@
+import { ProductSchemaType } from "../schema/productSchema";
+
 export const progressValue = ({ inventory, sold }: { inventory: { size: string; quantity: number }[], sold: number }) => {
   return (sold / inventory.reduce((acc, item) => acc + item.quantity, 0)) * 100
 }
@@ -44,14 +46,14 @@ export const getProductStatus = (product: {
   inventory: { size: string; quantity: number }[];
 }) => {
   const totalStock = calculateTotalStock(product.inventory)
-  
+
   if (totalStock === 0) return 'Out of Stock'
   if (totalStock < 10) return 'Low Stock'
   if (product.isBestSeller) return 'Best Seller'
   if (product.isNewArrival) return 'New Arrival'
   if (product.isTrending) return 'Trending'
   if (product.isDiscount) return 'Discount'
-  
+
   return 'Active'
 }
 
@@ -67,3 +69,23 @@ export const getStatusStyles = (status: string) => {
     default: return 'bg-gray-100 text-gray-800'
   }
 }
+
+export const ToFormData = (data: ProductSchemaType): FormData => {
+  const formData = new FormData();
+
+  Object.entries(data).forEach(([key, value]) => {
+    if (key === 'images' && Array.isArray(value)) {
+      // Append images individually
+      value.forEach((image) => {
+        formData.append('images', image);
+      });
+    } else if (Array.isArray(value) || (typeof value === 'object' && value !== null)) {
+      // Stringify complex objects/arrays
+      formData.append(key, JSON.stringify(value));
+    } else if (value !== undefined && value !== null) {
+      formData.append(key, String(value));
+    }
+  });
+
+  return formData;
+};

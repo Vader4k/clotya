@@ -27,7 +27,8 @@ export const ProductFormSheet = ({
     onSubmit,
     initialData,
     title,
-    description
+    description,
+    refetch
 }: ProductFormSheetProps) => {
     const { data: categories } = useCategories();
 
@@ -156,6 +157,7 @@ export const ProductFormSheet = ({
     const handleFormSubmit = async (data: ProductSchemaType) => {
         await onSubmit(data)
         reset()
+        refetch()
     }
 
     const toggleTag = (tagId: string) => {
@@ -182,9 +184,9 @@ export const ProductFormSheet = ({
                             control={control}
                             name="images"
                             render={({ field }) => (
-                                <ImageUploader 
-                                    value={field.value} 
-                                    onChange={field.onChange} 
+                                <ImageUploader
+                                    value={field.value}
+                                    onChange={field.onChange}
                                 />
                             )}
                         />
@@ -361,7 +363,7 @@ export const ProductFormSheet = ({
                             {invFields.map((field, index) => (
                                 <div key={field.id} className="flex gap-2 items-start mt-2">
                                     <div className="flex-1 space-y-1">
-                                        <Input {...register(`inventory.${index}.size`)} placeholder="Size (e.g. XL)" className="h-8 text-sm rounded-none" />
+                                        <Input {...register(`inventory.${index}.size`)} placeholder="Size (e.g. XL)" className="h-8 text-sm rounded-none uppercase" />
                                         {errors.inventory?.[index]?.size && <p className="text-[10px] text-red-500">{errors.inventory[index]?.size?.message}</p>}
                                     </div>
                                     <div className="flex-1 space-y-1">

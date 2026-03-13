@@ -1,13 +1,30 @@
 import React from 'react'
 import { X, Image as ImageIcon } from 'lucide-react'
 import { optimizeImage } from '../utils/image.utils'
-
-export interface ImageUploaderProps {
-  value?: string[];
-  onChange?: (urls: string[]) => void;
-}
+import { ImageUploaderProps } from '../types/product.types';
 
 export const ImageUploader = ({ value = [], onChange }: ImageUploaderProps) => {
+  const [previews, setPreviews] = React.useState<string[]>([]);
+
+  React.useEffect(() => {
+    const newPreviews = value.map(item => {
+      if (item instanceof File) {
+        return URL.createObjectURL(item);
+      }
+      return item;
+    });
+
+    setPreviews(newPreviews);
+
+    // Cleanup function to avoid memory leaks
+    return () => {
+      newPreviews.forEach(preview => {
+        if (preview.startsWith('blob:')) {
+          URL.revokeObjectURL(preview);
+        }
+      });
+    };
+  }, [value]);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -38,7 +55,7 @@ export const ImageUploader = ({ value = [], onChange }: ImageUploaderProps) => {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5">
-        {value.map((url, index) => (
+        {previews.map((url, index) => (
           <div key={index} className="relative group aspect-square rounded-lg overflow-hidden border">
             <img src={url} alt={`preview-${index}`} className="object-cover w-full h-full" />
             <button

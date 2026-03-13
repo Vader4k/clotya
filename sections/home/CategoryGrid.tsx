@@ -36,6 +36,8 @@ const CategoryCard = ({ category, className = "" }: { category: Category; classN
 const CategoryGrid = async () => {
   const categories = await categoriesService.getAllCategoriesPublic();
 
+  console.log(categories);
+
   // Helper to find category by slug (more resilient than index)
   const getCat = (slug: string) => categories.find((c) => c.slug === slug);
 

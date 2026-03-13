@@ -22,7 +22,7 @@ export const productSchema = z.object({
   discountPrice: z.number().optional(),
   discountPercentage: z.number().optional(),
   
-  images: z.array(z.string()).default([]),
+  images: z.array(z.any()).default([]),
   
   isBestSeller: z.boolean().default(false),
   isFeatured: z.boolean().default(false),

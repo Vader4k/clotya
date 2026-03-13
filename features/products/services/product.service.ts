@@ -4,6 +4,8 @@ import { QUERIES } from "@/queries/queries";
 import axiosInstance from "@/lib/http/axios";
 import { processUrlVariables } from "@/lib/utils";
 import { ProductSchemaType } from "../schema/productSchema";
+import { ToFormData } from "../utils/product.utils";
+
 
 export const adminProductServices = {
     getAll: async (filter?: AdminProductFilters): Promise<AdminProductResponse> => {
@@ -16,14 +18,25 @@ export const adminProductServices = {
     },
 
     add: async (product: ProductSchemaType): Promise<ProductSchemaType> => {
-        const response = await axiosInstance.post(QUERIES.admin.products.GETNADD, product);
+        const formData = ToFormData(product);
+        const response = await axiosInstance.post(QUERIES.admin.products.GETNADD, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
         return response.data;
     },
 
     edit: async (id: string, product: ProductSchemaType): Promise<ProductSchemaType> => {
+        const formData = ToFormData(product);
         const response = await axiosInstance.put(
             processUrlVariables(QUERIES.admin.products.EDITNDEL, { id }),
-            product
+            formData,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }
         )
         return response.data.product;
     },
