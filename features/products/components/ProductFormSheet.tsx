@@ -53,6 +53,7 @@ export const ProductFormSheet = ({
             isFeatured: false,
             isNewArrival: false,
             isTrending: false,
+            isDiscount: false,
             inventory: [],
             colors: [],
             category: '',
@@ -62,6 +63,23 @@ export const ProductFormSheet = ({
 
     const nameValue = watch('name')
     const selectedCategoryId = watch('category')
+    const isDiscount = watch('isDiscount')
+    const price = watch('price')
+    const discountPrice = watch('discountPrice')
+
+    useEffect(() => {
+        if (isDiscount && price > 0 && discountPrice !== undefined && discountPrice >= 0) {
+            if (discountPrice < price) {
+                const percentage = Math.round(((price - discountPrice) / price) * 100)
+                setValue('discountPercentage', percentage, { shouldValidate: true })
+            } else {
+                setValue('discountPercentage', 0, { shouldValidate: true })
+            }
+        } else if (!isDiscount) {
+            setValue('discountPrice', undefined, { shouldValidate: true })
+            setValue('discountPercentage', undefined, { shouldValidate: true })
+        }
+    }, [isDiscount, price, discountPrice, setValue])
     const selectedCategory = categories?.find(c => String(c._id) === selectedCategoryId)
     const availableTags = (selectedCategory?.tags as { name: string, _id: string | number }[]) || []
 
@@ -106,6 +124,7 @@ export const ProductFormSheet = ({
                     isFeatured: initialData.isFeatured ?? false,
                     isNewArrival: initialData.isNewArrival ?? false,
                     isTrending: initialData.isTrending ?? false,
+                    isDiscount: initialData.isDiscount ?? false,
                     inventory: initialData.inventory || [],
                     colors: initialData.colors || [],
                     category: initialData.category || '',
@@ -124,6 +143,7 @@ export const ProductFormSheet = ({
                     isFeatured: false,
                     isNewArrival: false,
                     isTrending: false,
+                    isDiscount: false,
                     inventory: [],
                     colors: [],
                     category: '',
@@ -135,6 +155,7 @@ export const ProductFormSheet = ({
 
     const handleFormSubmit = async (data: ProductSchemaType) => {
         await onSubmit(data)
+        reset()
     }
 
     const toggleTag = (tagId: string) => {
@@ -189,15 +210,29 @@ export const ProductFormSheet = ({
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <label className="text-xs font-medium">SKU</label>
-                                <Input {...register('sku')} placeholder="SKU-123" className={errors.sku ? 'border-red-500' : '' + "rounded-none"} />
+                                <Input {...register('sku')} placeholder="SKU-123" className={errors.sku ? 'border-red-500 rounded-none' : 'rounded-none'} />
                                 {errors.sku && <p className="text-xs text-red-500">{errors.sku.message}</p>}
                             </div>
                             <div className="space-y-2">
                                 <label className="text-xs font-medium">Price</label>
-                                <Input type="number" step="0.01" {...register('price', { valueAsNumber: true })} className={errors.price ? 'border-red-500' : '' + "rounded-none"} />
+                                <Input type="number" step="0.01" {...register('price', { valueAsNumber: true })} className={errors.price ? 'border-red-500 rounded-none' : 'rounded-none'} />
                                 {errors.price && <p className="text-xs text-red-500">{errors.price.message}</p>}
                             </div>
                         </div>
+
+                        {isDiscount && (
+                            <div className="grid grid-cols-2 gap-4 mt-4">
+                                <div className="space-y-2">
+                                    <label className="text-xs font-medium">Discount Price</label>
+                                    <Input type="number" step="0.01" {...register('discountPrice', { valueAsNumber: true })} className={errors.discountPrice ? 'border-red-500 rounded-none' : 'rounded-none'} />
+                                    {errors.discountPrice && <p className="text-xs text-red-500">{errors.discountPrice.message}</p>}
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-xs font-medium">Discount Percentage (%)</label>
+                                    <Input type="number" {...register('discountPercentage', { valueAsNumber: true })} disabled className="bg-gray-100 rounded-none cursor-not-allowed" />
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     {/* Descriptions */}
@@ -210,7 +245,7 @@ export const ProductFormSheet = ({
                         </div>
                         <div className="space-y-2">
                             <label className="text-xs font-medium">Full Description</label>
-                            <Input {...register('description')} placeholder="Detailed description" className={errors.description ? 'border-red-500' : '' + "rounded-none"} />
+                            <textarea rows={5} {...register('description')} placeholder="Detailed description" className={errors.description ? 'border-red-500' : '' + "rounded-none w-full border border-gray-300 p-3 text-sm"} />
                             {errors.description && <p className="text-xs text-red-500">{errors.description.message}</p>}
                         </div>
                     </div>
@@ -360,6 +395,10 @@ export const ProductFormSheet = ({
                             <div className="flex items-center justify-between border p-3">
                                 <div className="space-y-0.5"><label className="text-xs font-medium">Trending</label></div>
                                 <Switch checked={watch('isTrending')} onCheckedChange={(checked) => setValue('isTrending', checked)} />
+                            </div>
+                            <div className="flex items-center justify-between border p-3">
+                                <div className="space-y-0.5"><label className="text-xs font-medium">Has Discount</label></div>
+                                <Switch checked={watch('isDiscount')} onCheckedChange={(checked) => setValue('isDiscount', checked)} />
                             </div>
                         </div>
                     </div>

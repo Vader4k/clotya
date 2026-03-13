@@ -53,10 +53,41 @@ export type ProductActionsProps = {
 }
 
 export type ProductFormSheetProps = {
-    open: boolean;
-    onOpenChange: (open: boolean) => void;
-    onSubmit: (data: ProductSchemaType) => Promise<void>;
-    initialData?: Partial<ProductSchemaType>;
-    title: string;
-    description: string;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onSubmit: (data: ProductSchemaType) => Promise<void>;
+  initialData?: Partial<ProductSchemaType>;
+  title: string;
+  description: string;
+}
+
+export type AdminProductFilters = {
+  page?: number;
+  limit?: number;
+  search?: string;
+}
+
+export interface AdminProduct extends Omit<ProductSchemaType, "category"> {
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+  sold: number;
+  reviews: {
+    average: number;
+    count: number;
+  };
+  category: {
+    _id: string;
+    name: string;
+  }
+}
+
+export type AdminProductResponse = {
+  products: AdminProduct[];
+  pagination: {
+    totalProducts: number;
+    currentPage: number;
+    totalPages: number;
+    limit: number;
+  };
 }

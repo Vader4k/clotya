@@ -10,6 +10,10 @@ export const QUERIES = {
         categories: {
             GETNADD: '/categories/',
             EDITNDEL: '/categories/:id',
+        },
+        products: {
+            GETNADD: '/products/',
+            EDITNDEL: '/products/:id',
         }
     },
 

@@ -1,1 +1,0 @@
-// TODO: will separate server and client functions when backend is ready

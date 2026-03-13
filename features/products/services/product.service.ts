@@ -1,8 +1,37 @@
 import { allProducts, type Product } from "@/data/products";
-import { ProductFilters } from "../types/product.types";
+import { AdminProductFilters, ProductFilters, AdminProductResponse } from "../types/product.types";
 import { QUERIES } from "@/queries/queries";
 import axiosInstance from "@/lib/http/axios";
 import { processUrlVariables } from "@/lib/utils";
+import { ProductSchemaType } from "../schema/productSchema";
+
+export const adminProductServices = {
+    getAll: async (filter?: AdminProductFilters): Promise<AdminProductResponse> => {
+        const response = await axiosInstance.get(QUERIES.admin.products.GETNADD, {
+            params: {
+                ...filter
+            }
+        });
+        return response.data;
+    },
+
+    add: async (product: ProductSchemaType): Promise<ProductSchemaType> => {
+        const response = await axiosInstance.post(QUERIES.admin.products.GETNADD, product);
+        return response.data;
+    },
+
+    edit: async (id: string, product: ProductSchemaType): Promise<ProductSchemaType> => {
+        const response = await axiosInstance.put(
+            processUrlVariables(QUERIES.admin.products.EDITNDEL, { id }),
+            product
+        )
+        return response.data.product;
+    },
+
+    // delete: async (id: number): Promise<void> => {
+    //     await axiosInstance.delete(QUERIES.admin.products.EDITNDEL.replace(':id', id.toString()));
+    // },
+}
 
 export const productServices = {
     // get all products

@@ -28,6 +28,7 @@ export const productSchema = z.object({
   isFeatured: z.boolean().default(false),
   isNewArrival: z.boolean().default(false),
   isTrending: z.boolean().default(false),
+  isDiscount: z.boolean().default(false),
   
   inventory: z.array(inventorySchema).default([]),
   colors: z.array(colorSchema).default([]),

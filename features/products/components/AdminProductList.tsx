@@ -5,29 +5,27 @@ import { Plus, Edit2, Trash2, Search, Image as ImageIcon } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { ProductFormSheet } from './ProductFormSheet'
 import { ProductSchemaType } from '../schema/productSchema'
-
-// Dummy Data
-const INITIAL_PRODUCTS = [
-    { id: 1, name: "Classic White T-Shirt", category: "Men's Clothing", price: 29.99, stock: 154, status: "Active" },
-    { id: 2, name: "Summer Floral Dress", category: "Women's Clothing", price: 59.99, stock: 45, status: "Active" },
-    { id: 3, name: "Running Sneakers Elite", category: "Footwear", price: 129.99, stock: 12, status: "Low Stock" },
-    { id: 4, name: "Leather Crossbody Bag", category: "Accessories", price: 89.99, stock: 0, status: "Out of Stock" },
-    { id: 5, name: "Denim Jacket Vintage", category: "Men's Clothing", price: 79.99, stock: 34, status: "Active" },
-]
+import { useGetAdminProducts } from '../services/product.client'
+import { useDebounce } from '@/features/search/hooks/Debounce'
+import { toast } from 'sonner'
+import { errorHandler } from '@/lib/http/errorHandler'
+import { adminProductServices } from '../services/product.service'
+import { AdminProduct } from '../types/product.types'
 
 export const AdminProductList = () => {
-    const [products, setProducts] = useState(INITIAL_PRODUCTS)
+    
     const [searchTerm, setSearchTerm] = useState('')
+    const debouncedSearchTerm = useDebounce(searchTerm, 500)
+    
+    const { data: products, isLoading, isError } = useGetAdminProducts()
+
+    console.log(products)
+
 
     // Modal States
     const [isAddModalOpen, setIsAddModalOpen] = useState(false)
     const [isEditModalOpen, setIsEditModalOpen] = useState(false)
-    const [currentProduct, setCurrentProduct] = useState<any>(null) // TODO: type this properly once API is wired
-
-    const filteredProducts = products.filter(product =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.category.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+    const [currentProduct, setCurrentProduct] = useState<AdminProduct | null>(null)
 
     const getStatusStyles = (status: string) => {
         switch (status) {
@@ -39,14 +37,21 @@ export const AdminProductList = () => {
     }
 
     const handleAdd = async (data: ProductSchemaType) => {
-        console.log("Adding Product (Not wired yet)", data);
-        // await addProduct(data)
+        try {
+            await adminProductServices.add(data)
+        } catch (error) {
+            toast.error(errorHandler(error))
+        }
         setIsAddModalOpen(false);
     }
 
     const handleEdit = async (data: ProductSchemaType) => {
-        console.log("Editing Product (Not wired yet)", data);
-        // await editProduct(data)
+        if (!currentProduct?._id) return
+        try {
+            await adminProductServices.edit(currentProduct._id, data)
+        } catch (error) {
+            toast.error(errorHandler(error))
+        }
         setIsEditModalOpen(false);
     }
 
@@ -57,7 +62,7 @@ export const AdminProductList = () => {
                     <h1 className="text-2xl font-bold tracking-tight text-gray-900">Products</h1>
                     <p className="text-gray-500 text-xs">Manage your product inventory and details.</p>
                 </div>
-                <button 
+                <button
                     onClick={() => setIsAddModalOpen(true)}
                     className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
                 >
@@ -92,8 +97,8 @@ export const AdminProductList = () => {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
-                            {filteredProducts.map((product) => (
-                                <tr key={product.id} className="hover:bg-gray-50 transition-colors">
+                            {products?.products?.map((product) => (
+                                <tr key={product.name} className="hover:bg-gray-50 transition-colors">
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-3">
                                             <div className="flex h-10 w-10 items-center justify-center rounded bg-gray-100">
@@ -102,16 +107,33 @@ export const AdminProductList = () => {
                                             <span className="font-medium text-gray-900">{product.name}</span>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-4">{product.category}</td>
-                                    <td className="px-6 py-4 font-medium text-gray-900">${product.price.toFixed(2)}</td>
-                                    <td className="px-6 py-4">{product.stock}</td>
+                                    <td className="px-6 py-4">{product.category.name}</td>
+                                    <td className="px-6 py-4">
+                                        <div className="flex flex-col">
+                                            {product.isDiscount ? (
+                                                <>
+                                                    <span className="font-medium text-gray-900">${product.discountPrice?.toFixed(2)}</span>
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="text-xs text-gray-400 line-through">${product.price.toFixed(2)}</span>
+                                                        <span className="text-[10px] font-bold text-red-600 bg-red-50 px-1 rounded">-{product.discountPercentage}%</span>
+                                                    </div>
+                                                </>
+                                            ) : (
+                                                <span className="font-medium text-gray-900">${product.price.toFixed(2)}</span>
+                                            )}
+                                        </div>
+                                    </td>
+                                    <td className="px-6 py-4">{product?.stock || 0}</td>
                                     <td className="px-6 py-4 text-center">
-                                        <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${getStatusStyles(product.status)}`}>
-                                            {product.status}
+                                        <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${getStatusStyles(product?.status || "")}`}>
+                                            {product?.status || ""}
                                         </span>
                                     </td>
                                     <td className="px-6 py-4 flex justify-end gap-3 items-center mt-2">
-                                        <button className="text-gray-400 hover:text-primary transition-colors">
+                                        <button onClick={() => {
+                                            setCurrentProduct(product)
+                                            setIsEditModalOpen(true)
+                                        }} className="text-gray-400 hover:text-primary transition-colors">
                                             <Edit2 className="h-4 w-4" />
                                         </button>
                                         <button className="text-gray-400 hover:text-red-500 transition-colors">
