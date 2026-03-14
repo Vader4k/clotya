@@ -159,7 +159,7 @@ export const colors = [
     { name: 'brown', hex: '#7c2d12' },
 ]
 
-export const sizes = ['xss', 'xs', 's', 'm', 'l', 'xl', 'xxl', 'xxxl']
+export const sizes = ['XSS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL']
 
 
 export const hideNavOnRoutes = ['/admin', '/admin/products', '/admin/orders', '/login', '/register', '/forgot-password', '/reset-password', '/checkout', '/checkout/success', '/checkout/error']

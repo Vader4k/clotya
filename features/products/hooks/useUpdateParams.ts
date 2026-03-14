@@ -26,7 +26,7 @@ export const useUpdateParams = () => {
     }
 
     router.replace(`${pathname}?${params.toString()}`, {
-      scroll: options?.scroll ?? false,
+      scroll: options?.scroll ?? true,
     })
   }
 

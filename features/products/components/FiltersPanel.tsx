@@ -13,8 +13,8 @@ const FiltersPanel = ({ categories }: { categories: Category[] }) => {
   const searchParams = useSearchParams()
 
   const currentPrice = React.useMemo(() => {
-    const min = searchParams.get('min_price')
-    const max = searchParams.get('max_price')
+    const min = searchParams.get('minPrice')
+    const max = searchParams.get('maxPrice')
     return [min ? Number(min) : 0, max ? Number(max) : 2000]
   }, [searchParams])
 
@@ -22,8 +22,8 @@ const FiltersPanel = ({ categories }: { categories: Category[] }) => {
 
   const handlePriceFilter = (newPrice: number[]) => {
     updateParams({
-      min_price: newPrice[0].toString(),
-      max_price: newPrice[1].toString(),
+      minPrice: newPrice[0].toString(),
+      maxPrice: newPrice[1].toString(),
     })
   }
 
@@ -35,16 +35,16 @@ const FiltersPanel = ({ categories }: { categories: Category[] }) => {
   }
 
   const handleColorFilter = (color: string) => {
-    const current = searchParams.get("color")
+    const current = searchParams.get("colors")
     updateParams({
-      color: current === color ? null : color,
+      colors: current === color ? null : color,
     })
   }
 
   const handleSizeFilter = (size: string) => {
-    const current = searchParams.get("size")
+    const current = searchParams.get("sizes")
     updateParams({
-      size: current === size ? null : size,
+      sizes: current === size ? null : size,
     })
   }
 
@@ -62,10 +62,10 @@ const FiltersPanel = ({ categories }: { categories: Category[] }) => {
         onFilter={handlePriceFilter}
       />
       <div className="pt-8">
-        <ColorFilter activeColor={searchParams.get('color') || ''} setActiveColor={handleColorFilter} />
+        <ColorFilter activeColor={searchParams.get('colors') || ''} setActiveColor={handleColorFilter} />
       </div>
       <div className="pt-8">
-        <SizeFilter activeSize={searchParams.get('size') || ''} setActiveSize={handleSizeFilter} />
+        <SizeFilter activeSize={searchParams.get('sizes') || ''} setActiveSize={handleSizeFilter} />
       </div>
     </aside>
   )

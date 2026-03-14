@@ -6,9 +6,9 @@ import { ProductCardProps } from "../types/product.types"
 import ProductActions from "./ProductActions"
 
 
-const ProductCard = ({ name, _id, price, images, reviews, discountPrice, discount, inventory, sold, slug, showRange, isBestSeller }: ProductCardProps) => {
+const ProductCard = ({ name, _id, price, images, reviews, discountPrice, discount, inventory, sold, slug, showRange, isShopPage }: ProductCardProps) => {
   return (
-    <div className="w-full h-120 sm:h-150 lg:h-200 2xl:h-140 flex flex-col justify-between gap-2 relative group">
+    <div className={`w-full h-120 sm:h-150 lg:h-200 2xl:h-140 flex flex-col justify-between gap-2 relative group ${isShopPage ? 'xl:h-100!' : ''}`}>
       <a href={`/product/${slug}`} className="w-full h-[85%] 2xl:h-[85%]">
         <div className="relative w-full h-full group">
           <Image src={images[0]} alt={name} fill className="object-cover object-top z-1" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />

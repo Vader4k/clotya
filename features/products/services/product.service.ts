@@ -1,5 +1,4 @@
-import { allProducts, type Product } from "@/data/products";
-import { AdminProductFilters, ProductFilters, AdminProductResponse } from "../types/product.types";
+import { AdminProductFilters, ProductFilters, AdminProductResponse, Product, PublicProductResponse } from "../types/product.types";
 import { QUERIES } from "@/queries/queries";
 import axiosInstance from "@/lib/http/axios";
 import { processUrlVariables } from "@/lib/utils";
@@ -48,8 +47,13 @@ export const adminProductServices = {
 
 export const productServices = {
     // get all products
-    getAll: async (filters: ProductFilters): Promise<Product[]> => {
-        return Promise.resolve(allProducts);
+    getAll: async (filters: ProductFilters): Promise<PublicProductResponse> => {
+        const response = await axiosInstance.get(QUERIES.public.products.GET_ALL, {
+            params: {
+                ...filters
+            }
+        });
+        return response.data;
     },
 
     // get product by slug

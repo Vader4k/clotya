@@ -2,7 +2,7 @@ import { DisplaySelectorProps } from './types/shop.types'
 import { LayoutGrid, List } from 'lucide-react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
-const DisplaySelector = ({ display, setDisplay, handleLimitChange, handleSortChange, limit, sort }: DisplaySelectorProps) => {
+const DisplaySelector = ({ display, setDisplay, handleLimitChange, handleSortChange, limit, sort, totalProducts }: DisplaySelectorProps) => {
 
   return (
     <div className='hidden md:flex items-center justify-between'>
@@ -13,7 +13,7 @@ const DisplaySelector = ({ display, setDisplay, handleLimitChange, handleSortCha
         </div>
 
         <div>
-          <p className='text-xs text-gray-700 font-jost'>Showing 1 — {limit} of 120 products</p>
+          <p className='text-xs text-gray-700 font-jost'>Showing 1 — {limit} of {totalProducts} products</p>
         </div>
       </div>
 
@@ -34,11 +34,11 @@ const DisplaySelector = ({ display, setDisplay, handleLimitChange, handleSortCha
             <SelectValue placeholder="Sort by" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="latest">Latest</SelectItem>
+            <SelectItem value="newest">Latest</SelectItem>
             <SelectItem value="oldest">Oldest</SelectItem>
-            <SelectItem value="asc">Price: Low to High</SelectItem>
-            <SelectItem value="desc">Price: High to Low</SelectItem>
-            <SelectItem value="rating">Rating</SelectItem>
+            <SelectItem value="price_asc">Price: Low to High</SelectItem>
+            <SelectItem value="price_desc">Price: High to Low</SelectItem>
+            <SelectItem value="sold">Best Selling</SelectItem>
           </SelectContent>
         </Select>
       </div>

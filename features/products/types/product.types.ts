@@ -18,16 +18,19 @@ export type ProductCardProps = {
   sold?: number,
   slug: string
   showRange?: boolean
-  description?: string
+  shortDescription?: string
+  isShopPage?: boolean
 }
 
 export type ProductFilters = {
   category?: string
-  color?: string
-  size?: string
-  price?: number
+  colors?: string
+  sizes?: string
+  minPrice?: number
+  maxPrice?: number
   page?: number
   limit?: number
+  sort?: string
 }
 
 export interface FilterProps {
@@ -89,6 +92,17 @@ export type AdminProductResponse = {
     totalProducts: number;
     currentPage: number;
     totalPages: number;
+    limit: number
+  };
+}
+
+export type PublicProductResponse = {
+  products: Product[];
+  pagination: {
+    totalProducts: number;
+    currentPage: number;
+    totalPages: number;
+    limit: number;
   };
 }
 
@@ -121,4 +135,28 @@ export interface AdminProductLimitSelectProps {
 export interface ImageUploaderProps {
   value?: (string | File)[];
   onChange?: (urls: (string | File)[]) => void;
+}
+
+
+export type Color = {
+    name: string;
+    hex: string;
+}
+
+export interface Product extends ProductCardProps {
+    category: {
+        name: string;
+        slug: string;
+    }[];
+    tags?: {
+        _id: string;
+        name: string;
+    }[];
+    sku: string;
+    inventory: {
+        size: string;
+        quantity: number;
+    }[];
+    colors?: Color[];
+    shortDescription: string
 }

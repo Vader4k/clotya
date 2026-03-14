@@ -55,7 +55,6 @@
 } */
 
 html {
-  scrollbar-gutter: stable;
   scrollbar-width: thin;
   scrollbar-color: transparent;
 }

@@ -6,16 +6,16 @@ import { PageProp } from "@/sections/shop/types/shop.types";
 import FiltersPanel from "@/features/products/components/FiltersPanel";
 import { categoriesService } from "@/features/categories/services/categories.service";
 import Pagination from "@/features/products/components/Pagination";
+import EmptyShopView from "@/features/products/components/EmptyShopView";
 
 const page = async ({ searchParams }: PageProp) => {
   const resolvedSearchParams = await searchParams;
   const filters = normalizeParams(resolvedSearchParams);
   const products = await productServices.getAll(filters);
 
-  // TODO: will be replaced with a proper fetch api with a cache
   const categories = await categoriesService.getAllCategoriesPublic();
 
-  const totalPages = Math.ceil(products.length / 12);
+  const totalPages = products.pagination.totalPages;
   const currentPage = Number(resolvedSearchParams.page) || 1;
 
   return (
@@ -26,7 +26,11 @@ const page = async ({ searchParams }: PageProp) => {
         </div>
         <div className="w-full flex-4 grid gap-6">
           <Banner />
-          <ProductView products={products} />
+          {products.products.length === 0 ? (
+            <EmptyShopView />
+          ) : (
+            <ProductView products={products.products} limit={products.pagination.limit} totalProducts={products.pagination.totalProducts} />
+          )}
           <Pagination totalPages={totalPages} currentPage={currentPage} />
         </div>
       </div>
