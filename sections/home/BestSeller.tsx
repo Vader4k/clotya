@@ -9,8 +9,6 @@ const BestSeller = async ({ variant }: BestSellerProps) => {
 
   const bestSellerProducts = await productServices.getBestSeller();
 
-  console.log(bestSellerProducts);
-
 
   return (
     <section className='w-full max-w-7xl mx-auto'>

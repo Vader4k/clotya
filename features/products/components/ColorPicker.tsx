@@ -1,8 +1,12 @@
 "use client"
 
-import { Color } from '@/data/products'
 
-const ColorPicker = ({ colors, selectedColor, setSelectedColor }: { colors: Color[], selectedColor: string | null, setSelectedColor: (color: string) => void }) => {
+const ColorPicker = ({ colors, selectedColor, setSelectedColor }: {
+  colors: {
+    name: string,
+    hex: string
+  }[], selectedColor: string | null, setSelectedColor: (color: string) => void
+}) => {
   return (
     <div>
       <p className='text-sm'>Color: <span className='capitalize'>{selectedColor}</span></p>

@@ -13,7 +13,7 @@ const CompareTable = ({ products, removeProduct }: { products: any[], removeProd
                         <td className="w-28 min-w-28 px-4 py-3 text-gray-500 font-medium text-xs uppercase tracking-wide border-r bg-gray-50">
                         </td>
                         {products.map((product) => (
-                            <td key={product.id} className="px-4 py-3 text-center border-r last:border-r-0 min-w-48">
+                            <td key={product._id} className="px-4 py-3 text-center border-r last:border-r-0 min-w-48">
                                 <button
                                     onClick={() => removeProduct(product.id)}
                                     className="inline-flex items-center gap-1 text-xs text-red-500 hover:text-red-700 transition-colors"
