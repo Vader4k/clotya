@@ -9,14 +9,13 @@ import GridView from './GridView'
 import ListView from './ListView'
 import { AnimatePresence, motion } from 'framer-motion'
 
-const ProductView = ({ products }: { products: ProductCardProps[] }) => {
+const ProductView = ({ products, limit, totalProducts }: { products: ProductCardProps[], limit: number, totalProducts: number }) => {
 
   const [display, setDisplay] = useState<'grid' | 'list'>('grid')
   const searchParams = useSearchParams()
   const updateParams = useUpdateParams()
 
-  const limit = searchParams.get('limit') || '16'
-  const sort = searchParams.get('sort') || 'latest'
+  const sort = searchParams.get('sort') || 'newest'
 
   const handleLimitChange = (value: string) => {
     updateParams({
@@ -37,7 +36,8 @@ const ProductView = ({ products }: { products: ProductCardProps[] }) => {
         setDisplay={setDisplay}
         handleLimitChange={handleLimitChange}
         handleSortChange={handleSortChange}
-        limit={limit}
+        limit={limit.toString()}
+        totalProducts={totalProducts}
         sort={sort}
       />
       <AnimatePresence mode="wait">

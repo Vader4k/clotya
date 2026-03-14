@@ -1,6 +1,6 @@
 "use client"
 
-import { Product } from '@/data/products'
+import { Product } from '@/features/products/types/product.types'
 import ColorPicker from '@/features/products/components/ColorPicker'
 import SizePicker from '@/features/products/components/SizePicker'
 import { Star, X, Heart, Share } from 'lucide-react'

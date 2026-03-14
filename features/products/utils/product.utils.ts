@@ -11,26 +11,29 @@ export const normalizeParams = (
     category:
       typeof params.category === "string" ? params.category : undefined,
 
-    color:
-      typeof params.color === "string" ? params.color : undefined,
+    colors:
+      typeof params.colors === "string" ? params.colors : undefined,
 
-    size:
-      typeof params.size === "string" ? params.size : undefined,
+    sizes:
+      typeof params.sizes === "string" ? params.sizes : undefined,
 
     page:
       typeof params.page === "string" && !isNaN(Number(params.page))
         ? Number(params.page)
         : 1,
 
-    min_price:
-      typeof params.min_price === "string"
-        ? Number(params.min_price)
+    minPrice:
+      typeof params.minPrice === "string"
+        ? Number(params.minPrice)
         : undefined,
 
-    max_price:
-      typeof params.max_price === "string"
-        ? Number(params.max_price)
+    maxPrice:
+      typeof params.maxPrice === "string"
+        ? Number(params.maxPrice)
         : undefined,
+    
+    sort:
+      typeof params.sort === "string" ? params.sort : undefined,
   }
 }
 

@@ -25,11 +25,11 @@ export const useCompareStore = create<CompareState>()(
                     products: [...state.products, product]
                 }))
             },
-            removeProduct: (id: string) => set((state) => ({
-                products: state.products.filter((product) => product.id !== id)
+            removeProduct: (_id: string) => set((state) => ({
+                products: state.products.filter((product) => product._id !== _id)
             })),
-            isInCompare: (id) => {
-                return !!get().products.find(i => i.id === id)
+            isInCompare: (_id: string) => {
+                return !!get().products.find(i => i._id === _id)
             },
             clearProducts: () => set({ products: [] })
         }),

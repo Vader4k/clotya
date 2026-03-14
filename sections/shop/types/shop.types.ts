@@ -9,4 +9,5 @@ export type DisplaySelectorProps = {
     handleSortChange: (value: string) => void;
     limit: string;
     sort: string;
+    totalProducts: number;
 };

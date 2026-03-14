@@ -11,6 +11,7 @@ const ProductPage = async ({ params }: { params: Promise<{ slug: string }> }) =>
   const { slug } = await params
   const product = await productServices.getBySlug(slug)
 
+
   const relatedProducts = await productServices.getRelated(product?._id || '')
 
   if (!product) {

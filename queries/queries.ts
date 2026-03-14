@@ -27,6 +27,7 @@ export const QUERIES = {
             GET_BY_SLUG: '/public/products/:slug',
             GET_RELATED: '/public/products/related/:id',
             GET_BY_SEARCH: '/public/products/search/:search',
+            GET_ALL: '/public/products',
         }
     }
 }

@@ -1,5 +1,5 @@
 const DB_NAME = "shop_cache_db";
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
 export const openDb = (): Promise<IDBDatabase> => {
     return new Promise((resolve, reject) => {
@@ -11,10 +11,11 @@ export const openDb = (): Promise<IDBDatabase> => {
             if (!db.objectStoreNames.contains("search_results")) {
                 db.createObjectStore("search_results", { keyPath: "query" });
             }
-            // Create store for recently viewed products if it doesn't exist
-            if (!db.objectStoreNames.contains("recently_viewed")) {
-                db.createObjectStore("recently_viewed", { keyPath: "id" });
+            // Create store for recently viewed products if it doesn't exist or needs update
+            if (db.objectStoreNames.contains("recently_viewed")) {
+                db.deleteObjectStore("recently_viewed");
             }
+            db.createObjectStore("recently_viewed", { keyPath: "_id" });
         };
 
         request.onsuccess = (event) => {

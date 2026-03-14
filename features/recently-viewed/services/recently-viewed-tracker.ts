@@ -6,7 +6,7 @@ import { addRecentlyViewedProduct } from "../utils/indexedDb"
 
 const RecentlyViewedTracker = ({ product }: { product: ProductCardProps }) => {
     useEffect(() => {
-        if (product && product.id) {
+        if (product && product._id) {
             addRecentlyViewedProduct(product);
         }
     }, [product]);

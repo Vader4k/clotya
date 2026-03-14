@@ -11,7 +11,7 @@ const CategoryFilter = ({ categories, selectedCategories, setSelectedCategories 
 
       <div className='my-4 grid gap-2.5'>
         {categories.map((category) => (
-          <div onClick={() => setSelectedCategories(category.slug)} key={category._id} className='flex items-center gap-3 cursor-pointer'>
+          <div onClick={() => setSelectedCategories(category.slug)} key={category.slug} className='flex items-center gap-3 cursor-pointer'>
             <Checkbox checked={selectedCategories === category.slug} />
             <span className='capitalize text-sm text-neutral-800'>{category.name}</span>
           </div>
