@@ -2,6 +2,12 @@ import ContactForm from "@/sections/contact/ContactForm"
 import Image from "next/image"
 import { Store, DoorOpen } from "lucide-react"
 import { email, phone } from "@/constants"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description: "Get in touch with the Clotya team. We're here to help with your orders, styling questions, and feedback.",
+}
 
 const page = () => {
     return (

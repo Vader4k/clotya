@@ -6,7 +6,6 @@ import Contact from '@/sections/home/Contact'
 import Hero from '@/sections/home/Hero'
 import News from '@/sections/home/News'
 
-
 const page = () => {
   return (
     <main className='grid gap-10 lg:gap-18'>

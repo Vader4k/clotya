@@ -19,41 +19,17 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
-  title: "Clotya",
-  description: "Clotya - Your one stop shop for all things fashion for all genders and occasions",
+  title: {
+    default: "Clotya | Modern Fashion & Accessories Store",
+    template: "%s | Clotya"
+  },
+  description: "Clotya - Your one-stop shop for high-quality fashion, accessories, and shoes for every occasion. Discover latest trends with worldwide shipping.",
   keywords: [
-    'fashion',
-    'clothing',
-    'shoes',
-    'accessories',
-    'bags',
-    'jewelry',
-    'watches',
-    'sunglasses',
-    'hats',
-    'scarves',
-    'gloves',
-    'belts',
-    'wallets',
-    'keychains',
-    'umbrellas',
-    'backpacks',
-    'luggage',
-    'travel',
-    'business',
-    'casual',
-    'formal',
-    'party',
-    'wedding',
-    'birthday',
-    'anniversary',
-    'graduation',
-    'new year',
-    'christmas',
-    'cargo',
-    'gowns',
-    'shirts',
-    'gym wears'
+    'fashion', 'clothing', 'shoes', 'accessories', 'bags', 'jewelry', 'watches',
+    'sunglasses', 'hats', 'scarves', 'gloves', 'belts', 'wallets', 'keychains',
+    'umbrellas', 'backpacks', 'luggage', 'travel', 'business', 'casual', 'formal',
+    'party', 'wedding', 'birthday', 'anniversary', 'graduation', 'new year',
+    'christmas', 'cargo', 'gowns', 'shirts', 'gym wears'
   ],
   robots: {
     index: true,
@@ -74,8 +50,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://clotya.vercel.app",
     siteName: "Clotya",
-    title: "Clotya | Fashion Store",
-    description: "Clotya - Your one stop shop for all things fashion for all genders and occasions",
+    title: "Clotya | Modern Fashion & Accessories",
+    description: "Clotya - Premium quality fashion and accessories for all genders and occasions.",
     images: [
       {
         url: "https://res.cloudinary.com/dpwljfhgl/image/upload/v1772491120/shop-banner_jmggvz.webp",
@@ -87,9 +63,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Clotya | Fashion Store",
-    description:
-      "Clotya - Your one stop shop for all things fashion for all genders and occasions",
+    title: "Clotya | Modern Fashion & Accessories",
+    description: "Your one-stop shop for high-quality fashion, accessories, and shoes.",
     creator: "@clotya",
     site: "@clotya",
     images: [
@@ -98,11 +73,11 @@ export const metadata: Metadata = {
   },
   manifest: '/site.webmanifest',
   metadataBase: new URL('https://clotya.vercel.app'),
-  category: 'business',
+  category: 'fashion',
   classification: 'Fashion Store',
   other: {
     'theme-color': '#000000',
-    'color-scheme': 'dark',
+    'color-scheme': 'light dark',
     'format-detection': 'telephone=no',
   },
 };
