@@ -6,22 +6,32 @@ export type Color = {
 }
 
 export interface Product extends ProductCardProps {
-    category: string[];
-    tags?: string[];
+    category: {
+        name: string;
+        slug: string;
+    }[];
+    tags?: {
+        _id: string;
+        name: string;
+    }[];
     sku: string;
     inventory: {
         size: string;
         quantity: number;
     }[];
     colors?: Color[];
+    shortDescription: string
 }
 
 export const allProducts: Product[] = [
     {
-        id: '1',
+        _id: '1',
         slug: 'sleeveless-ribbed-short-dress',
         name: 'Sleeveless ribbed short dress',
-        category: ['women'],
+        category: [{
+            name: 'women',
+            slug: 'women'
+        }],
         tags: ['casual', 'short', 'dresses'],
         discountPrice: 14.99,
         discount: 26,

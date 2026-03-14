@@ -25,6 +25,8 @@ const Categories = () => {
 
   const { data: products, isLoading, isError } = useGetProductsByCategory(selected)
 
+  console.log(products)
+
   const isEmpty = products?.length === 0
 
   useEffect(() => {
@@ -62,7 +64,7 @@ const Categories = () => {
             {products?.map((product) => (
               <SwiperSlide key={product.id}>
                 <div className="pb-4">
-                  <ProductCard {...product} showRange={false} />
+                  <ProductCard {...product} />
                 </div>
               </SwiperSlide>
             ))}

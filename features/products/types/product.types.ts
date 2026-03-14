@@ -3,7 +3,7 @@ import { ProductSchemaType } from "../schema/productSchema";
 
 
 export type ProductCardProps = {
-  id: string,
+  _id: string,
   name: string,
   price: number,
   images: string[],

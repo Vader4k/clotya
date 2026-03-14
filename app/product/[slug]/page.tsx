@@ -11,7 +11,7 @@ const ProductPage = async ({ params }: { params: Promise<{ slug: string }> }) =>
   const { slug } = await params
   const product = await productServices.getBySlug(slug)
 
-  const relatedProducts = await productServices.getRelated(slug, product?.category || [])
+  const relatedProducts = await productServices.getRelated(product?._id || '')
 
   if (!product) {
     return <div>Product not found</div>
@@ -34,13 +34,13 @@ const ProductPage = async ({ params }: { params: Promise<{ slug: string }> }) =>
         </div>
         {/* recent views */}
         <div className="w-full xl:max-w-[20%]">
-          <RecentViews currentProductId={product.id} />
+          <RecentViews currentProductId={product._id} />
         </div>
       </div>
 
       {/* description, reviews */}
       <div className="my-14">
-        <DetailsView reviews={product.reviews} name={product.name} />
+        <DetailsView reviews={product.reviews} name={product.name} description={product.description as string} />
       </div>
 
       {/* related products */}

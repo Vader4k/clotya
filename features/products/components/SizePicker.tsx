@@ -17,7 +17,7 @@ const SizePicker = ({
         {sizes.map((size) => (
           <button
             key={size.size}
-            className={`h-8 w-18 cursor-pointer ${selectedSize === size.size ? 'bg-red-500 text-white' : ''} border transition`}
+            className={`h-8 w-18 uppercase cursor-pointer ${selectedSize === size.size ? 'bg-red-500 text-white' : ''} border transition`}
             onClick={() => {
                 setSize(size.size)
                 setStock(size.quantity)

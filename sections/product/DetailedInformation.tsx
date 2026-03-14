@@ -47,7 +47,7 @@ const DetailedInformation = ({ product }: { product: Product }) => {
 
   return (
     <div className='font-jost grid gap-4'>
-      <h1 className='text-2xl capitalize xl:leading-3'>{product.name}</h1>
+      <h1 className='text-2xl capitalize'>{product.name}</h1>
       <div className='flex items-center gap-0.5 text-sm'>
         {[...Array(5)].map((_, index) => (
           <Star key={index} size={11} fill='gold' stroke='gold' />
@@ -66,10 +66,10 @@ const DetailedInformation = ({ product }: { product: Product }) => {
         )}
       </div>
 
-      <p className='text-sm'>{product.description}</p>
+      <p className='text-sm'>{product.shortDescription}</p>
 
 
-      {product.colors && <div className='mt-2'>
+      {product.colors && product.colors.length > 0 && <div className='mt-2'>
         <ColorPicker
           colors={product.colors}
           selectedColor={selectedColor}
@@ -77,14 +77,14 @@ const DetailedInformation = ({ product }: { product: Product }) => {
         />
       </div>}
 
-      <div>
+      {product.inventory && product.inventory.length > 0 && <div>
         <SizePicker
           sizes={product.inventory}
           selectedSize={size}
           setSize={setSize}
           setStock={setStock}
         />
-      </div>
+      </div>}
 
       <AnimatePresence mode='wait'>
         {selectedColor && size && (
@@ -123,8 +123,8 @@ const DetailedInformation = ({ product }: { product: Product }) => {
         <div className='mt-3 pt-5 w-full border-t'>
             <div className='text-sm grid gap-1.5'>
               <p className='text-gray-400'>SKU: <span className='text-black font-medium'>{product.sku}</span></p>
-              <p className='capitalize text-gray-400'>Category: <span className='capitalize text-black font-medium'>{product.category?.map((tag) => tag).join(', ')}</span></p>
-              <p className='capitalize text-gray-400'>Tags: <span className='text-black font-medium'>{product.tags?.map((tag) => tag).join(', ')}</span></p>
+              <p className='capitalize text-gray-400'>Category: <span className='capitalize text-black font-medium'>{product.category?.map((tag) => tag.name).join(', ')}</span></p>
+              <p className='capitalize text-gray-400'>Tags: <span className='text-black font-medium'>{product.tags?.map((tag) => tag.name).join(', ')}</span></p>
             </div>
         </div>
     </div>

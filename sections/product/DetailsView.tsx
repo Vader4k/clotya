@@ -5,7 +5,7 @@ import { useState } from "react"
 import ReviewList from "./ReviewList"
 import ReviewForm from "./ReviewForm"
 
-const DetailsView = ({reviews, name}: {reviews:number, name:string}) => {
+const DetailsView = ({reviews, name, description}: {reviews:number, name:string, description: string}) => {
 
   const [view, setView] = useState<"description" | "reviews">("description")
 
@@ -26,7 +26,7 @@ const DetailsView = ({reviews, name}: {reviews:number, name:string}) => {
         {view === "description" ? (
           <div className="w-full h-full">
             <p className="text-sm">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae nam enim animi. Voluptatibus, odio! Ea iste maiores quos numquam dolorum!
+              {description}
             </p>
           </div>
         ) : (

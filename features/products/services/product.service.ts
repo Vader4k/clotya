@@ -54,7 +54,9 @@ export const productServices = {
 
     // get product by slug
     getBySlug: async (slug: string): Promise<Product | undefined> => {
-        return Promise.resolve(allProducts.find((product) => product.slug === slug));
+        const url = processUrlVariables(QUERIES.public.products.GET_BY_SLUG, { slug });
+        const response = await axiosInstance.get(url);
+        return response.data.product;
     },
 
     getByCategory: async (category: string): Promise<Product[]> => {
@@ -65,31 +67,21 @@ export const productServices = {
 
     // get products by search
     getBySearch: async (search: string): Promise<Product[]> => {
-        return Promise.resolve(
-            allProducts.filter((product) =>
-                product.name.toLowerCase().includes(search.toLowerCase()),
-            ),
-        );
-    },
-
-    // get products by price
-    getByPrice: async (price: number): Promise<Product[]> => {
-        return Promise.resolve(
-            allProducts.filter((product) => product.price === price),
-        );
+        const url = processUrlVariables(QUERIES.public.products.GET_BY_SEARCH, { search });
+        const response = await axiosInstance.get(url);
+        return response.data.products;
     },
 
     //get best seller products
     getBestSeller: async (): Promise<Product[]> => {
-        return Promise.resolve(
-            allProducts.filter((product) => product.isBestSeller),
-        );
+        const response = await axiosInstance.get(QUERIES.public.products.GET_BEST_SELLER);
+        return response.data.products;
     },
 
     // get related products
-    getRelated: async (slug: string, category: string[]): Promise<Product[]> => {
-        return Promise.resolve(
-            allProducts.filter((product) => product.slug !== slug && product.category.some((cat) => category.includes(cat))),
-        );
+    getRelated: async (id: string): Promise<Product[]> => {
+        const url = processUrlVariables(QUERIES.public.products.GET_RELATED, { id });
+        const response = await axiosInstance.get(url);
+        return response.data.products;
     },
 };

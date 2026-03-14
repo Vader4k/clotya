@@ -20,10 +20,3 @@ export const useGetProductsBySearch = (search: string) => {
     })
 }
 
-export const useGetProductsByPrice = (price: number) => {
-    return useQuery({
-        queryKey: ['products', price],
-        queryFn: () => productServices.getByPrice(price),
-        enabled: !!price,
-    })
-}

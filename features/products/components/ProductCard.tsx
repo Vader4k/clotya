@@ -6,10 +6,10 @@ import { ProductCardProps } from "../types/product.types"
 import ProductActions from "./ProductActions"
 
 
-const ProductCard = ({ name, id, price, images, reviews, discountPrice, discount, inventory, sold, slug, showRange }: ProductCardProps) => {
+const ProductCard = ({ name, _id, price, images, reviews, discountPrice, discount, inventory, sold, slug, showRange, isBestSeller }: ProductCardProps) => {
   return (
-    <div className="w-full h-120 sm:h-150 lg:h-200 2xl:h-145 flex flex-col justify-between gap-2 relative group">
-      <a href={`/product/${slug}`} className="w-full h-[85%] 2xl:h-[80%]">
+    <div className="w-full h-120 sm:h-150 lg:h-200 2xl:h-140 flex flex-col justify-between gap-2 relative group">
+      <a href={`/product/${slug}`} className="w-full h-[85%] 2xl:h-[85%]">
         <div className="relative w-full h-full group">
           <Image src={images[0]} alt={name} fill className="object-cover object-top z-1" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
           {images[1] && <Image src={images[1]} alt={name} fill className="object-cover object-top absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:z-2" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />}
@@ -28,14 +28,16 @@ const ProductCard = ({ name, id, price, images, reviews, discountPrice, discount
             <p className="font-jost font-medium">${discountPrice}</p>
           </div>
         ) : (
-          <p className="font-jost">${price}</p>
+          <p className="font-jost font-medium">${price}</p>
         )}
       </div>
-      <div className="flex items-center gap-3 my-1">
+      <div className="flex items-center gap-3">
         <Star size={14} fill="gold" stroke="gold" />
-        <p className="text-xs font-semibold">{reviews} review</p>
+        <p className="text-xs font-semibold">{reviews || 0} review</p>
       </div>
-      {inventory && sold && showRange && (
+
+
+      {inventory && typeof sold === 'number' && showRange ? (
         <div className="font-jost">
           <Progress value={progressValue({ inventory, sold })} />
           <div className="mt-2 flex items-center justify-between">
@@ -43,12 +45,13 @@ const ProductCard = ({ name, id, price, images, reviews, discountPrice, discount
             <p className="text-xs">Sold: <span className="font-medium text-red-600">{sold}</span></p>
           </div>
         </div>
-      )}
+      ) : null}
+
 
       <div className="absolute right-3 top-3 z-10">
         <ProductActions
           slug={slug}
-          id={id}
+          id={_id}
           name={name}
           image={images[0]}
           rating={reviews}

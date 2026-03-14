@@ -9,6 +9,8 @@ const BestSeller = async ({ variant }: BestSellerProps) => {
 
   const bestSellerProducts = await productServices.getBestSeller();
 
+  console.log(bestSellerProducts);
+
 
   return (
     <section className='w-full max-w-7xl mx-auto'>
@@ -46,8 +48,8 @@ const BestSeller = async ({ variant }: BestSellerProps) => {
       {variant === 'close' && (
         <div className="mt-10 flex flex-col 2xl:flex-row items-start justify-between gap-10 2xl:gap-6 w-full">
           <div className="w-full 2xl:max-w-1/2 flex items-start gap-4">
-            {bestSellerProducts.slice(0, 2).map((product) => (
-              <ProductCard key={product.id} {...product} showRange={true} />
+            {bestSellerProducts.slice(2, 4).map((product) => (
+              <ProductCard key={product._id} {...product} showRange={true} />
             ))}
           </div>
           <div className="w-full 2xl:max-w-1/2 min-h-100 md:min-h-156 banner4 font-jost p-6 md:p-10 text-black flex flex-col gap-4 items-start justify-center 2xl:justify-start ">

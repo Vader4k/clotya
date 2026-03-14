@@ -30,7 +30,7 @@ const SearchModalContent = ({ data, error, debounceValue }: { data: ProductCardP
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
           viewport={{ amount: 0.2, once: true }}
-          key={product.id}
+          key={product._id}
         >
           <SearchCard product={product} />
         </motion.div>
