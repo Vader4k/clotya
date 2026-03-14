@@ -159,4 +159,5 @@ export interface Product extends ProductCardProps {
     }[];
     colors?: Color[];
     shortDescription: string
+    description: string
 }

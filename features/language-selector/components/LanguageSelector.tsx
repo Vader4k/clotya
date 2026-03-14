@@ -12,9 +12,15 @@ import {
 
 const LanguageSelector = () => {
     const [currentLanguage, setCurrentLanguage] = useState("en");
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     // Sync currentLanguage with Google Translate's actual state
     useEffect(() => {
+        if (!mounted) return;
         const observer = new MutationObserver(() => {
             const googleCombo = document.querySelector<HTMLSelectElement>(".goog-te-combo");
             if (googleCombo && googleCombo.value !== currentLanguage) {
@@ -35,7 +41,7 @@ const LanguageSelector = () => {
             observer.disconnect();
             clearInterval(checkCombo);
         };
-    }, [currentLanguage]);
+    }, [currentLanguage, mounted]);
 
     // Keep handleLanguageChange
     const handleLanguageChange = (langCode: string) => {
@@ -49,9 +55,13 @@ const LanguageSelector = () => {
         }
     };
 
+    if (!mounted) {
+        return <div className="h-9 w-20 flex items-center justify-center border border-transparent" />; // Placeholder to avoid layout shift
+    }
+
     return (
         <Select value={currentLanguage} onValueChange={handleLanguageChange}>
-            <SelectTrigger className="w-fit text-nowrap gap-2 notranslate bg-background data-[slot=select-value]:flex data-[slot=select-value]:items-center data-[slot=select-value]:gap-2">
+            <SelectTrigger className="w-fit text-nowrap gap-2 notranslate bg-background data-[slot=select-value]:flex data-[slot=select-value]:items-center data-[slot=select-value]:gap-2" translate="no">
                 <SelectValue translate="no" className="notranslate" placeholder="Language" />
             </SelectTrigger>
             <SelectContent className="z-50 notranslate">

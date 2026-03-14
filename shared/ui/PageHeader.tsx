@@ -37,7 +37,7 @@ const PageHeader = () => {
           <Link href='/order-tracking' className='text-nowrap'>Order Tracking</Link>
           <LanguageSelector />
           <Select value='usd'>
-            <SelectTrigger translate='no' className="w-full max-w-20 bg-white text-xs outline-none notranslate">
+            <SelectTrigger translate='no' className="w-full max-w-20 bg-white text-xs outline-none notranslate" suppressHydrationWarning>
               <SelectValue translate='no' placeholder="Currency" />
             </SelectTrigger>
             <SelectContent className="notranslate">

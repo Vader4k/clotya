@@ -1,5 +1,5 @@
 export type CompareProduct = {
-    id: string;
+    _id: string;
     name: string;
     image: string;
     rating: number;
@@ -18,7 +18,7 @@ export type CompareModalProps = {
 export interface CompareState {
     products: CompareProduct[];
     addProduct: (product: CompareProduct) => void;
-    removeProduct: (id: string) => void;
-    isInCompare: (id: string) => boolean;
+    removeProduct: (_id: string) => void;
+    isInCompare: (_id: string) => boolean;
     clearProducts: () => void;
 }

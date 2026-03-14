@@ -27,7 +27,7 @@ const ProductActions = ({ slug, id, name, image, rating, price, discountPrice }:
         if (isInCompare(id)) {
             setIsDuplicate(true)
         } else {
-            addProduct({ slug, id, name, image, rating, price, discountPrice })
+            addProduct({ slug, _id: id, name, image, rating, price, discountPrice })
             setIsDuplicate(false)
         }
         setModalOpen(true)

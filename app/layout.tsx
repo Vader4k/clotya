@@ -116,11 +116,10 @@ export default function RootLayout({
   product: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${jost.variable} antialiased`}
       >
-        <div id="google_translate_element" className="hidden" />
         <Providers>
           <PageHeader />
           <GoogleTranslatorInit />
@@ -132,10 +131,6 @@ export default function RootLayout({
           </div>
           <Footer />
         </Providers>
-        <Script
-          src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-          strategy="afterInteractive"
-        />
         <Toaster />
       </body>
     </html>

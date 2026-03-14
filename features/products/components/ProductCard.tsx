@@ -38,7 +38,7 @@ const ProductCard = ({ name, _id, price, images, reviews, discountPrice, discoun
 
 
       {inventory && typeof sold === 'number' && showRange ? (
-        <div className="font-jost">
+        <div className="font-jost mt-1">
           <Progress value={progressValue({ inventory, sold })} />
           <div className="mt-2 flex items-center justify-between">
             <p className="text-xs text-gray-400">Available: {inventory.reduce((acc, item) => acc + item.quantity, 0)}</p>

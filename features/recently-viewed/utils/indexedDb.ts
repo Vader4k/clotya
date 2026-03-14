@@ -18,7 +18,7 @@ export const addRecentlyViewedProduct = async (product: ProductCardProps): Promi
                 let products = getAllRequest.result as (ProductCardProps & { timestamp: number })[];
 
                 // Remove the product if it already exists (so it can be moved to the top)
-                products = products.filter(p => p.id !== product.id);
+                products = products.filter(p => p._id !== product._id);
 
                 // Add the new product with a timestamp
                 products.unshift({
@@ -30,7 +30,7 @@ export const addRecentlyViewedProduct = async (product: ProductCardProps): Promi
                 if (products.length > MAX_RECENT_PRODUCTS) {
                     const toDelete = products.slice(MAX_RECENT_PRODUCTS);
                     toDelete.forEach((p) => {
-                        store.delete(p.id);
+                        store.delete(p._id);
                     });
                 }
 
