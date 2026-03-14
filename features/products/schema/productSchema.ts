@@ -33,7 +33,7 @@ export const productSchema = z.object({
   inventory: z.array(inventorySchema).default([]),
   colors: z.array(colorSchema).default([]),
   
-  category: z.string().min(1, "Category is required"),
+  category: z.array(z.string()).min(1, "At least one category is required"),
   tags: z.array(z.string()), // Store tag IDs
 });
 

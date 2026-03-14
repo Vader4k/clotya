@@ -57,13 +57,13 @@ export const ProductFormSheet = ({
             isDiscount: false,
             inventory: [],
             colors: [],
-            category: '',
+            category: [],
             tags: [],
         }
     })
 
     const nameValue = watch('name')
-    const selectedCategoryId = watch('category')
+    const selectedCategoryIds = watch('category') || []
     const isDiscount = watch('isDiscount')
     const price = watch('price')
     const discountPrice = watch('discountPrice')
@@ -81,8 +81,8 @@ export const ProductFormSheet = ({
             setValue('discountPercentage', undefined, { shouldValidate: true })
         }
     }, [isDiscount, price, discountPrice, setValue])
-    const selectedCategory = categories?.find(c => String(c._id) === selectedCategoryId)
-    const availableTags = (selectedCategory?.tags as { name: string, _id: string | number }[]) || []
+    const selectedCategories = categories?.filter(c => selectedCategoryIds.includes(String(c._id))) || []
+    const availableTags = selectedCategories.flatMap(c => (c.tags as { name: string, _id: string | number }[]) || [])
 
     const currentTags = watch('tags')
 
@@ -101,12 +101,16 @@ export const ProductFormSheet = ({
         }
     }, [nameValue, setValue, initialData])
 
-    // Reset tags when category changes
+    // Maintain tags when categories change (filter out tags that no longer belong to any selected category)
     useEffect(() => {
         if (!initialData) {
-            setValue('tags', [])
+            const availableTagIds = availableTags.map(t => String(t._id))
+            const validTags = currentTags.filter(t => availableTagIds.includes(t))
+            if (validTags.length !== currentTags.length) {
+                setValue('tags', validTags)
+            }
         }
-    }, [selectedCategoryId, setValue, initialData])
+    }, [selectedCategoryIds, availableTags, setValue, initialData, currentTags])
 
     useEffect(() => {
         if (open) {
@@ -128,7 +132,7 @@ export const ProductFormSheet = ({
                     isDiscount: initialData.isDiscount ?? false,
                     inventory: initialData.inventory || [],
                     colors: initialData.colors || [],
-                    category: initialData.category || '',
+                    category: initialData.category instanceof Array ? initialData.category : [],
                     tags: initialData.tags || [],
                 })
             } else {
@@ -147,7 +151,7 @@ export const ProductFormSheet = ({
                     isDiscount: false,
                     inventory: [],
                     colors: [],
-                    category: '',
+                    category: [],
                     tags: [],
                 })
             }
@@ -165,6 +169,14 @@ export const ProductFormSheet = ({
             setValue('tags', currentTags.filter(t => t !== tagId), { shouldValidate: true })
         } else {
             setValue('tags', [...currentTags, tagId], { shouldValidate: true })
+        }
+    }
+
+    const toggleCategory = (categoryId: string) => {
+        if (selectedCategoryIds.includes(categoryId)) {
+            setValue('category', selectedCategoryIds.filter(id => id !== categoryId), { shouldValidate: true })
+        } else {
+            setValue('category', [...selectedCategoryIds, categoryId], { shouldValidate: true })
         }
     }
 
@@ -246,78 +258,92 @@ export const ProductFormSheet = ({
                             {errors.shortDescription && <p className="text-xs text-red-500">{errors.shortDescription.message}</p>}
                         </div>
                         <div className="space-y-2">
-                            <label className="text-xs font-medium">Full Description</label>
-                            <textarea rows={5} {...register('description')} placeholder="Detailed description" className={errors.description ? 'border-red-500' : '' + "rounded-none w-full border border-gray-300 p-3 text-sm"} />
+                            <label htmlFor='full description' className="text-xs font-medium">Full Description</label>
+                            <textarea id='full description' autoComplete='on' rows={5} {...register('description')} placeholder="Detailed description" className={errors.description ? 'border-red-500' : '' + "rounded-none w-full border border-gray-300 p-3 text-sm"} />
                             {errors.description && <p className="text-xs text-red-500">{errors.description.message}</p>}
                         </div>
                     </div>
 
-                    {/* Taxonomy */}
                     <div className="space-y-4">
-                        <h3 className="text-sm font-semibold">Category & Tags</h3>
+                        <h3 className="text-sm font-semibold">Categories & Tags</h3>
                         <div className="space-y-2">
-                            <label className="text-xs font-medium">Category</label>
-                            <Controller
-                                control={control}
-                                name="category"
-                                render={({ field }) => (
-                                    <Select onValueChange={field.onChange} value={field.value}>
-                                        <SelectTrigger className={errors.category ? 'border-red-500' : '' + "text-xs ring-1 ring-gray-300! mt-1 rounded-none"}>
-                                            <SelectValue placeholder="Select a category" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            {categories?.map(c => (
-                                                <SelectItem key={c._id} value={String(c._id)}>{c.name}</SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
+                            <label className="text-xs font-medium">Categories</label>
+                            
+                            <div className="flex flex-wrap gap-2 mb-2">
+                                {selectedCategories.map(cat => (
+                                    <div key={cat._id} className="flex items-center gap-1 bg-secondary text-secondary-foreground px-2 py-1 rounded-md text-xs border border-primary/20">
+                                        <span>{cat.name}</span>
+                                        <button type="button" onClick={() => toggleCategory(String(cat._id))} className="hover:text-destructive">
+                                            <X className="w-3 h-3" />
+                                        </button>
+                                    </div>
+                                ))}
+                                {selectedCategoryIds.length === 0 && (
+                                    <p className="text-xs text-gray-500 italic">No categories selected.</p>
                                 )}
-                            />
+                            </div>
+
+                            <Select onValueChange={(val) => {
+                                if (val) toggleCategory(val);
+                            }} value="">
+                                <SelectTrigger className={errors.category ? 'border-red-500' : '' + "text-xs ring-1 ring-gray-300! mt-1 notranslate rounded-none"}>
+                                    <SelectValue translate="no" className="notranslate" placeholder="Add a category..." />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {categories?.map(c => {
+                                        const isSelected = selectedCategoryIds.includes(String(c._id));
+                                        return (
+                                            <SelectItem className="notranslate" translate="no" key={c._id} value={String(c._id)}>
+                                                <div className="flex items-center justify-between w-full pr-4">
+                                                    <span>{c.name}</span>
+                                                    {isSelected && <span className="text-xs text-muted-foreground ml-2">(Selected)</span>}
+                                                </div>
+                                            </SelectItem>
+                                        )
+                                    })}
+                                </SelectContent>
+                            </Select>
                             {errors.category && <p className="text-xs text-red-500">{errors.category.message}</p>}
                         </div>
 
-                        {selectedCategoryId && availableTags.length > 0 && (
-                            <div className="space-y-2">
-                                <label className="text-xs font-medium">Tags (for {selectedCategory?.name})</label>
-                                <div className="mb-2 flex flex-wrap gap-2">
-                                    {currentTags.map(tagId => {
-                                        const tag = availableTags.find((t) => String(t._id) === tagId)
-                                        if (!tag) return null;
+                        <div className="space-y-2">
+                            <label className="text-xs font-medium">Tags (from selected categories)</label>
+                            <div className="mb-2 flex flex-wrap gap-2">
+                                {currentTags.map(tagId => {
+                                    const tag = availableTags.find((t) => String(t._id) === tagId)
+                                    if (!tag) return null;
+                                    return (
+                                        <div key={tagId} className="flex items-center gap-1 bg-primary text-white px-2 py-1 rounded-md text-xs">
+                                            <span>{tag.name}</span>
+                                            <button type="button" onClick={() => toggleTag(tagId)} className="hover:text-primary-foreground/80">
+                                                <X className="w-3 h-3" />
+                                            </button>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                            <Select onValueChange={(val) => {
+                                if (val) toggleTag(val);
+                            }} disabled={selectedCategoryIds.length === 0} value="">
+                                <SelectTrigger className='ring-1 rounded-none ring-gray-300 text-xs notranslate'>
+                                    <SelectValue translate="no" className="notranslate" placeholder={selectedCategoryIds.length === 0 ? "Select a category first" : "Select a tag to add/remove..."} />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {availableTags.map((tag) => {
+                                        const isSelected = currentTags.includes(String(tag._id));
                                         return (
-                                            <div key={tagId} className="flex items-center gap-1 bg-primary text-white px-2 py-1 rounded-md text-xs">
-                                                <span>{tag.name}</span>
-                                                <button type="button" onClick={() => toggleTag(tagId)} className="hover:text-primary-foreground/80">
-                                                    <X className="w-3 h-3" />
-                                                </button>
-                                            </div>
+                                            <SelectItem className="notranslate"
+                                                translate="no" key={tag._id} value={String(tag._id)}>
+                                                <div className="flex items-center justify-between w-full pr-4">
+                                                    <span>{tag.name}</span>
+                                                    {isSelected && <span className="text-xs text-muted-foreground ml-2">(Selected)</span>}
+                                                </div>
+                                            </SelectItem>
                                         )
                                     })}
-                                </div>
-                                <Select onValueChange={(val) => {
-                                    if (val) toggleTag(val);
-                                }}>
-                                    <SelectTrigger className='ring-1 rounded-none ring-gray-300 text-xs'>
-                                        <SelectValue placeholder="Select a tag to add/remove..." />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        {availableTags.map((tag) => {
-                                            const isSelected = currentTags.includes(String(tag._id));
-                                            return (
-                                                <SelectItem key={tag._id} value={String(tag._id)}>
-                                                    <div className="flex items-center justify-between w-full pr-4">
-                                                        <span>{tag.name}</span>
-                                                        {isSelected && <span className="text-xs text-muted-foreground ml-2">(Selected)</span>}
-                                                    </div>
-                                                </SelectItem>
-                                            )
-                                        })}
-                                    </SelectContent>
-                                </Select>
-                            </div>
-                        )}
-                        {!selectedCategoryId && (
-                            <p className="text-xs text-gray-500 italic">Select a category to view available tags.</p>
-                        )}
+                                </SelectContent>
+                            </Select>
+                        </div>
                     </div>
 
                     {/* Variants */}

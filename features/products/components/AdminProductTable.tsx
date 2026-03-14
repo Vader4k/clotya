@@ -52,7 +52,15 @@ export const AdminProductTable = ({
                                     <span className="font-medium text-gray-900">{product.name}</span>
                                 </div>
                             </td>
-                            <td className="px-6 py-4">{product.category.name}</td>
+                            <td className="px-6 py-4">
+                                <div className="flex flex-wrap gap-1">
+                                    {product.category.map((cat, idx) => (
+                                        <span key={cat._id} className="inline-block">
+                                            {cat.name}{idx < product.category.length - 1 ? ',' : ''}
+                                        </span>
+                                    ))}
+                                </div>
+                            </td>
                             <td className="px-6 py-4">
                                 <div className="flex flex-col">
                                     {product.isDiscount ? (

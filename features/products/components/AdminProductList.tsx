@@ -133,7 +133,8 @@ export const AdminProductList = () => {
                 refetch={refetch}
                 initialData={currentProduct ? {
                     ...currentProduct,
-                    category: currentProduct.category._id
+                    category: currentProduct.category.map(c => c._id),
+                    tags: currentProduct.tags || []
                 } : undefined}
                 title="Edit Product"
                 description="Update the details for this product."

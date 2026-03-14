@@ -80,7 +80,7 @@ export interface AdminProduct extends Omit<ProductSchemaType, "category"> {
   category: {
     _id: string;
     name: string;
-  }
+  }[]
 }
 
 export type AdminProductResponse = {
