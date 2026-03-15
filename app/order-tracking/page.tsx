@@ -1,4 +1,10 @@
 import TrackingForm from "@/features/order-tracking/components/TrackingForm"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Track Your Order",
+  description: "Check the status of your Clotya order. Simply enter your Order ID to get real-time tracking updates.",
+}
 
 const page = () => {
   return (

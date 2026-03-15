@@ -1,6 +1,12 @@
 import BlogDisplay from '@/sections/blog/BlogDisplay'
 import BlogFilters from '@/sections/blog/BlogFilters'
 import { blogService } from '@/features/blogs/services/blog.service'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "Fashion Blog & Styling Tips",
+  description: "Stay updated with the latest fashion trends, styling tips, and industry news on the Clotya blog.",
+}
 
 const BlogPage = async() => {
   const blogPosts = await blogService.getAll()

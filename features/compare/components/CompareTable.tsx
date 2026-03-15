@@ -15,7 +15,7 @@ const CompareTable = ({ products, removeProduct }: { products: any[], removeProd
                         {products.map((product) => (
                             <td key={product._id} className="px-4 py-3 text-center border-r last:border-r-0 min-w-48">
                                 <button
-                                    onClick={() => removeProduct(product.id)}
+                                    onClick={() => removeProduct(product._id)}
                                     className="inline-flex items-center gap-1 text-xs text-red-500 hover:text-red-700 transition-colors"
                                 >
                                     <X size={13} /> Remove
@@ -30,9 +30,9 @@ const CompareTable = ({ products, removeProduct }: { products: any[], removeProd
                             Image
                         </td>
                         {products.map((product) => (
-                            <td key={product.id} className="px-4 py-4 border-r last:border-r-0 min-w-60">
+                            <td key={product._id} className="px-4 py-4 border-r last:border-r-0 min-w-60">
                                 <a href={`/product/${product.slug}`}>
-                                    <div className="relative w-full aspect-3/4 bg-gray-100 overflow-hidden">
+                                    <div className="relative w-full aspect-3/4 bg-gray-100 h-full overflow-hidden border">
                                         <Image
                                             src={product.image}
                                             alt={product.name}
@@ -51,7 +51,7 @@ const CompareTable = ({ products, removeProduct }: { products: any[], removeProd
                             Name
                         </td>
                         {products.map((product) => (
-                            <td key={product.id} className="px-4 py-3 border-r last:border-r-0 min-w-48">
+                            <td key={product._id} className="px-4 py-3 border-r last:border-r-0 min-w-48">
                                 <a
                                     href={`/product/${product.slug}`}
                                     className="text-red-500 hover:text-red-700 transition-colors whitespace-normal leading-snug capitalize"
@@ -68,7 +68,7 @@ const CompareTable = ({ products, removeProduct }: { products: any[], removeProd
                             Rating
                         </td>
                         {products.map((product) => (
-                            <td key={product.id} className="px-4 py-3 border-r last:border-r-0 min-w-48">
+                            <td key={product._id} className="px-4 py-3 border-r last:border-r-0 min-w-48">
                                 <StarRating rating={product.rating} />
                             </td>
                         ))}
@@ -80,7 +80,7 @@ const CompareTable = ({ products, removeProduct }: { products: any[], removeProd
                             Price
                         </td>
                         {products.map((product) => (
-                            <td key={product.id} className="px-4 py-3 border-r last:border-r-0 min-w-48">
+                            <td key={product._id} className="px-4 py-3 border-r last:border-r-0 min-w-48">
                                 <div className="flex items-center gap-2 flex-wrap">
                                     {product.discountPrice ? (
                                         <>
@@ -105,7 +105,7 @@ const CompareTable = ({ products, removeProduct }: { products: any[], removeProd
                             Stock
                         </td>
                         {products.map((product) => (
-                            <td key={product.id} className="px-4 py-3 border-r last:border-r-0 min-w-48">
+                            <td key={product._id} className="px-4 py-3 border-r last:border-r-0 min-w-48">
                                 <span className="text-green-600 font-medium">In Stock</span>
                             </td>
                         ))}

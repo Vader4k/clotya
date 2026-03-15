@@ -66,7 +66,7 @@ const Footer = () => {
         <div className='w-full max-w-7xl mx-auto h-full flex flex-col justify-between'>
           <div className="grid 2xl:grid-cols-6 gap-10 w-full">
             <div className="col-span-2 grid gap-2">
-              <Image src="/logo.png" alt="Logo" width={150} height={150} />
+              <Image src="/logo.png" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" alt="Logo" width={150} height={150} />
               <p className="text-neutral-600 font-light text-xs md:text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
               <p className="text-xs md:text-sm">{phone} — {email}</p>
             </div>

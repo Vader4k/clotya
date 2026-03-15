@@ -6,6 +6,41 @@ import RecentViews from "@/sections/product/RecentViews"
 import DetailsView from "@/sections/product/DetailsView"
 import RelatedProducts from "@/sections/product/RelatedProducts"
 import RecentlyViewedTracker from "@/features/recently-viewed/services/recently-viewed-tracker"
+import { Metadata } from "next"
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const product = await productServices.getBySlug(slug)
+
+  if (!product) {
+    return {
+      title: "Product Not Found",
+    }
+  }
+
+  return {
+    title: product.name,
+    description: product.shortDescription || product.description,
+    openGraph: {
+      title: `${product.name} | Clotya`,
+      description: product.shortDescription || product.description,
+      images: [
+        {
+          url: product.images[0],
+          width: 800,
+          height: 600,
+          alt: product.name,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.name,
+      description: product.shortDescription || product.description,
+      images: [product.images[0]],
+    },
+  }
+}
 
 const ProductPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params

@@ -1,4 +1,10 @@
 import Link from "next/link"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Page Not Found",
+  description: "Sorry, the page you are looking for does not exist or has been moved.",
+}
 
 const NotFound = () => {
   return (
