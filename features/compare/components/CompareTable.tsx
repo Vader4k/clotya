@@ -32,7 +32,7 @@ const CompareTable = ({ products, removeProduct }: { products: any[], removeProd
                         {products.map((product) => (
                             <td key={product._id} className="px-4 py-4 border-r last:border-r-0 min-w-60">
                                 <a href={`/product/${product.slug}`}>
-                                    <div className="relative w-full aspect-3/4 bg-gray-100 overflow-hidden">
+                                    <div className="relative w-full aspect-3/4 bg-gray-100 h-full overflow-hidden border">
                                         <Image
                                             src={product.image}
                                             alt={product.name}
