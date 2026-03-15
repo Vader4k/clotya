@@ -181,3 +181,12 @@ export interface ImageUploaderProps {
     value?: (string | File)[];
     onChange?: (urls: (string | File)[]) => void;
 }
+
+export interface ImageLightboxProps {
+    images: string[]
+    currentIndex: number
+    setIndex: (index: number) => void
+    isOpen: boolean
+    onClose: () => void
+    name: string
+}

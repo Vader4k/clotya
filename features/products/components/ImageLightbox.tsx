@@ -4,15 +4,8 @@ import { AnimatePresence, motion } from "framer-motion"
 import { ChevronLeft, ChevronRight, X } from "lucide-react"
 import Image from "next/image"
 import { useCallback, useEffect } from "react"
+import { ImageLightboxProps } from "../types/product.types"
 
-interface ImageLightboxProps {
-  images: string[]
-  currentIndex: number
-  setIndex: (index: number) => void
-  isOpen: boolean
-  onClose: () => void
-  name: string
-}
 
 const ImageLightbox = ({ images, currentIndex, setIndex, isOpen, onClose, name }: ImageLightboxProps) => {
   const handleNext = useCallback(() => {
