@@ -43,7 +43,10 @@ const DetailedInformation = ({ product }: { product: Product }) => {
     }
   }
 
-  const isDisabled = !selectedColor || !size || stock === 0
+  const hasColor = product.colors && product.colors.length > 0
+  const hasSize = product.inventory && product.inventory.length > 0
+
+  const isDisabled = (hasColor && !selectedColor) || (hasSize && !size) || (hasColor && hasSize && stock === 0)
 
   return (
     <div className='font-jost grid gap-4'>
@@ -69,17 +72,17 @@ const DetailedInformation = ({ product }: { product: Product }) => {
       <p className='text-sm'>{product.shortDescription}</p>
 
 
-      {product.colors && product.colors.length > 0 && <div className='mt-2'>
+      {hasColor && <div className='mt-2'>
         <ColorPicker
-          colors={product.colors}
+          colors={product.colors!}
           selectedColor={selectedColor}
           setSelectedColor={setSelectedColor}
         />
       </div>}
 
-      {product.inventory && product.inventory.length > 0 && <div>
+      {hasSize && <div>
         <SizePicker
-          sizes={product.inventory}
+          sizes={product.inventory!}
           selectedSize={size}
           setSize={setSize}
           setStock={setStock}
@@ -105,7 +108,7 @@ const DetailedInformation = ({ product }: { product: Product }) => {
         quantity={quantity}
         decrease={decrease}
         increase={increase}
-        isDisabled={isDisabled}
+        isDisabled={isDisabled!}
       />
 
       <div className='flex items-center flex-wrap sm:flex-nowrap gap-5 my-2'>
