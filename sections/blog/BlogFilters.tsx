@@ -5,16 +5,13 @@ import CategoriesDisplay from '@/sections/blog/CategoriesDisplay'
 import PopularPosts from '@/sections/blog/PopularPosts'
 import TagsDisplay from '@/sections/blog/TagsDisplay'
 import { BlogCardProps } from '@/features/blogs/types/blog.types'
-import { usePathname } from 'next/navigation'
 
-const BlogFilters = ({ relatedPosts, categories, tags }: { relatedPosts: BlogCardProps[], categories: string[], tags: string[] }) => {
-
-    const pathname = usePathname()
+const BlogFilters = ({ popularPosts, categories, tags }: { popularPosts: BlogCardProps[], categories: string[], tags: string[] }) => {
 
     return (
         <div className='grid gap-8'>
             <BlogSearch />
-            <PopularPosts relatedPosts={relatedPosts} />
+            <PopularPosts popularPosts={popularPosts} />
             <CategoriesDisplay categories={categories} />
             <TagsDisplay tags={tags} />
         </div>

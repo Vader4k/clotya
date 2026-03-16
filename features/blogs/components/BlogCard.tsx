@@ -4,7 +4,7 @@ import { BlogCardProps } from '../types/blog.types'
 import Link from 'next/link'
 import { MoveRight } from 'lucide-react'
 
-const BlogCard = ({ categories, intro, slug, title, date, image, tags, blogPage, style }: BlogCardProps) => {
+const BlogCard = ({ categories, intro, slug, title, createdAt, image, tags, blogPage, style }: BlogCardProps) => {
   return (
     <div className={`w-full ${style} relative group overflow-hidden flex flex-col gap-3 items-start justify-between font-jost`}>
       <Link href={`/blog/${slug}`} className={`block w-full h-[85%] lg:h-[70%] relative ${blogPage ? 'h-[90%] lg:h-[90%]' : ''}`}>
@@ -19,7 +19,7 @@ const BlogCard = ({ categories, intro, slug, title, date, image, tags, blogPage,
       <div className='w-full flex items-center gap-2'>
         <p className='text-xs font-semibold text-gray-500'>{categories[0].toUpperCase()}</p>
         <p className='text-xs text-gray-500'>—</p>
-        <p className='text-xs text-gray-500 capitalize text-nowrap'>{date}</p>
+        <p className='text-xs text-gray-500 capitalize text-nowrap'>{new Date(createdAt).toLocaleDateString()}</p>
         {blogPage && (
           <div className='w-full flex items-center gap-1'>
             {tags?.slice(0, 2).map((tag, index) => (

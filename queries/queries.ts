@@ -14,6 +14,10 @@ export const QUERIES = {
         products: {
             GETNADD: '/products/',
             EDITNDEL: '/products/:id',
+        },
+        blogs: {
+            GETALL_N_ADD: '/blogs/',
+            GET_N_EDIT_N_DEL: '/blogs/:id',
         }
     },
 
@@ -28,6 +32,12 @@ export const QUERIES = {
             GET_RELATED: '/public/products/related/:id',
             GET_BY_SEARCH: '/public/products/search/:search',
             GET_ALL: '/public/products',
+        },
+        blogs: {
+            GET_ALL: '/public/blogs',
+            GET_BY_SLUG: '/public/blogs/:slug',
+            GET_BY_SEARCH: '/public/blogs/search/:search',
+            GET_POPULAR: '/public/blogs/popular',
         }
     }
 }

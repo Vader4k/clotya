@@ -2,15 +2,25 @@ import BlogDisplay from '@/sections/blog/BlogDisplay'
 import BlogFilters from '@/sections/blog/BlogFilters'
 import { blogService } from '@/features/blogs/services/blog.service'
 import { Metadata } from 'next'
+import { BlogPageProps } from '@/features/blogs/types/blog.types'
 
 export const metadata: Metadata = {
   title: "Fashion Blog & Styling Tips",
   description: "Stay updated with the latest fashion trends, styling tips, and industry news on the Clotya blog.",
 }
 
-const BlogPage = async() => {
-  const blogPosts = await blogService.getAll()
-  const relatedPosts = await blogService.getRelatedBlogs(blogPosts[0].slug)
+const BlogPage = async({ searchParams }: BlogPageProps) => {
+  const resolvedParams = await searchParams;
+  const filters = {
+    categories: resolvedParams.category,
+    tags: resolvedParams.tag,
+    search: resolvedParams.search,
+    page: resolvedParams.page ? Number(resolvedParams.page) : 1,
+  };
+
+  const blogResponse = await blogService.getAll(filters)
+  const blogPosts = blogResponse.blogs;
+  const popularPosts = await blogService.getPopularPosts()
   const categories = await blogService.getCategories()
   const tags = await blogService.getTags()
 
@@ -22,7 +32,7 @@ const BlogPage = async() => {
           <BlogDisplay blogPosts={blogPosts}/>
         </div>
         <aside className='w-full lg:w-[25%] sticky top-5'>
-          <BlogFilters relatedPosts={relatedPosts} categories={categories} tags={tags}/>
+          <BlogFilters popularPosts={popularPosts} categories={categories} tags={tags}/>
         </aside>
       </div>
     </main>
