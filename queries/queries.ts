@@ -39,5 +39,12 @@ export const QUERIES = {
             GET_BY_SEARCH: '/public/blogs/search/:search',
             GET_POPULAR: '/public/blogs/popular',
         }
+    },
+
+    cart: {
+        GET: '/cart',
+        ADD: '/cart/add',
+        REMOVE: '/cart/remove/:id',
+        REMOVE_ALL: '/cart/reset',
     }
 }

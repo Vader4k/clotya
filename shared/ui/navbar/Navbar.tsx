@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Suspense } from "react";
 import NavLinks from "./NavLinks";
 import { NavSheet } from "./NavSheet";
-import CartIndicator from "./CartIndicator";
+import CartIndicator from "@/features/cart/components/CartIndicator";
 import SearchModal from "@/features/search/components/SearchModal";
 import { hideNavOnRoutes } from "@/constants";
 import { usePathname } from "next/navigation";
