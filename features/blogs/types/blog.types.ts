@@ -1,5 +1,9 @@
-export type BlogCardProps = {
-    id: string;
+/** 
+ * Section 1: Core & Base Types 
+ */
+
+export interface BlogCardProps {
+    _id: string;
     title: string;
     slug: string;
     categories: string[];
@@ -9,7 +13,13 @@ export type BlogCardProps = {
     style?: string;
     blogPage?: boolean;
     tags: string[];
+    createdAt: string;
+    updatedAt: string;
 }
+
+/** 
+ * Section 2: Specialized Blog Variants 
+ */
 
 export interface BlogDetails extends BlogCardProps {
     details: string;
@@ -27,3 +37,21 @@ export interface Comment {
     date: string;
 }
 
+export interface BlogResponse {
+    blogs: Omit<BlogCardProps, "style" | "blogPage">[];
+    pagination: {
+        currentPage: number;
+        limit: number;
+        totalBlogs: number;
+        totalPages: number;
+    }
+}
+
+export interface BlogPageProps {
+  searchParams: Promise<{
+    category?: string;
+    tag?: string;
+    search?: string;
+    page?: string;
+  }>;
+}

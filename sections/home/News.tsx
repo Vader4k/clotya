@@ -17,8 +17,8 @@ const News = async () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-14 lg:gap-6 mt-10 md:mt-16">
-        {blogData.map((blog) => (
-          <BlogCard key={blog.id} {...blog} style=" h-[450px] sm:h-[650px] lg:h-[430px]"/>
+        {blogData.blogs.map((blog) => (
+          <BlogCard key={blog._id} {...blog} style=" h-[450px] sm:h-[650px] lg:h-[430px]"/>
         ))}
       </div>
     </section>

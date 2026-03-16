@@ -60,6 +60,7 @@ export interface Product extends BaseProduct {
         name: string;
     }[];
     reviews: number;
+    updatedAt: string;
 }
 
 /** Product object for Admin views, includes metadata and complex reviews */

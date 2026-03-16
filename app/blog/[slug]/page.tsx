@@ -9,7 +9,7 @@ const BlogDetails = async ({ params }: { params: Promise<{ slug: string }> }) =>
     const { slug } = await params
     const blogPost = await blogService.getBySlug(slug)
 
-    const relatedPosts = await blogService.getRelatedBlogs(blogPost?.slug as string)
+    const popularPosts = await blogService.getPopularPosts()
     const categories = await blogService.getCategories()
     const tags = await blogService.getTags()
 
@@ -29,11 +29,11 @@ const BlogDetails = async ({ params }: { params: Promise<{ slug: string }> }) =>
                 <div className='w-full flex items-center gap-2'>
                     <p className='text-xs font-semibold text-gray-500'>{blogPost?.categories[0].toUpperCase()}</p>
                     <p className='text-xs text-gray-500'>—</p>
-                    <p className='text-xs text-gray-500 capitalize text-nowrap'>{blogPost?.date}</p>
+                    <p className='text-xs text-gray-500 capitalize text-nowrap'>{new Date(blogPost?.createdAt!).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
                     <p className='text-xs text-gray-500'>—</p>
                     <div className='w-full flex items-center gap-1'>
                         {blogPost?.tags?.map((tag, index) => (
-                            <p key={index} className='text-xs text-black font-medium capitalize'>{tag},</p>
+                            <p key={index} className='text-xs text-black font-medium capitalize'>{tag}</p>
                         ))}
                     </div>
                 </div>
@@ -53,7 +53,7 @@ const BlogDetails = async ({ params }: { params: Promise<{ slug: string }> }) =>
             </div>
             <aside className="w-full lg:w-[25%] sticky top-5 h-fit pr-5">
                 <BlogFilters
-                    relatedPosts={relatedPosts}
+                    popularPosts={popularPosts}
                     categories={categories}
                     tags={tags}
                 />
