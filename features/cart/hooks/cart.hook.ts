@@ -1,9 +1,12 @@
+"use client"
+
 import { QUERIES } from "@/queries/queries";
 import { UseQueryResult, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { cartService } from "../services/cart.service";
 import { CartItem, AddToCartPayload } from "../types/cart.types";
 import { toast } from "sonner";
 import { errorHandler } from "@/lib/http/errorHandler";
+import { useRouter } from "next/navigation";
 
 export const useCartHook = (): UseQueryResult<CartItem[]> => {
     return useQuery({
@@ -14,14 +17,22 @@ export const useCartHook = (): UseQueryResult<CartItem[]> => {
 
 export const useAddToCart = () => {
     const queryClient = useQueryClient();
+    const router = useRouter();
     return useMutation({
         mutationFn: (cartItem: AddToCartPayload) => cartService.addToCart(cartItem),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [QUERIES.cart.GET] });
-            toast.success("Added to cart");
+            toast.success("Added to cart", {
+                action: {
+                    label: "View Cart",
+                    onClick: () => {
+                        router.push("/cart");
+                    }
+                }
+            });
         },
         onError: (error) => {
-            errorHandler(error)
+            toast.error(errorHandler(error))
         }
     });
 };
@@ -35,7 +46,7 @@ export const useRemoveFromCart = () => {
             toast.success("Removed from cart");
         },
         onError: (error) => {
-            errorHandler(error)
+            toast.error(errorHandler(error))
         }
     });
 };
@@ -49,7 +60,7 @@ export const useClearCart = () => {
             toast.success("Cart cleared");
         },
         onError: (error) => {
-            errorHandler(error)
+            toast.error(errorHandler(error))
         }
     });
 };

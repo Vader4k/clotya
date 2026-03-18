@@ -30,7 +30,7 @@ const CartItemList: React.FC<CartItemListProps> = ({ items }) => {
                         <tr key={`${item.sku}-${index}`} className="border-b last:border-0 group">
                             <td className="py-3 flex items-center gap-1">
                                 <button 
-                                    onClick={() => removeItem(item.sku)}
+                                    onClick={() => removeItem(item._id)}
                                     disabled={isPending}
                                     className="text-red-500 hover:text-red-700 transition-colors"
                                 >

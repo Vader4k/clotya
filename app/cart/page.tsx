@@ -11,7 +11,6 @@ import CartError from '@/features/cart/components/CartError'
 const CartPage = () => {
   const { data: cartItems = [], isLoading, isError, refetch } = useCartHook()
 
-
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[60vh]">
