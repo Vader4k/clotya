@@ -3,34 +3,35 @@
 import { Product } from '@/features/products/types/product.types'
 import ColorPicker from '@/features/products/components/ColorPicker'
 import SizePicker from '@/features/products/components/SizePicker'
-import { Star, X, Heart, Share } from 'lucide-react'
+import { Star, X, Heart, Share, ShoppingCart } from 'lucide-react'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import QuantityPicker from '@/features/products/components/QuantityPicker'
 import SizeGuide from './SizeGuide'
+import { useAddToCart } from '@/features/cart/hooks/cart.hook'
 
 const DetailedInformation = ({ product }: { product: Product }) => {
 
   const [selectedColor, setSelectedColor] = useState<string | null>(null)
   const [size, setSize] = useState<string | null>(null)
   const [stock, setStock] = useState<number>(0)
-  const [quantity, setQuantity] = useState<number>(1)
+
+  const { mutate: addToCart, isPending: isAdding } = useAddToCart()
 
   const reset = () => {
     setSelectedColor(null)
     setSize(null)
-    setQuantity(1)
   }
 
-  const decrease = () => {
-    if (quantity === 1) return
-    setQuantity(quantity - 1)
-  }
-
-  const increase = () => {
-    if (quantity < stock) {
-      setQuantity(quantity + 1)
+  const handleAddToCart = () => {
+    const cartItem = {
+      product: product._id,
+      sku: product.sku,
+      quantity: 1,
+      size: size,
+      color: selectedColor
     }
+    addToCart(cartItem)
   }
 
   const shareProduct = () => {
@@ -104,12 +105,19 @@ const DetailedInformation = ({ product }: { product: Product }) => {
         )}
       </AnimatePresence>
 
-      <QuantityPicker
-        quantity={quantity}
-        decrease={decrease}
-        increase={increase}
-        isDisabled={isDisabled!}
-      />
+      <div className="mt-4 flex flex-col sm:flex-row gap-4">
+        <button
+          onClick={handleAddToCart}
+          disabled={isDisabled || isAdding}
+          className={`w-full bg-black transition hover:bg-gray-300 text-white h-12 flex items-center justify-center ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+        >
+          {isAdding ? (
+            <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          ) : (
+            <span>Add to cart</span>
+          )}
+        </button>
+      </div>
 
       <div className='flex items-center flex-wrap sm:flex-nowrap gap-5 my-2'>
         <SizeGuide />
@@ -134,4 +142,4 @@ const DetailedInformation = ({ product }: { product: Product }) => {
   )
 }
 
-export default DetailedInformation
+export default DetailedInformation
