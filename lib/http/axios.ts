@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
         "Content-Type": "application/json",
     },
     withCredentials: true,
-    timeout: 15000, // Reduced from 30s to 15s for faster failure under high load
+    timeout: 30000, // Increased to 30s to allow backend cold starts on Vercel
 });
 
 // Add retry logic with exponential backoff to prevent thundering herd
@@ -21,7 +21,7 @@ axiosRetry(axiosInstance, {
         return Math.min(exponentialDelay + jitter, 10000); // Cap at 10s
     },
     retryCondition: (error) => {
-        // Retry on network errors and 5xx server errors, but not 4xx client errors
+        // Retry on network errors, timeouts, and 5xx server errors, but not 4xx client errors
         const isSafeMethod = ["get", "head", "options"].includes(
             error.config?.method?.toLowerCase() || ""
         );
@@ -29,6 +29,7 @@ axiosRetry(axiosInstance, {
         return (
             isSafeMethod &&
             (axiosRetry.isNetworkError(error) ||
+                error.code === 'ECONNABORTED' ||
                 (error.response?.status ? error.response.status >= 500 : false))
         );
     },
