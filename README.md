@@ -141,17 +141,13 @@ Global client state is managed with **Zustand**, using the `persist` middleware 
 | Store                       | Purpose                                                  |
 | --------------------------- | -------------------------------------------------------- |
 | `compareStore`              | Tracks products added to the comparison list (persisted) |
-| `cartStore` _(planned)_     | Shopping cart items and quantities                       |
+| `cartStore`                 | Shopping cart items and quantities                       |
 | `wishlistStore` _(planned)_ | Saved/wishlisted products                                |
 
 ---
 
 ## 🗺️ Roadmap
 
-- [ ] Cart with drawer UI and quantity management
 - [ ] Wishlist with persistent storage
 - [ ] Checkout flow (address, payment, confirmation)
 - [ ] Order tracking page
-- [ ] Admin dashboard (product CRUD, order management, user management)
-- [ ] Authentication (NextAuth or Clerk)
-- [ ] Backend API integration (replace static data)
