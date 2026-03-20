@@ -1,24 +1,47 @@
-import { Minus, Plus } from "lucide-react"
+import { Minus, Plus, Loader2 } from "lucide-react";
 
+const QuantityPicker = ({
+  quantity,
+  decrease,
+  increase,
+  isDisabled,
+  addToCart,
+  isAdding
+}: {
+  quantity: number;
+  decrease: () => void;
+  increase: () => void;
+  isDisabled: boolean;
+  addToCart: () => void;    
+  isAdding: boolean;
+}) => {
+  return (
+    <div className="w-full flex items-center gap-2">
+      <div className="flex items-center justify-between h-12 w-full max-w-[40%] sm:max-w-1/4 border">
+        <button
+          disabled={isDisabled}
+          className="w-10 h-full flex items-center justify-center"
+        >
+          <Minus size={16} strokeWidth={1.5} onClick={decrease} />
+        </button>
+        <p>{quantity}</p>
+        <button
+          disabled={isDisabled}
+          className="w-10 h-full flex items-center justify-center"
+        >
+          <Plus size={16} strokeWidth={1.5} onClick={increase} />
+        </button>
+      </div>
 
-const QuantityPicker = ({ quantity, decrease, increase, isDisabled }: { quantity: number, decrease: () => void, increase: () => void, isDisabled: boolean }) => {
-    return (
-        <div className="w-full flex items-center gap-2">
-            <div className="flex items-center justify-between h-12 w-full max-w-[40%] sm:max-w-1/4 border">
-                <button disabled={isDisabled} className="w-10 h-full flex items-center justify-center">
-                    <Minus size={16} strokeWidth={1.5} onClick={decrease} />
-                </button>
-                <p>{quantity}</p>
-                <button disabled={isDisabled} className="w-10 h-full flex items-center justify-center">
-                    <Plus size={16} strokeWidth={1.5} onClick={increase} />
-                </button>
-            </div>
+      <button
+        onClick={addToCart}
+        disabled={isDisabled}
+        className={`w-full max-w-[60%] sm:max-w-3/4 bg-black transition hover:bg-gray-300 text-white h-12 flex items-center justify-center ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+      >
+        {isAdding ? <Loader2 className="animate-spin" size={16} /> : "Add to cart"}
+      </button>
+    </div>
+  );
+};
 
-            <button disabled={isDisabled} className={`w-full max-w-[60%] sm:max-w-3/4 bg-black transition hover:bg-gray-300 text-white h-12 flex items-center justify-center ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}>
-                Add to cart
-            </button>
-        </div>
-    )
-}
-
-export default QuantityPicker
+export default QuantityPicker;

@@ -8,10 +8,11 @@ import { toast } from "sonner";
 import { errorHandler } from "@/lib/http/errorHandler";
 import { useRouter } from "next/navigation";
 
-export const useCartHook = (): UseQueryResult<CartItem[]> => {
+export const useCartHook = (enabled: boolean = true): UseQueryResult<CartItem[]> => {
     return useQuery({
         queryKey: [QUERIES.cart.GET],
-        queryFn: () => cartService.getCart()
+        queryFn: () => cartService.getCart(),
+        enabled
     })
 }
 

@@ -20,10 +20,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return {
     title: product.name,
-    description: product.shortDescription || product.description,
+    description: product.shortDescription,
     openGraph: {
       title: `${product.name} | Clotya`,
-      description: product.shortDescription || product.description,
+      description: product.shortDescription,
       images: [
         {
           url: product.images[0],
