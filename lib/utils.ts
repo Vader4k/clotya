@@ -41,7 +41,9 @@ export const processUrlVariables = (
     const queryString = new URLSearchParams(
       query as Record<string, string>
     ).toString();
-    processedUrl = `${processedUrl}?${queryString}`;
+    if (queryString) {
+      processedUrl = `${processedUrl}?${queryString}`;
+    }
   }
 
   return processedUrl;

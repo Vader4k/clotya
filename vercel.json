@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://clotya-backend.onrender.com/api/:path*"
+    }
+  ]
+}

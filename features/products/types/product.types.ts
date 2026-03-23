@@ -64,7 +64,7 @@ export interface Product extends BaseProduct {
 }
 
 /** Product object for Admin views, includes metadata and complex reviews */
-export interface AdminProduct extends Omit<ProductSchemaType, "category"> {
+export interface AdminProduct extends Omit<ProductSchemaType, "category" | "tags"> {
     _id: string;
     createdAt: string;
     updatedAt: string;
@@ -74,6 +74,10 @@ export interface AdminProduct extends Omit<ProductSchemaType, "category"> {
         count: number;
     };
     category: {
+        _id: string;
+        name: string;
+    }[];
+    tags: {
         _id: string;
         name: string;
     }[];
@@ -147,7 +151,7 @@ export type ProductFormSheetProps = {
     open: boolean;
     onOpenChange: (open: boolean) => void;
     onSubmit: (data: ProductSchemaType) => Promise<void>;
-    initialData?: Partial<ProductSchemaType>;
+    initialData?: Partial<ProductSchemaType> | AdminProduct;
     title: string;
     description: string;
     refetch: () => void;

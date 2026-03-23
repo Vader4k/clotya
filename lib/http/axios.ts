@@ -2,13 +2,27 @@ import axios from "axios";
 import axiosRetry from "axios-retry";
 
 const axiosInstance = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL!,
+    baseURL: typeof window === "undefined" ? process.env.NEXT_PUBLIC_API_URL : "/api",
     headers: {
         "Content-Type": "application/json",
     },
     withCredentials: true,
     timeout: 30000, // Increased to 30s to allow backend cold starts on Vercel
 });
+
+// Add request interceptor to handle /api prefix for client-side rewrites
+axiosInstance.interceptors.request.use(
+    (config) => {
+        // Only prefix on the client and if it's a relative path starting with /
+        if (typeof window !== "undefined" && config.url?.startsWith("/")) {
+            // We don't use baseURL on the client anymore to avoid Axios path replacement issues
+            config.baseURL = ""; 
+            config.url = `/api${config.url}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
 
 // Add retry logic with exponential backoff to prevent thundering herd
 axiosRetry(axiosInstance, {

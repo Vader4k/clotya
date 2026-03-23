@@ -4,6 +4,7 @@ import axiosInstance from "@/lib/http/axios";
 import { processUrlVariables } from "@/lib/utils";
 import { ProductSchemaType } from "../schema/productSchema";
 import { ToFormData } from "../utils/product.utils";
+import { fetcher } from "@/lib/http/fetch";
 
 
 export const adminProductServices = {
@@ -48,44 +49,52 @@ export const adminProductServices = {
 export const productServices = {
     // get all products
     getAll: async (filters: ProductFilters): Promise<PublicProductResponse> => {
-        const response = await axiosInstance.get(QUERIES.public.products.GET_ALL, {
-            params: {
-                ...filters
-            }
+        return await fetcher.get<PublicProductResponse>(QUERIES.public.products.GET_ALL, {
+            params: { ...filters },
+            next: { revalidate: 3600 } // Example: revalidate every hour
         });
-        return response.data;
     },
 
     // get product by slug
     getBySlug: async (slug: string): Promise<Product | undefined> => {
         const url = processUrlVariables(QUERIES.public.products.GET_BY_SLUG, { slug });
-        const response = await axiosInstance.get(url);
-        return response.data.product;
+        const data = await fetcher.get<{ product: Product }>(url, {
+            next: { revalidate: 3600 }
+        });
+        return data.product;
     },
 
     getByCategory: async (category: string): Promise<Product[]> => {
         const url = processUrlVariables(QUERIES.public.products.GET_BY_CATEGORY, { category });
-        const response = await axiosInstance.get(url);
-        return response.data.products;
+        const data = await fetcher.get<{ products: Product[] }>(url, {
+            next: { revalidate: 3600 }
+        });
+        return data.products;
     },
 
     // get products by search
     getBySearch: async (search: string): Promise<Product[]> => {
         const url = processUrlVariables(QUERIES.public.products.GET_BY_SEARCH, { search });
-        const response = await axiosInstance.get(url);
-        return response.data.products;
+        const data = await fetcher.get<{ products: Product[] }>(url, {
+            cache: 'no-store' // Don't cache search results
+        });
+        return data.products;
     },
 
     //get best seller products
     getBestSeller: async (): Promise<Product[]> => {
-        const response = await axiosInstance.get(QUERIES.public.products.GET_BEST_SELLER);
-        return response.data.products;
+        const data = await fetcher.get<{ products: Product[] }>(QUERIES.public.products.GET_BEST_SELLER, {
+            next: { revalidate: 3600 }
+        });
+        return data.products;
     },
 
     // get related products
     getRelated: async (id: string): Promise<Product[]> => {
         const url = processUrlVariables(QUERIES.public.products.GET_RELATED, { id });
-        const response = await axiosInstance.get(url);
-        return response.data.products;
+        const data = await fetcher.get<{ products: Product[] }>(url, {
+            next: { revalidate: 3600 }
+        });
+        return data.products;
     },
 };

@@ -1,34 +1,37 @@
 import { blogCategories, blogTags } from "@/data/blog";
-import { BlogCardProps, BlogDetails, BlogResponse } from "../types/blog.types";
+import { BlogDetails, BlogResponse } from "../types/blog.types";
 import { BlogSchemaType } from "../schema/blog.schema";
 import { QUERIES } from "@/queries/queries";
 import axiosInstance from "@/lib/http/axios";
 import { processUrlVariables } from "@/lib/utils";
+import { fetcher } from "@/lib/http/fetch";
 
 export const blogService = {
     // PUBLIC ENDPOINTS
     
     //get all blog post
     getAll: async (filters?: {categories?: string, tags?: string, search?: string, page?: number, limit?: number}): Promise<BlogResponse> => {
-        const result = await axiosInstance.get(QUERIES.public.blogs.GET_ALL, {
-            params: {
-                ...filters
-            }
+        return await fetcher.get<BlogResponse>(QUERIES.public.blogs.GET_ALL, {
+            params: { ...filters },
+            next: { revalidate: 3600 }
         });
-        return result.data;
     },
 
     //get blog by slug
     getBySlug: async (slug: string): Promise<BlogDetails | null> => {
         const url = processUrlVariables(QUERIES.public.blogs.GET_BY_SLUG, { slug });
-        const result = await axiosInstance.get(url);
-        return result.data.blog;
+        const data = await fetcher.get<{ blog: BlogDetails }>(url, {
+            next: { revalidate: 3600 }
+        });
+        return data.blog;
     },
 
     //get popular posts
     getPopularPosts: async (): Promise<BlogDetails[]> => {
-        const result = await axiosInstance.get(QUERIES.public.blogs.GET_POPULAR);
-        return result.data.blogs;
+        const data = await fetcher.get<{ blogs: BlogDetails[] }>(QUERIES.public.blogs.GET_POPULAR, {
+            next: { revalidate: 3600 }
+        });
+        return data.blogs;
     },
 
     //get blog categories

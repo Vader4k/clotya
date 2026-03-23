@@ -3,6 +3,7 @@ import { QUERIES } from "@/queries/queries";
 import { CategorySchemaType } from "../schema/categorySchema";
 import { Category } from "../types/categories.types";
 import { processUrlVariables } from "@/lib/utils";
+import { fetcher } from "@/lib/http/fetch";
 
 export const categoriesService = {
     // Fetch all categories
@@ -15,8 +16,10 @@ export const categoriesService = {
         return response.data
     },
     getAllCategoriesPublic: async (): Promise<Category[]> => {
-        const response = await axiosInstance.get(QUERIES.public.categories.GET)
-        return response.data.categories
+        const data = await fetcher.get<{ categories: Category[] }>(QUERIES.public.categories.GET, {
+            next: { revalidate: 3600 }
+        });
+        return data.categories;
     },
     editCategory: async ({ data, id }: { data: CategorySchemaType, id: string }) => {
         const res = await axiosInstance.put(processUrlVariables(QUERIES.admin.categories.EDITNDEL, { id }), data)
