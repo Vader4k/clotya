@@ -29,8 +29,7 @@ export default function SettingsPage() {
 
     // Extract profile info (minus address) to match ProfileSchema structure
     const profileInfo: ProfileSchemaType = {
-        firstName: user.firstName,
-        lastName: user.lastName,
+        name: `${user.firstName} ${user.lastName}`,
         email: user.email,
         phone: user.phone,
     };

@@ -131,11 +131,7 @@ export const AdminProductList = () => {
                 onOpenChange={setIsEditModalOpen}
                 onSubmit={handleEdit}
                 refetch={refetch}
-                initialData={currentProduct ? {
-                    ...currentProduct,
-                    category: currentProduct.category.map(c => c._id),
-                    tags: currentProduct.tags || []
-                } : undefined}
+                initialData={currentProduct || undefined}
                 title="Edit Product"
                 description="Update the details for this product."
             />

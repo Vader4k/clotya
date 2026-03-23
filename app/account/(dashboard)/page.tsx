@@ -13,7 +13,11 @@ export default function AccountOverviewPage() {
   useEffect(() => {
     const fetchUser = async () => {
       const data = await accountClientService.getProfile();
-      setUser(data);
+      setUser({
+        name: `${data.firstName} ${data.lastName}`,
+        email: data.email,
+        phone: data.phone,
+      });
       setLoading(false);
     };
     fetchUser();
@@ -35,7 +39,7 @@ export default function AccountOverviewPage() {
     <div className="space-y-6">
       <div className="bg-neutral-50 p-6 border border-neutral-200">
         <h2 className="text-xl font-medium text-black">
-          Hello, {user?.firstName} {user?.lastName}
+          Hello, {user?.name}
         </h2>
         <p className="text-neutral-500 mt-2 text-sm">
           From your account dashboard you can view your recent orders, manage
