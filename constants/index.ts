@@ -133,7 +133,7 @@ export const sheetLinks: Record<string, SheetLink[]> = {
     ]
 }
 
-const accountNavLink = { name: "account", href: '/account', icon: User }
+const accountNavLink = { name: "account", href: '/account/login', icon: User }
 
 export const bottomNavLinks = [
     { name: "store", href: "/shop", icon: Store },
