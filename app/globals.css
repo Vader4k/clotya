@@ -75,11 +75,31 @@ html {
   display: none !important;
 }
 
+/* * {
+  outline: 1px solid red;
+} */
+
+
 body {
   top: 0 !important;
   position: static !important;
   font-family: var(--font-inter);
+  overflow-x: hidden;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  box-sizing: border-box;
+}
+
 
 /* Specific fix for Google Translate's body injection */
 .translated-ltr body,

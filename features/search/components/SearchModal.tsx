@@ -68,7 +68,7 @@ const SearchModal = ({ isMobile }: { isMobile: boolean }) => {
             className={
               isMobile
                 ? "fixed inset-0 z-1 bg-white h-screen font-jost pt-5"
-                : "absolute w-screen inset-0 h-[90vh] mt-20 z-10 bg-white border-t font-jost"
+                : "absolute w-full inset-0 h-[90vh] mt-20 z-10 bg-white border-t font-jost"
             }
           >
             <div className={`w-full max-w-7xl mx-auto px-5 ${isMobile ? "mt-4" : "mt-10"}`}>

@@ -60,11 +60,11 @@ const Navbar = () => {
           <button>
             <Heart strokeWidth={1.5} size={22} />
           </button>
-          <CartIndicator />
+          <CartIndicator isMobile={false} />
         </div>
 
         <div className="xl:hidden w-full flex-1 flex items-center justify-end">
-          <CartIndicator />
+          <CartIndicator isMobile={true} />
         </div>
       </div>
     </nav>

@@ -90,7 +90,7 @@ export default function RootLayout({
   product: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body
         className={`${inter.variable} ${jost.variable} antialiased`}
       >
