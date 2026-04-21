@@ -1,10 +1,9 @@
 import * as z from "zod";
 
-const validSizes = ["S", "M", "L", "XL", "XXL"];
 
 export const inventorySchema = z.object({
-  size: z.enum(validSizes, "Invalid size"),
-  quantity: z.number().min(0, "Quantity must be at least 0"),
+  size: z.string().min(1, "Size is required"),
+  quantity: z.number().min(1, "Quantity must be at least 1"),
 });
 
 export const colorSchema = z.object({

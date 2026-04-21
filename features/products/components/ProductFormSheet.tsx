@@ -609,7 +609,7 @@ export const ProductFormSheet = ({
                 <label className="text-xs font-medium">Inventory Sizes</label>
                 <button
                   type="button"
-                  onClick={() => appendInv({ size: "", quantity: 0 })}
+                  onClick={() => appendInv({ size: "", quantity: 1 })}
                   className="text-xs flex items-center gap-1 text-primary hover:text-primary/80"
                 >
                   <Plus className="w-3 h-3" /> Add Size
