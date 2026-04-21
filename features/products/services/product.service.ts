@@ -41,9 +41,12 @@ export const adminProductServices = {
         return response.data.product;
     },
 
-    // delete: async (id: number): Promise<void> => {
-    //     await axiosInstance.delete(QUERIES.admin.products.EDITNDEL.replace(':id', id.toString()));
-    // },
+    delete: async (id: string): Promise<{ message: string }> => {
+        const response = await axiosInstance.delete(
+            processUrlVariables(QUERIES.admin.products.EDITNDEL, { id })
+        );
+        return response.data;
+    },
 }
 
 export const productServices = {

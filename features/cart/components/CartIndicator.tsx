@@ -43,9 +43,9 @@ const CartIndicator = ({ isMobile = false }: { isMobile?: boolean }) => {
                 </SheetTrigger>
                 <SheetContent side="right" className="w-[85vw] max-w-[400px]">
                     <SheetHeader>
-                        <SheetTitle className="text-left font-jost text-lg border-b pb-4 mb-4">Shopping Cart</SheetTitle>
+                        <SheetTitle className="text-left font-jost text-lg border-b pb-4">Shopping Cart</SheetTitle>
                     </SheetHeader>
-                    <div>
+                    <div className="h-full -mt-5">
                         <MiniCart />
                     </div>
                 </SheetContent>
@@ -59,7 +59,7 @@ const CartIndicator = ({ isMobile = false }: { isMobile?: boolean }) => {
                 {TriggerButton}
             </HoverCardTrigger>
 
-            <HoverCardContent className="w-80" align="end" sideOffset={15}>
+            <HoverCardContent className="w-80" align="start" sideOffset={15}>
                 <MiniCart />
             </HoverCardContent>
         </HoverCard>

@@ -38,7 +38,7 @@ const MiniCart = () => {
       ) : (
         <div className="flex flex-col">
           {/* Items List */}
-          <div className="flex flex-col max-h-[130px] overflow-y-auto px-1 no-scrollbar">
+          <div className="flex flex-col h-[450px] overflow-y-auto px-1 no-scrollbar">
             {cart.map((item) => (
               <div key={item._id} className="flex gap-4 mb-5 mt-2">
                 {/* Image */}

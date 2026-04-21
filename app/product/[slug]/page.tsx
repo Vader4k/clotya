@@ -10,7 +10,7 @@ import { Metadata } from "next"
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-  const product = await productServices.getBySlug(slug)
+  const product = await productServices.getBySlug(slug).catch(() => undefined)
 
   if (!product) {
     return {
@@ -44,14 +44,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 const ProductPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params
-  const product = await productServices.getBySlug(slug)
-
-
-  const relatedProducts = await productServices.getRelated(product?._id || '')
+  const product = await productServices.getBySlug(slug).catch(() => undefined)
 
   if (!product) {
     return <div>Product not found</div>
   }
+
+  const relatedProducts = await productServices.getRelated(product._id)
 
   return (
     <main className='w-full max-w-7xl mx-auto px-3 sm:px-10 lg:px-14 xl:px-3'>

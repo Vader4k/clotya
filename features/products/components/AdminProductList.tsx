@@ -65,6 +65,17 @@ export const AdminProductList = () => {
         setPage(1) // Reset to first page when search changes
     }
 
+    const handleDelete = async (product: AdminProduct) => {
+        if (!product?._id) return
+        try {
+            const res = await adminProductServices.delete(product._id)
+            toast.success(res.message)
+            await refetch()
+        } catch (error) {
+            toast.error(errorHandler(error))
+        }
+    }
+
     return (
         <div className="space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -102,10 +113,7 @@ export const AdminProductList = () => {
                         setCurrentProduct(product)
                         setIsEditModalOpen(true)
                     }}
-                    onDelete={(product: AdminProduct) => {
-                        // Handle delete
-                        toast.error("Delete not implemented yet")
-                    }}
+                    onDelete={handleDelete}
                 />
 
                 <AdminProductPagination
