@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { CartItem } from '../types/cart.types'
+import Link from 'next/link'
 
 interface CartSummaryProps {
     items: CartItem[]
@@ -51,9 +52,9 @@ const CartSummary: React.FC<CartSummaryProps> = ({ items }) => {
                 </div>
             </div>
 
-            <button className="w-full bg-red-500 text-white py-3 text-xs flex items-center justify-center font-medium uppercase tracking-wider mt-8 hover:bg-red-600 transition-colors">
+            <Link href='/checkout' className="w-full bg-red-500 text-white py-3 text-xs flex items-center justify-center font-medium uppercase tracking-wider mt-8 hover:bg-red-600 transition-colors">
                 Proceed to checkout
-            </button>
+            </Link>
         </div>
     )
 }

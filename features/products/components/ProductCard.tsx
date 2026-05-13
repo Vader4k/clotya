@@ -8,8 +8,8 @@ import ProductActions from "./ProductActions"
 
 const ProductCard = ({ name, _id, price, images, reviews, discountPrice, discount, inventory, sold, slug, showRange, isShopPage }: ProductCardProps) => {
   return (
-    <div className={`w-full h-100 sm:h-120 lg:h-200 2xl:h-140 flex flex-col justify-between gap-2 relative group ${isShopPage ? 'xl:h-100!' : ''}`}>
-      <a href={`/product/${slug}`} className="w-full h-[85%] 2xl:h-[85%]">
+    <div className={`w-full h-100 sm:h-120 lg:h-200 xl:h-140 flex flex-col justify-between gap-2 relative group ${isShopPage ? 'xl:h-100!' : ''}`}>
+      <a href={`/product/${slug}`} className="w-full h-[85%] xl:h-[85%]">
         <div className="relative w-full h-full group">
           <Image src={images[0]} alt={name} fill className="object-cover object-top z-1" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
           {images[1] && <Image src={images[1]} alt={name} fill className="object-cover object-top absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:z-2" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />}
