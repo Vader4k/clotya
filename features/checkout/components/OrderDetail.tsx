@@ -3,8 +3,15 @@
 import { useFormContext, useWatch } from "react-hook-form";
 import { BillingDetailsType } from "../schema/checkout.schema";
 import { CartItem } from "../../cart/types/cart.types";
+import { Loader2 } from 'lucide-react';
 
-const OrderDetail = ({ cartItems }: { cartItems: CartItem[] }) => {
+const OrderDetail = ({
+  cartItems,
+  paying,
+}: {
+  cartItems: CartItem[];
+  paying: boolean;
+}) => {
   const { register } = useFormContext<BillingDetailsType>();
   const shipmentType = useWatch({ name: "shipmentType" });
 
@@ -128,9 +135,21 @@ const OrderDetail = ({ cartItems }: { cartItems: CartItem[] }) => {
         </div>
         <button
           type="submit"
+          disabled={paying}
           className="w-full mt-4 bg-red-500 text-white py-3 text-sm font-medium"
         >
-          Place order
+          {paying ? (
+            <div className="flex items-center justify-center gap-2">
+              <Loader2
+                className="animate-spin"
+                size={16}
+                strokeWidth={1.5}
+              />{" "}
+              <span>Processing...</span>
+            </div>
+          ) : (
+            "Place order"
+          )}
         </button>
       </div>
     </aside>

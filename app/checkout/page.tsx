@@ -17,10 +17,12 @@ import { useCartHook, useClearCart } from "@/features/cart/hooks/cart.hook";
 import CartError from "@/features/cart/components/CartError";
 import EmptyCart from "@/features/cart/components/EmptyCart";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const page = () => {
   const { data: cartItems, isLoading, isError, refetch } = useCartHook();
   const { mutate: clearCart } = useClearCart();
+  const [paying, setPaying] = useState(false);
   // TODO: think of a better ux for clear cart functionality
   const router = useRouter();
 
@@ -76,6 +78,7 @@ const page = () => {
     };
 
     try {
+      setPaying(true);
       const res = await checkoutServices.checkout(orderItem);
       if (!res.paymentUrl) {
         toast.success(res.message);
@@ -84,6 +87,8 @@ const page = () => {
       }
     } catch (error) {
       toast.error(errorHandler(error));
+    } finally {
+      setPaying(false);
     }
   };
 
@@ -100,7 +105,7 @@ const page = () => {
             <BillingDetails />
           </div>
           <div className="flex-[2.5] w-full">
-            <OrderDetail cartItems={cartItems?.items} />
+            <OrderDetail cartItems={cartItems?.items} paying={paying}/>
           </div>
         </form>
       </FormProvider>

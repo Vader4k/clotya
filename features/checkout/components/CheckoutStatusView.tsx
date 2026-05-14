@@ -113,8 +113,8 @@ const CheckoutStatusView = ({ status, reference, message }: CheckoutStatusViewPr
           {isSuccess ? (
             <>
               <Link
-                href="/account/orders"
-                className="w-full bg-gray-900 text-white font-bold py-4.5 rounded-2xl hover:bg-black transition-all flex items-center justify-center gap-2 group shadow-xl shadow-gray-200"
+                href="/order-tracking"
+                className="w-full bg-gray-900 text-white font-bold py-3 rounded-none hover:bg-black transition-all flex items-center justify-center gap-2 group shadow-xl shadow-gray-200"
               >
                 <ReceiptText className="size-5" />
                 <span>Track My Order</span>
@@ -132,7 +132,7 @@ const CheckoutStatusView = ({ status, reference, message }: CheckoutStatusViewPr
             <>
               <Link
                 href="/checkout"
-                className="w-full bg-[#ed2024] text-white font-bold py-4.5 rounded-2xl hover:bg-red-700 transition-all flex items-center justify-center gap-2 shadow-xl shadow-red-100"
+                className="w-full bg-[#ed2024] text-white font-bold py-3 rounded-none hover:bg-red-700 transition-all flex items-center justify-center gap-2 shadow-xl shadow-red-100"
               >
                 Try Payment Again
               </Link>
