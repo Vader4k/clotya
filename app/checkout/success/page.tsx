@@ -32,21 +32,21 @@ const page = async ({
     return (
       <main>
         <CheckoutStatusView
-          status={response.status === "success" ? "success" : "failed"}
+          status={response.success ? "success" : "failed"}
           reference={reference}
           message={response.message}
         />
       </main>
     );
   } catch (error: any) {
+    const data = error.response?.data;
     return (
       <main>
         <CheckoutStatusView
-          status="failed"
+          status={data?.success ? "success" : "failed"}
           reference={reference}
           message={
-            error.response?.data?.message ||
-            "An error occurred while verifying your payment. Please try again later."
+            data?.message || "An error occurred while verifying your payment. Please try again later."
           }
         />
       </main>
@@ -55,3 +55,5 @@ const page = async ({
 };
 
 export default page;
+
+
