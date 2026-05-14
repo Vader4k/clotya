@@ -6,15 +6,15 @@ import { Loader2, X } from "lucide-react";
 import FreeShippingProgress from "./FreeShippingProgress";
 
 const MiniCart = () => {
-  const { data: cart = [], isLoading } = useCartHook();
+  const { data: cart, isLoading } = useCartHook();
   const { mutate: removeFromCart, isPending: isRemoving } = useRemoveFromCart();
 
-  const totalPrice = cart.reduce((acc, item) => {
+  const totalPrice = cart?.items.reduce((acc, item) => {
     const price = item.product.discountPrice || item.product.price;
     return acc + price * item.quantity;
   }, 0);
 
-  const totalItems = cart.length;
+  const totalItems = cart?.items.length;
 
   return (
     <div className="w-full">
@@ -22,7 +22,7 @@ const MiniCart = () => {
         <div className="flex justify-center items-center py-10">
           <Loader2 className="animate-spin text-gray-500" size={24} />
         </div>
-      ) : cart.length === 0 ? (
+      ) : !cart?.items || cart?.items.length === 0 ? (
         <div className="flex flex-col items-center gap-4 py-8">
           <Image
             src="/empty-cart.svg"
@@ -39,7 +39,7 @@ const MiniCart = () => {
         <div className="flex flex-col">
           {/* Items List */}
           <div className="flex flex-col h-[450px] lg:h-[150px] overflow-y-auto px-1 no-scrollbar">
-            {cart.map((item) => (
+            {cart?.items.map((item) => (
               <div key={item._id} className="flex gap-4 mb-5 mt-2">
                 {/* Image */}
                 {item.product.images?.[0] ? (
@@ -94,16 +94,18 @@ const MiniCart = () => {
               <span className="text-[#9ea6ab] font-bold text-sm uppercase">
                 Subtotal:
               </span>
-              <span className="text-[#ed2024] font-bold text-base">
-                ${totalPrice.toFixed(2)}
-              </span>
+              {totalPrice && (
+                <span className="text-[#ed2024] font-bold text-base">
+                  ${totalPrice.toFixed(2)}
+                </span>
+              )}
             </div>
             <p className="text-[13px] font-jost text-[#414b56] mb-4 font-medium">
               You have {totalItems} items in your cart
             </p>
 
             <div className="mb-3">
-              <FreeShippingProgress total={totalPrice} />
+              <FreeShippingProgress total={totalPrice!} />
             </div>
 
             {/* Buttons */}

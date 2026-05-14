@@ -13,7 +13,7 @@ export const billingDetailsSchema = z.object({
     zip: z.string().min(1, "Zip code is required"),
     notes: z.string().optional(),
     shipmentType: z.enum(["standard", "local_pickup"]),
-    paymentType: z.enum(["bank_transfer", "cash_on_delivery"]),
+    paymentType: z.enum(["paystack", "bank_transfer", "cash_on_delivery"]),
 })
 
 export type BillingDetailsType = z.infer<typeof billingDetailsSchema>

@@ -162,7 +162,7 @@ export const colors = [
 export const sizes = ['xss', 'xs', 's', 'm', 'l', 'xl', 'xxl', 'xxxl']
 
 
-export const hideNavOnRoutes = ['/admin', '/admin/products', '/admin/orders', '/login', '/register', '/forgot-password', '/reset-password', '/checkout/success', '/checkout/error']
+export const hideNavOnRoutes = ['/admin', '/admin/products', '/admin/orders', '/login', '/register', '/forgot-password', '/reset-password', '/checkout/success']
 
 export const SIDEBAR_LINKS = [
     { name: "Overview", href: "/admin", icon: LayoutDashboard },

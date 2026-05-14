@@ -9,7 +9,7 @@ import EmptyCart from '@/features/cart/components/EmptyCart'
 import CartError from '@/features/cart/components/CartError'
 
 const CartPage = () => {
-  const { data: cartItems = [], isLoading, isError, refetch } = useCartHook()
+  const { data: cartItems, isLoading, isError, refetch } = useCartHook()
 
   if (isLoading) {
     return (
@@ -25,13 +25,13 @@ const CartPage = () => {
     )
   }
 
-  if (cartItems.length === 0) {
+  if (!cartItems?.items || cartItems?.items?.length === 0) {
     return (
       <EmptyCart />
     )
   }
 
-  const subtotal = cartItems.reduce(
+  const subtotal = cartItems?.items.reduce(
     (acc, item) => acc + item.product.price * item.quantity,
     0
   );
@@ -42,13 +42,13 @@ const CartPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         <div className="lg:col-span-8">
           <FreeShippingProgress total={subtotal} />
-          <CartItemList items={cartItems} />
+          <CartItemList items={cartItems.items} />
           <div className="mt-8 max-w-sm">
             <CouponSection />
           </div>
         </div>
         <aside className="lg:col-span-4">
-          <CartSummary items={cartItems} />
+          <CartSummary items={cartItems.items} />
         </aside>
       </div>
     </main>

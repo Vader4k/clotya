@@ -6,7 +6,7 @@ import { AddToCartPayload } from "../types/cart.types";
 export const cartService = {
     async getCart() {
         const response = await axiosInstance.get(QUERIES.cart.GET);
-        return response.data.cart.items;
+        return response.data.cart;
     },
     async addToCart(cartItem: AddToCartPayload) {
         const response = await axiosInstance.post(QUERIES.cart.ADD, cartItem);

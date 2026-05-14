@@ -1,15 +1,12 @@
 "use client";
 
-import CartError from "@/features/cart/components/CartError";
-import EmptyCart from "@/features/cart/components/EmptyCart";
-import { useCartHook } from "@/features/cart/hooks/cart.hook";
 import { useFormContext, useWatch } from "react-hook-form";
 import { BillingDetailsType } from "../schema/checkout.schema";
+import { CartItem } from "../../cart/types/cart.types";
 
-const OrderDetail = () => {
+const OrderDetail = ({ cartItems }: { cartItems: CartItem[] }) => {
   const { register } = useFormContext<BillingDetailsType>();
   const shipmentType = useWatch({ name: "shipmentType" });
-  const { data: cartItems = [], isLoading, isError, refetch } = useCartHook();
 
   const methodTypes = [
     { label: "Flat rate: $15.00", value: 15, id: "standard" },
@@ -17,28 +14,13 @@ const OrderDetail = () => {
   ] as const;
 
   const paymentMethods = [
+    { label: "Paystack", value: "paystack" },
     { label: "Direct bank transfer", value: "bank_transfer" },
     { label: "Cash on delivery", value: "cash_on_delivery" },
   ] as const;
 
-  const selectedShippingMethod = methodTypes.find(m => m.id === shipmentType) || methodTypes[0];
-
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-[60vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900" />
-      </div>
-    );
-  }
-
-  if (isError) {
-    return <CartError refetch={refetch} />;
-  }
-
-  if (cartItems.length === 0) {
-    return <EmptyCart />;
-  }
+  const selectedShippingMethod =
+    methodTypes.find((m) => m.id === shipmentType) || methodTypes[0];
 
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.product.price * item.quantity,
@@ -84,7 +66,10 @@ const OrderDetail = () => {
         <p className="font-medium text-sm">Shipment</p>
         <div className="flex flex-col justify-end items-end gap-2">
           {methodTypes.map((method) => (
-            <div key={method.id} className="grid grid-cols-[auto_1fr] items-center gap-2">
+            <div
+              key={method.id}
+              className="grid grid-cols-[auto_1fr] items-center gap-2"
+            >
               <label htmlFor={method.id}>{method.label}</label>
               <input
                 type="radio"
@@ -110,7 +95,10 @@ const OrderDetail = () => {
               key={method.value}
               className="w-full flex items-center justify-between"
             >
-              <label htmlFor={method.value} className="font-semibold capitalize">
+              <label
+                htmlFor={method.value}
+                className="font-semibold capitalize"
+              >
                 {method.label}
               </label>
               <input
@@ -138,7 +126,10 @@ const OrderDetail = () => {
             </button>
           </div>
         </div>
-        <button type="submit" className="w-full mt-4 bg-red-500 text-white py-3 text-sm font-medium">
+        <button
+          type="submit"
+          className="w-full mt-4 bg-red-500 text-white py-3 text-sm font-medium"
+        >
           Place order
         </button>
       </div>

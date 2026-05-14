@@ -46,5 +46,10 @@ export const QUERIES = {
         ADD: '/cart/add',
         REMOVE: '/cart/remove/:id',
         REMOVE_ALL: '/cart/reset',
+    },
+
+    order: {
+        CHECKOUT: '/orders/checkout',
+        VERIFY_ORDER: '/orders/verify/:reference',
     }
 }
