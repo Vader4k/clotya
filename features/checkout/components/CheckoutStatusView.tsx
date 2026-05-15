@@ -122,7 +122,7 @@ const CheckoutStatusView = ({ status, reference, message }: CheckoutStatusViewPr
               </Link>
               <Link
                 href="/shop"
-                className="w-full bg-white text-gray-700 border border-gray-200 font-bold py-4.5 rounded-2xl hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
+                className="w-full bg-white text-gray-700 border border-gray-200 font-bold py-4.5 rounded-none hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
               >
                 <ShoppingBag className="size-5" />
                 <span>Continue Shopping</span>
@@ -138,7 +138,7 @@ const CheckoutStatusView = ({ status, reference, message }: CheckoutStatusViewPr
               </Link>
               <Link
                 href="/cart"
-                className="w-full bg-white text-gray-700 border border-gray-200 font-bold py-4.5 rounded-2xl hover:bg-gray-50 transition-all"
+                className="w-full bg-white text-gray-700 border border-gray-200 font-bold py-4.5 rounded-none hover:bg-gray-50 transition-all"
               >
                 Back to Shopping Bag
               </Link>

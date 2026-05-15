@@ -21,7 +21,7 @@ export default function DashboardLayout({
             
             <div className="flex flex-col gap-8 md:flex-row md:items-start">
                 <AccountSidebar />
-                <main className="flex-1 w-full min-h-[500px]">
+                <main className="flex-1 w-full min-h-125">
                     {children}
                 </main>
             </div>
