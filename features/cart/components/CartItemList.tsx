@@ -5,6 +5,7 @@ import { CartItem } from "../types/cart.types";
 import Image from "next/image";
 import { XCircle } from "lucide-react";
 import { useRemoveFromCart, useClearCart } from "../hooks/cart.hook";
+import { toast } from "sonner";
 
 interface CartItemListProps {
   items: CartItem[];
@@ -75,7 +76,11 @@ const CartItemList: React.FC<CartItemListProps> = ({ items }) => {
 
       <div className="mt-8 flex justify-between items-center">
         <button
-          onClick={() => clearCart()}
+          onClick={() => clearCart(undefined, {
+            onSuccess: () => {
+              toast.success("Cart cleared successfully");
+            }
+          })}
           disabled={isClearing}
           className="text-gray-400 hover:text-black transition-colors text-sm underline uppercase tracking-widest font-medium"
         >

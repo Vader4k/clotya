@@ -25,7 +25,6 @@ const BlogDetails = async ({
           alt={blogPost?.title as string}
           width={1000}
           height={1000}
-          unoptimized
           fetchPriority="high"
           priority
           className="w-full md:h-[500px] xl:h-[700px] object-cover"

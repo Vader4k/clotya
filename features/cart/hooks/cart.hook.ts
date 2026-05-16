@@ -62,7 +62,6 @@ export const useClearCart = () => {
         mutationFn: () => cartService.deleteAllCart(),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [QUERIES.cart.GET] });
-            toast.success("Cart cleared");
         },
         onError: (error) => {
             toast.error(errorHandler(error))

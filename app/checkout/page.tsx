@@ -23,7 +23,6 @@ const page = () => {
   const { data: cartItems, isLoading, isError, refetch } = useCartHook();
   const { mutate: clearCart } = useClearCart();
   const [paying, setPaying] = useState(false);
-  // TODO: think of a better ux for clear cart functionality
   const router = useRouter();
 
   const form = useForm<BillingDetailsType>({
@@ -82,6 +81,7 @@ const page = () => {
       const res = await checkoutServices.checkout(orderItem);
       if (!res.paymentUrl) {
         toast.success(res.message);
+        clearCart();
       } else {
         router.replace(res.paymentUrl);
       }
@@ -99,7 +99,7 @@ const page = () => {
       <FormProvider {...form}>
         <form
           onSubmit={handleSubmit(handleCheckout)}
-          className="w-full flex items-start gap-6"
+          className="w-full flex flex-col xl:flex-row items-start gap-6"
         >
           <div className="flex-5 w-full">
             <BillingDetails />
