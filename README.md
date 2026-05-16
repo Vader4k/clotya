@@ -21,12 +21,10 @@ A full-featured, modern e-commerce web application built with **Next.js 16**, **
 | 📬 **Contact Page**        | Static contact page                                                                   |
 | ⚡ **Intercepting Routes** | Quick-view product modal using Next.js parallel/intercepting routes (`@product`)      |
 | 🌐 **Language Selector**   | Multilingual support via Google Translate API with custom Shadcn UI                   |
+| 👤 **Account Management**  | Responsive order history, profile updates, and address management with cache invalidation |
+| 🛒 **Cart & Checkout**     | Full cart management, auto-filling billing details from profile, and terms enforcement |
 
-### Planned / In Progress
-
-- 🛒 **Cart** — Add to cart, update quantities, remove items, cart drawer
 - ❤️ **Wishlist** — Save products for later, persistent across sessions
-- 📦 **Order Tracking** — View order status and history
 - 🔐 **Admin Panel** — Manage products, orders, and users
 
 ---
@@ -50,6 +48,9 @@ clotya/
 ├── features/                   # Feature-sliced domain modules
 │   ├── blogs/                  # Blog feature (components, services, types)
 │   ├── categories/             # Category browsing & filtering
+│   ├── accounts/               # User profile, orders, and settings management
+│   ├── checkout/               # Checkout process, billing forms, and order validation
+│   ├── cart/                   # Cart state management and components
 │   ├── compare/                # Product comparison (store, modal, table)
 │   ├── currency/               # Currency switching
 │   ├── products/               # Core product feature (card, filters, actions, hooks)
@@ -85,6 +86,8 @@ clotya/
 | **Language**                | TypeScript 5                                                                       |
 | **UI Library**              | React 19                                                                           |
 | **Styling**                 | Tailwind CSS v4 + `tw-animate-css`                                                 |
+| **State Management**        | [Zustand](https://zustand-demo.pmnd.rs/) (Cart, Currency, Compare)                 |
+| **Data Fetching**           | [TanStack Query v5](https://tanstack.com/query/latest) (Server state & caching)    |
 | **Component Primitives**    | [shadcn/ui](https://ui.shadcn.com/) + [Radix UI](https://www.radix-ui.com/)        |
 | **Icons**                   | [Lucide React](https://lucide.dev/)                                                |
 | **Animations**              | [Motion](https://motion.dev/) (Framer Motion v12)                                  |
