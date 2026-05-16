@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Heart, UserRound } from "lucide-react";
 import Image from "next/image";
@@ -9,8 +9,9 @@ import CartIndicator from "@/features/cart/components/CartIndicator";
 import SearchModal from "@/features/search/components/SearchModal";
 import { hideNavOnRoutes } from "@/constants";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
-const NavbarLogo = ({ width, height }: { width: number, height: number }) => {
+const NavbarLogo = ({ width, height }: { width: number; height: number }) => {
   return (
     <Image
       src="/logo.png"
@@ -21,13 +22,12 @@ const NavbarLogo = ({ width, height }: { width: number, height: number }) => {
       className="aspect-[4.49]"
       priority
     />
-  )
-}
-
+  );
+};
 
 const Navbar = () => {
-  const pathname = usePathname()
-  if (hideNavOnRoutes.some((page) => pathname.includes(page))) return null
+  const pathname = usePathname();
+  if (hideNavOnRoutes.some((page) => pathname.includes(page))) return null;
 
   return (
     <nav className="w-full border-b border-gray-200 font-jost px-3 sticky xl:relative top-0 bg-white z-50">
@@ -49,9 +49,9 @@ const Navbar = () => {
 
         {/* controls */}
         <div className="hidden xl:flex items-center gap-4">
-          <button>
+          <Link href={"/account"}>
             <UserRound strokeWidth={1.5} size={22} />
-          </button>
+          </Link>
           <div>
             <Suspense fallback={null}>
               <SearchModal isMobile={false} />

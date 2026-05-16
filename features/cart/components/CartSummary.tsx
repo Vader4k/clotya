@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { CartItem } from '../types/cart.types'
+import { useCurrentUser } from '../../accounts/hooks/account.hooks'
 import Link from 'next/link'
 
 interface CartSummaryProps {
@@ -9,6 +10,7 @@ interface CartSummaryProps {
 }
 
 const CartSummary: React.FC<CartSummaryProps> = ({ items }) => {
+    const { data: user } = useCurrentUser()
     const subtotal = items.reduce(
         (acc, item) => acc + item.product.price * item.quantity,
         0
@@ -41,7 +43,11 @@ const CartSummary: React.FC<CartSummaryProps> = ({ items }) => {
                             <div className="text-gray-500 mt-2">
                                 Shipping to <span className="font-bold text-black uppercase">AL</span>.
                             </div>
-                            <button className="text-red-400 hover:text-red-500">Change address</button>
+                            {user && (
+                                <Link href="/account/settings" className="text-red-400 hover:text-red-500 block mt-1">
+                                    Change address
+                                </Link>
+                            )}
                         </div>
                     </div>
                 </div>

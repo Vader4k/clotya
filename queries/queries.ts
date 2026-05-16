@@ -21,6 +21,13 @@ export const QUERIES = {
         }
     },
 
+    //users
+    user: {
+        orders: '/users/orders',
+        Profile: '/users/profile',
+        password: '/users/update-password'
+    },
+
     public: {
         categories: {
             GET: '/public/categories',

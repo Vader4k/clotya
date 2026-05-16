@@ -14,6 +14,7 @@ const OrderDetail = ({
 }) => {
   const { register } = useFormContext<BillingDetailsType>();
   const shipmentType = useWatch({ name: "shipmentType" });
+  const isTermsAccepted = useWatch({name: 'terms'});
 
   const methodTypes = [
     { label: "Flat rate: $15.00", value: 15, id: "standard" },
@@ -125,18 +126,18 @@ const OrderDetail = ({
         </p>
 
         <div className="mt-4 flex items-center gap-3">
-          <input type="checkbox" className="accent-red-500" />
+          <input type="checkbox" {...register("terms")} className="accent-red-500" />
           <div className="text-sm w-fit">
             I have read and agree to the website{" "}
-            <button className="underline text-red-500">
+            <button type="button" className="underline text-red-500">
               terms and conditions
             </button>
           </div>
         </div>
         <button
           type="submit"
-          disabled={paying}
-          className="w-full mt-4 bg-red-500 text-white py-3 text-sm font-medium"
+          disabled={paying || !isTermsAccepted}
+          className="w-full mt-4 bg-red-500 text-white py-3 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {paying ? (
             <div className="flex items-center justify-center gap-2">

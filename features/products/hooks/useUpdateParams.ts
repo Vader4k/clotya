@@ -1,5 +1,4 @@
-import { useRouter, useSearchParams } from 'next/navigation'
-import { usePathname } from 'next/navigation'
+import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 
 export const useUpdateParams = () => {
   const router = useRouter()

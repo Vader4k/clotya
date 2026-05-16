@@ -6,9 +6,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { userRegisterSchema, UserRegisterSchemaType } from '../schema/accountSchema';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { accountClientService } from '../services/account.client.service';
+import { authClientService } from '../../auth/services/auth.client.service';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { errorHandler } from '@/lib/http/errorHandler';
+
 
 export default function UserRegisterForm() {
     const [showPassword, setShowPassword] = useState(false);
@@ -29,11 +31,11 @@ export default function UserRegisterForm() {
 
     const onSubmit = async (data: UserRegisterSchemaType) => {
         try {
-            const response = await accountClientService.register(data);
+            const response = await authClientService.register(data);
             toast.success(response.message);
             router.push('/account');
-        } catch (error: any) {
-            toast.error(error.message || "Failed to sign up");
+        } catch (error) {
+            toast.error(errorHandler(error));
         }
     };
 

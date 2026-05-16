@@ -14,6 +14,7 @@ export const billingDetailsSchema = z.object({
     notes: z.string().optional(),
     shipmentType: z.enum(["standard", "local_pickup"]),
     paymentType: z.enum(["paystack", "bank_transfer", "cash_on_delivery"]),
+    terms: z.boolean().refine(val => val === true, "You must accept the terms and conditions"),
 })
 
 export type BillingDetailsType = z.infer<typeof billingDetailsSchema>

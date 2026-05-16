@@ -3,9 +3,27 @@
 import { Input } from '@/components/ui/input'
 import { useFormContext } from 'react-hook-form'
 import { BillingDetailsType } from '../schema/checkout.schema'
+import { useCurrentUser } from '../../accounts/hooks/account.hooks'
+import { useEffect } from 'react'
 
 const BillingDetails = () => {
-  const { register, formState: { errors } } = useFormContext<BillingDetailsType>()
+  const { register, setValue, formState: { errors } } = useFormContext<BillingDetailsType>()
+  const { data: user } = useCurrentUser()
+
+  useEffect(() => {
+    if (user) {
+      const names = user.name.split(' ')
+      setValue('firstName', names[0] || '')
+      setValue('lastName', names.slice(1).join(' ') || '')
+      setValue('email', user.email)
+      if (user.phone) setValue('phone', user.phone)
+      if (user.country) setValue('country', user.country)
+      if (user.streetAddress) setValue('address', user.streetAddress + (user.apartment ? `, ${user.apartment}` : ''))
+      if (user.city) setValue('city', user.city)
+      if (user.state) setValue('state', user.state)
+      if (user.postalCode) setValue('zip', user.postalCode)
+    }
+  }, [user, setValue])
 
 
   return (

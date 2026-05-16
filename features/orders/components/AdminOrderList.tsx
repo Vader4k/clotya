@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react'
-import { Eye, Search, Filter } from 'lucide-react'
+import { Eye, Search } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 
 // Dummy Data

@@ -6,9 +6,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { userLoginSchema, UserLoginSchemaType } from "../schema/accountSchema";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { accountClientService } from "../services/account.client.service";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { errorHandler } from "@/lib/http/errorHandler";
+import { authClientService } from '../../auth/services/auth.client.service';
 
 export default function UserLoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -28,11 +29,11 @@ export default function UserLoginForm() {
 
   const onSubmit = async (data: UserLoginSchemaType) => {
     try {
-      const response = await accountClientService.login(data);
+      const response = await authClientService.login(data);
       toast.success(response.message);
       router.push("/account");
-    } catch (error: any) {
-      toast.error(error.message || "Failed to sign in");
+    } catch (error) {
+      toast.error(errorHandler(error));
     }
   };
 

@@ -1,79 +1,130 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { accountClientService, Order } from "../services/account.client.service";
-import { Loader2, PackageOpen } from "lucide-react";
-import Link from "next/link";
+import { useGetOrders } from "../hooks/account.hooks";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import OrderLoading from "./OrderLoading";
+import OrderError from "./OrderError";
+import OrderEmpty from "./OrderEmpty";
 
 export default function OrderList() {
-    const [orders, setOrders] = useState<Order[]>([]);
-    const [loading, setLoading] = useState(true);
+  const { data: orders, isLoading, isError, refetch } = useGetOrders();
 
-    useEffect(() => {
-        const fetchOrders = async () => {
-            const data = await accountClientService.getOrders();
-            setOrders(data);
-            setLoading(false);
-        };
-        fetchOrders();
-    }, []);
+  if (isLoading) return <OrderLoading />;
+  if (isError) return <OrderError refetch={refetch} />;
+  if (!orders || orders.length === 0) return <OrderEmpty />;
 
-    if (loading) {
-        return (
-            <div className="flex justify-center items-center py-20">
-                <Loader2 className="size-8 animate-spin text-neutral-400" />
-            </div>
-        );
-    }
-
-    if (orders.length === 0) {
-        return (
-            <div className="flex flex-col items-center justify-center py-20 bg-neutral-50 border border-neutral-200">
-                <PackageOpen className="size-12 text-neutral-300 mb-4" />
-                <h3 className="text-lg font-medium text-black">No orders yet</h3>
-                <p className="text-sm text-neutral-500 mt-1 mb-6">Looks like you haven't made any purchases yet.</p>
-                <Link 
-                    href="/shop"
-                    className="bg-black text-white px-6 py-3 text-sm font-medium hover:bg-neutral-800 transition-colors"
-                >
-                    Start Shopping
-                </Link>
-            </div>
-        );
-    }
-
-    return (
-        <div className="overflow-x-auto border border-neutral-200 bg-white">
-            <table className="w-full text-left text-sm whitespace-nowrap">
-                <thead className="bg-neutral-50 border-b border-neutral-200 text-neutral-700">
-                    <tr>
-                        <th className="px-6 py-4 font-medium">Order ID</th>
-                        <th className="px-6 py-4 font-medium">Date</th>
-                        <th className="px-6 py-4 font-medium">Status</th>
-                        <th className="px-6 py-4 font-medium">Total</th>
-                        <th className="px-6 py-4 font-medium">Actions</th>
-                    </tr>
-                </thead>
-                <tbody className="divide-y divide-neutral-200">
-                    {orders.map((order) => (
-                        <tr key={order.id} className="hover:bg-neutral-50 transition-colors">
-                            <td className="px-6 py-4 font-medium text-black">{order.id}</td>
-                            <td className="px-6 py-4 text-neutral-600">{new Date(order.date).toLocaleDateString()}</td>
-                            <td className="px-6 py-4">
-                                <span className={`inline-flex items-center px-2.5 py-0.5 text-xs font-medium bg-neutral-100 text-neutral-800`}>
-                                    {order.status}
-                                </span>
-                            </td>
-                            <td className="px-6 py-4 text-neutral-600">${order.total.toFixed(2)} for {order.items} item{order.items > 1 ? 's' : ''}</td>
-                            <td className="px-6 py-4">
-                                <button className="text-black font-medium hover:underline underline-offset-4">
-                                    View
-                                </button>
-                            </td>
-                        </tr>
+  return (
+    <div className="space-y-6">
+      {/* Desktop View */}
+      <div className="hidden lg:block border border-neutral-200 bg-white overflow-hidden">
+        <Table>
+          <TableHeader>
+            <TableRow className="bg-neutral-50 hover:bg-neutral-50">
+              <TableHead className="px-6 py-4 font-medium text-black">Order ID</TableHead>
+              <TableHead className="px-6 py-4 font-medium text-black">Date</TableHead>
+              <TableHead className="px-6 py-4 font-medium text-black">Items</TableHead>
+              <TableHead className="px-6 py-4 font-medium text-black">Status</TableHead>
+              <TableHead className="px-6 py-4 font-medium text-black">Payment/Shipment</TableHead>
+              <TableHead className="px-6 py-4 font-medium text-black text-right">Total</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {orders.map((order) => (
+              <TableRow key={order.orderNumber} className="hover:bg-neutral-50/50 transition-colors align-top">
+                <TableCell className="px-6 py-4 font-medium text-primary">#{order.orderNumber}</TableCell>
+                <TableCell className="px-6 py-4 text-neutral-600">
+                  {new Date(order.createdAt).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </TableCell>
+                <TableCell className="px-6 py-4">
+                  <div className="space-y-1">
+                    {order.items.map((item, idx) => (
+                      <div key={idx} className="text-xs text-neutral-600 flex items-center gap-2">
+                        <span className="font-medium text-black">{item.quantity}x</span>
+                        <span className="truncate max-w-[150px]">{item.name}</span>
+                        {item.size && <span className="text-neutral-400 uppercase">({item.size})</span>}
+                      </div>
                     ))}
-                </tbody>
-            </table>
-        </div>
-    );
+                  </div>
+                </TableCell>
+                <TableCell className="px-6 py-4">
+                  <div className="flex flex-col gap-1.5">
+                    <Badge variant={order.isPaid ? "success" : "warning"} className="w-fit text-[10px]">
+                      {order.isPaid ? "Paid" : "Pending Payment"}
+                    </Badge>
+                    {order.isDelivered && (
+                      <Badge variant="success" className="w-fit text-[10px]">
+                        Delivered
+                      </Badge>
+                    )}
+                  </div>
+                </TableCell>
+                <TableCell className="px-6 py-4">
+                   <div className="text-xs space-y-1">
+                      <p className="text-neutral-600 capitalize">{order.paymentType.replace('_', ' ')}</p>
+                      <p className="text-neutral-400 text-[10px] capitalize">{order.shipmentType.replace('_', ' ')}</p>
+                   </div>
+                </TableCell>
+                <TableCell className="px-6 py-4 text-right font-semibold text-black">
+                  ${order.totalPrice.toFixed(2)}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+
+      {/* Mobile View */}
+      <div className="grid grid-cols-1 gap-4 lg:hidden">
+        {orders.map((order) => (
+          <div 
+            key={order.orderNumber} 
+            className="border border-neutral-200 bg-white p-4 space-y-4"
+          >
+            <div className="flex justify-between items-start">
+              <div className="space-y-1">
+                <p className="font-medium text-primary text-sm">#{order.orderNumber}</p>
+                <p className="text-xs text-neutral-500">
+                  {new Date(order.createdAt).toLocaleDateString()}
+                </p>
+              </div>
+              <div className="flex flex-col items-end gap-1">
+                <Badge variant={order.isPaid ? "success" : "warning"} className="text-[10px] px-1.5 py-0">
+                  {order.isPaid ? "Paid" : "Pending"}
+                </Badge>
+                {order.isDelivered && (
+                   <Badge variant="success" className="text-[10px] px-1.5 py-0">
+                    Delivered
+                   </Badge>
+                )}
+              </div>
+            </div>
+
+            <div className="space-y-2 py-2">
+               {order.items.map((item, idx) => (
+                 <div key={idx} className="flex justify-between text-xs">
+                    <span className="text-neutral-600">{item.quantity}x {item.name}</span>
+                    <span className="text-neutral-400">${(item.price * item.quantity).toFixed(2)}</span>
+                 </div>
+               ))}
+            </div>
+            
+            <div className="pt-4 border-t border-neutral-100 space-y-2">
+               <div className="flex justify-between items-center text-xs">
+                  <span className="text-neutral-500 capitalize">{order.paymentType.replace('_', ' ')} / {order.shipmentType.replace('_', ' ')}</span>
+                  <div className="space-x-1">
+                    <span className="text-neutral-500">Total: </span>
+                    <span className="font-bold text-black">${order.totalPrice.toFixed(2)}</span>
+                  </div>
+               </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }

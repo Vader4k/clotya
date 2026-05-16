@@ -5,8 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { profileSchema, ProfileSchemaType } from "../schema/accountSchema";
 import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
-import { accountClientService } from "../services/account.client.service";
 import { toast } from "sonner";
+import { errorHandler } from "@/lib/http/errorHandler";
+import { useUpdateProfile } from "../hooks/account.hooks";
 
 export default function ProfileForm({
   initialData,
@@ -26,12 +27,14 @@ export default function ProfileForm({
     },
   });
 
+  const { mutateAsync, isPending } = useUpdateProfile();
+
   const onSubmit = async (data: ProfileSchemaType) => {
     try {
-      const res = await accountClientService.updateProfile(data);
-      toast.success(res.message);
-    } catch (err: any) {
-      toast.error(err.message || "Failed to update profile");
+      const res = await mutateAsync(data)
+      toast.success(res.message)
+    } catch (error) {
+      toast.error(errorHandler(error))
     }
   };
 
@@ -86,10 +89,10 @@ export default function ProfileForm({
 
       <button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isPending}
         className="flex items-center justify-center gap-2 bg-black px-6 py-3 text-sm font-medium text-white hover:bg-neutral-800 disabled:opacity-70 rounded-none w-full md:w-auto"
       >
-        {isSubmitting ? (
+        {isPending ? (
           <>
             <Loader2 className="size-4 animate-spin" /> Saving...
           </>

@@ -17,6 +17,12 @@ export const profileSchema = z.object({
     name: z.string().min(1, "Name is required"),
     email: z.string().email("Invalid email address"),
     phone: z.string().optional(),
+    streetAddress: z.string().optional(),
+    apartment: z.string().optional(),
+    city: z.string().optional(),
+    state: z.string().optional(),
+    postalCode: z.string().optional(),
+    country: z.string().optional(),
 });
 export type ProfileSchemaType = z.infer<typeof profileSchema>;
 

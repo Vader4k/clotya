@@ -1,6 +1,8 @@
 import axiosInstance from "@/lib/http/axios";
 import { QUERIES } from "@/queries/queries";
 import { LoginSchemaType } from "@/schema/loginSchema";
+import { UserRegisterSchemaType } from '../../accounts/schema/accountSchema';
+
 
 export const authClientService = {
     login: async (data: LoginSchemaType) => {
@@ -12,7 +14,7 @@ export const authClientService = {
         });
         return response.data;
     },
-    register: async (data: any) => {
+    register: async (data: UserRegisterSchemaType) => {
         const response = await axiosInstance.post(QUERIES.REGISTER, data, {
             headers: {
                 "Content-Type": "application/json",
@@ -27,6 +29,6 @@ export const authClientService = {
     },
     me: async () => {
         const response = await axiosInstance.get(QUERIES.ME);
-        return response.data;
+        return response.data.user;
     },
 }
