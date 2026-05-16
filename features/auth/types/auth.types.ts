@@ -6,7 +6,13 @@ export type UserData = {
     isActive: boolean;
     createdAt: string;
     updatedAt: string;
-    __v?: number;
+    phone: string,
+    streetAddress?: string,
+    apartment?: string,
+    city?: string,
+    state?: string,
+    postalCode?: string,
+    country?: string,
 };
 
 export type MeResponse = {

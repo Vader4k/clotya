@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { Package, Settings, MapPin } from "lucide-react";
-import { useCurrentUser } from "@/features/accounts/hooks/account.hooks";
+import { useMe } from "@/features/auth/hooks/auth.hooks";
 
 export default function AccountOverviewPage() {
-  const { data, isLoading } = useCurrentUser();
+  const { data, isLoading } = useMe();
 
   if (isLoading) {
     return (

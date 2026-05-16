@@ -6,7 +6,7 @@ export function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl
 
     //protected routes for logged in users
-    const isDashboardPath = pathname.startsWith('/account') && !pathname.includes('/login') && !pathname.includes('/register')
+    const isDashboardPath = pathname.startsWith('/account') && pathname.startsWith('/admin') && !pathname.includes('/login') && !pathname.includes('/register')
 
     //paths for guest users (login/register)
     const isAuthPath = pathname === '/account/login' || pathname === '/account/register'
@@ -24,7 +24,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
 }
 
-// Only run middleware on account routes to keep the site fast
+//Only run middleware on account routes to keep the site fast
 export const config = {
     matcher: ['/account/:path*'],
 };

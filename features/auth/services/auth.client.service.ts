@@ -29,6 +29,6 @@ export const authClientService = {
     },
     me: async () => {
         const response = await axiosInstance.get(QUERIES.ME);
-        return response.data.user;
+        return response.data;
     },
 }

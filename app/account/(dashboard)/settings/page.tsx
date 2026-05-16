@@ -7,10 +7,10 @@ import {
   ProfileSchemaType,
   AddressSchemaType,
 } from "@/features/accounts/schema/accountSchema";
-import { useCurrentUser } from "@/features/accounts/hooks/account.hooks";
+import { useMe } from "@/features/auth/hooks/auth.hooks";
 
 export default function SettingsPage() {
-  const { data, isLoading } = useCurrentUser();
+  const { data, isLoading } = useMe();
 
   if (!data) return null;
 

@@ -3,12 +3,12 @@
 import { Input } from '@/components/ui/input'
 import { useFormContext } from 'react-hook-form'
 import { BillingDetailsType } from '../schema/checkout.schema'
-import { useCurrentUser } from '../../accounts/hooks/account.hooks'
+import { useMe } from '@/features/auth/hooks/auth.hooks'
 import { useEffect } from 'react'
 
 const BillingDetails = () => {
   const { register, setValue, formState: { errors } } = useFormContext<BillingDetailsType>()
-  const { data: user } = useCurrentUser()
+  const { data: user } = useMe()
 
   useEffect(() => {
     if (user) {

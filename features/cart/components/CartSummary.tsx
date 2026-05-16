@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { CartItem } from '../types/cart.types'
-import { useCurrentUser } from '../../accounts/hooks/account.hooks'
+import { useMe } from '@/features/auth/hooks/auth.hooks'
 import Link from 'next/link'
 
 interface CartSummaryProps {
@@ -10,7 +10,7 @@ interface CartSummaryProps {
 }
 
 const CartSummary: React.FC<CartSummaryProps> = ({ items }) => {
-    const { data: user } = useCurrentUser()
+    const { data: user } = useMe()
     const subtotal = items.reduce(
         (acc, item) => acc + item.product.price * item.quantity,
         0

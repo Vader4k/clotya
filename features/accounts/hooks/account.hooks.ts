@@ -10,7 +10,7 @@ export const useUpdateProfile = () => {
     return useMutation({
         mutationFn: (data: ProfileSchemaType | AddressSchemaType) => accountService.updateProfile(data),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [QUERIES.user.Profile] });
+            queryClient.invalidateQueries({ queryKey: [QUERIES.ME] });
         },
     });
 };
@@ -25,14 +25,5 @@ export const useGetOrders = (): UseQueryResult<UserOrderType[]> => {
     return useQuery({
         queryKey: [QUERIES.user.orders],
         queryFn: () => accountService.orders(),
-    })
-}
-
-export const useCurrentUser = (): UseQueryResult<ProfileSchemaType> => {
-    return useQuery({
-        queryKey: [QUERIES.user.Profile],
-        queryFn: () => authClientService.me(),
-        staleTime: Infinity,
-        gcTime: Infinity,
     })
 }
