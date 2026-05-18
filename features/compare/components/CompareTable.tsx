@@ -2,6 +2,7 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { X } from 'lucide-react'
 import Image from 'next/image'
 import StarRating from './StarRating'
+import { ProductPrice } from '@/features/currency/components/ProductPrice'
 
 const CompareTable = ({ products, removeProduct }: { products: any[], removeProduct: (id: string) => void }) => {
     return (
@@ -84,15 +85,11 @@ const CompareTable = ({ products, removeProduct }: { products: any[], removeProd
                                 <div className="flex items-center gap-2 flex-wrap">
                                     {product.discountPrice ? (
                                         <>
-                                            <span className="line-through text-gray-400 text-xs">${product.price.toFixed(2)}</span>
-                                            <span className="font-semibold underline underline-offset-2">
-                                                ${product.discountPrice.toFixed(2)}
-                                            </span>
+                                            <ProductPrice price={product.price} className="line-through text-gray-400 text-xs" />
+                                            <ProductPrice price={product.discountPrice} className="font-semibold underline underline-offset-2" />
                                         </>
                                     ) : (
-                                        <span className="font-semibold underline underline-offset-2">
-                                            ${product.price.toFixed(2)}
-                                        </span>
+                                        <ProductPrice price={product.price} className="font-semibold underline underline-offset-2" />
                                     )}
                                 </div>
                             </td>

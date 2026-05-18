@@ -3,6 +3,7 @@
 import { Eye } from 'lucide-react'
 import { OrderTableProps } from '../types/order.types'
 import { OrderStatusSelect } from './OrderStatusSelect'
+import { useCurrency } from '@/features/currency/context/CurrencyContext'
 
 export const OrderTable = ({
     orders,
@@ -10,6 +11,7 @@ export const OrderTable = ({
     onStatusChange,
     isUpdating
 }: OrderTableProps) => {
+    const { formatPrice } = useCurrency();
     return (
         <div className="overflow-x-auto">
             <table className="w-full text-left text-sm text-gray-500">
@@ -41,7 +43,7 @@ export const OrderTable = ({
                                 </td>
                                 <td className="px-6 py-4">{new Date(order.createdAt).toLocaleDateString()}</td>
                                 <td className="px-6 py-4">{order.items?.length || 0}</td>
-                                <td className="px-6 py-4 font-medium text-gray-900">${order.totalPrice?.toFixed(2)}</td>
+                                <td className="px-6 py-4 font-medium text-gray-900">{formatPrice(order.totalPrice)}</td>
                                 <td className="px-6 py-4">
                                     <div className="flex justify-center">
                                         <OrderStatusSelect

@@ -1,22 +1,17 @@
 "use client"
 
 import { ChevronDown, Instagram } from 'lucide-react';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import LanguageSelector from "@/features/language-selector/components/LanguageSelector"
+import CurrencySelector from '@/features/currency/components/CurrencySelector';
+import { useCurrency } from '@/features/currency/context/CurrencyContext';
 import Link from 'next/link';
 import { hideNavOnRoutes } from '@/constants';
 import { usePathname } from 'next/navigation';
 
 const PageHeader = () => {
   const pathname = usePathname()
+  const { formatPrice } = useCurrency();
+  
   if (hideNavOnRoutes.some((page) => pathname.includes(page))) return null
 
   return (
@@ -29,28 +24,14 @@ const PageHeader = () => {
             <span className='font-semibold'> 3.1M Followers</span>
             <ChevronDown size={12} strokeWidth={2} fill='black' />
           </button>
-          <p className='text-xs'>Free Shipping World Wide for all orders over $199. <span className='text-red-600'>Click and Shop Now.</span></p>
+          <p className='text-xs'>Free Shipping World Wide for all orders over {formatPrice(199)}. <span className='text-red-600'>Click and Shop Now.</span></p>
         </div>
 
         {/*controls */}
         <div className='flex items-center gap-3 text-xs'>
           <Link href='/order-tracking' className='text-nowrap'>Order Tracking</Link>
           <LanguageSelector />
-          <Select value='usd'>
-            <SelectTrigger translate='no' className="w-full max-w-20 bg-white text-xs outline-none notranslate" suppressHydrationWarning>
-              <SelectValue translate='no' placeholder="Currency" />
-            </SelectTrigger>
-            <SelectContent className="notranslate">
-              <SelectGroup className="notranslate">
-                <SelectLabel className="notranslate">Currency</SelectLabel>
-                <SelectItem value="usd" className="notranslate">USD</SelectItem>
-                <SelectItem value="eur" className="notranslate">EUR</SelectItem>
-                <SelectItem value="gbp" className="notranslate">GBP</SelectItem>
-                <SelectItem value="aud" className="notranslate">AUD</SelectItem>
-                <SelectItem value="cad" className="notranslate">CAD</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <CurrencySelector />
         </div>
       </div>
     </header>

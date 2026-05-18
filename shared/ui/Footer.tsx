@@ -7,6 +7,7 @@ import { footerLinks, phone, email } from "@/constants"
 import Image from "next/image"
 import { hideNavOnRoutes } from "@/constants"
 import { usePathname } from "next/navigation"
+import { useCurrency } from "@/features/currency/context/CurrencyContext"
 
 
 const StoreLinks = ({ href, children, icon }: { href: string, children: React.ReactNode, icon: React.ReactNode }) => {
@@ -20,6 +21,8 @@ const StoreLinks = ({ href, children, icon }: { href: string, children: React.Re
 
 const Footer = () => {
   const pathname = usePathname()
+  const { formatPrice } = useCurrency()
+  
   if (hideNavOnRoutes.some((page) => pathname.includes(page))) return null
 
   return (
@@ -28,7 +31,7 @@ const Footer = () => {
         <div className='w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-start justify-between gap-10'>
           <div className='w-full flex-1 flex flex-col gap-3'>
             <h3 className="text-2xl lg:text-3xl font-medium">Get our emails for info on <br className="hidden lg:block" />new items, sales and more.</h3>
-            <p className="text-neutral-300/60">We'll email you a voucher worth $10 off your first order over $50.</p>
+            <p className="text-neutral-300/60">We'll email you a voucher worth {formatPrice(10)} off your first order over {formatPrice(50)}.</p>
 
             <div className="flex item-center mt-6">
               <Input placeholder="Enter your email address" className='max-w-sm bg-white h-11 rounded-none text-black' />

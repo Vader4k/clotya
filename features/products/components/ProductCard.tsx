@@ -4,6 +4,7 @@ import { Progress } from "@/components/ui/progress"
 import { progressValue } from "@/features/products/utils/product.utils"
 import { ProductCardProps } from "../types/product.types"
 import ProductActions from "./ProductActions"
+import { ProductPrice } from "@/features/currency/components/ProductPrice"
 
 
 const ProductCard = ({ name, _id, price, images, reviews, discountPrice, discount, inventory, sold, slug, showRange, isShopPage }: ProductCardProps) => {
@@ -24,11 +25,11 @@ const ProductCard = ({ name, _id, price, images, reviews, discountPrice, discoun
       <div className="text-sm">
         {discountPrice ? (
           <div className="flex items-center gap-3">
-            <p className="font-jost line-through text-gray-300 font-light">${price}</p>
-            <p className="font-jost font-medium">${discountPrice}</p>
+            <ProductPrice price={price} className="font-jost line-through text-gray-300 font-light" />
+            <ProductPrice price={discountPrice} className="font-jost font-medium" />
           </div>
         ) : (
-          <p className="font-jost font-medium">${price}</p>
+          <ProductPrice price={price} className="font-jost font-medium" />
         )}
       </div>
       <div className="flex items-center gap-3">

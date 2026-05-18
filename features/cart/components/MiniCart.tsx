@@ -4,10 +4,12 @@ import Link from "next/link";
 import { useCartHook, useRemoveFromCart } from "../hooks/cart.hook";
 import { Loader2, X } from "lucide-react";
 import FreeShippingProgress from "./FreeShippingProgress";
+import { useCurrency } from "@/features/currency/context/CurrencyContext";
 
 const MiniCart = () => {
   const { data: cart, isLoading } = useCartHook();
   const { mutate: removeFromCart, isPending: isRemoving } = useRemoveFromCart();
+  const { formatPrice } = useCurrency();
 
   const totalPrice = cart?.items.reduce((acc, item) => {
     const price = item.product.discountPrice || item.product.price;
@@ -70,10 +72,7 @@ const MiniCart = () => {
                     </button>
                   </div>
                   <span className="font-jost font-bold text-[13px] text-gray-800 mb-1">
-                    {item.quantity} × $
-                    {(item.product.discountPrice || item.product.price).toFixed(
-                      2,
-                    )}
+                    {item.quantity} × {formatPrice(item.product.discountPrice || item.product.price)}
                   </span>
                   {(item.color || item.size) && (
                     <span className="font-jost text-xs text-gray-600 capitalize font-medium">
@@ -96,7 +95,7 @@ const MiniCart = () => {
               </span>
               {totalPrice && (
                 <span className="text-[#ed2024] font-bold text-base">
-                  ${totalPrice.toFixed(2)}
+                  {formatPrice(totalPrice)}
                 </span>
               )}
             </div>
@@ -105,7 +104,7 @@ const MiniCart = () => {
             </p>
 
             <div className="mb-3">
-              <FreeShippingProgress total={totalPrice!} />
+              <FreeShippingProgress total={totalPrice! || 0} />
             </div>
 
             {/* Buttons */}

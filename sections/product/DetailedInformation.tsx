@@ -9,12 +9,14 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SizeGuide from "./SizeGuide";
 import { useAddToCart } from "@/features/cart/hooks/cart.hook";
+import { useCurrency } from "@/features/currency/context/CurrencyContext";
 
 const DetailedInformation = ({ product }: { product: Product }) => {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [size, setSize] = useState<string | null>(null);
   const [stock, setStock] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(1);
+  const { formatPrice } = useCurrency();
 
   const { mutate: addToCart, isPending: isAdding } = useAddToCart();
 
@@ -77,12 +79,12 @@ const DetailedInformation = ({ product }: { product: Product }) => {
         {product.discount ? (
           <div className="flex items-center gap-2">
             <p className="text-xl font-medium line-through text-gray-300">
-              ${product.price}
+              {formatPrice(product.price)}
             </p>
-            <p className="text-xl font-medium">${product.discount}</p>
+            <p className="text-xl font-medium">{formatPrice(product.discountPrice || product.price)}</p>
           </div>
         ) : (
-          <p className="text-xl font-medium">${product.price}</p>
+          <p className="text-xl font-medium">{formatPrice(product.price)}</p>
         )}
       </div>
 

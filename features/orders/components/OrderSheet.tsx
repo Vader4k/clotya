@@ -11,6 +11,7 @@ import {
 import { OrderSheetProps } from '../types/order.types'
 import { getStatusStyles, getPaymentStatusStyles } from '../utils/orders.utils'
 import { OrderStatusSelect } from './OrderStatusSelect'
+import { useCurrency } from '@/features/currency/context/CurrencyContext'
 
 export const OrderSheet = ({
     order,
@@ -19,6 +20,7 @@ export const OrderSheet = ({
     onStatusChange,
     isUpdating
 }: OrderSheetProps) => {
+    const { formatPrice } = useCurrency();
     if (!order) return null;
 
     return (
@@ -133,7 +135,7 @@ export const OrderSheet = ({
                                     <div className="flex-1 min-w-0 flex flex-col justify-between">
                                         <div className="flex justify-between items-start gap-2">
                                             <p className="text-sm font-medium text-gray-900 truncate">{item.name}</p>
-                                            <p className="text-sm font-medium text-gray-900">${item.price.toFixed(2)}</p>
+                                            <p className="text-sm font-medium text-gray-900">{formatPrice(item.price)}</p>
                                         </div>
                                         <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-gray-500 mt-1">
                                             <span>Qty: {item.quantity}</span>
@@ -152,19 +154,19 @@ export const OrderSheet = ({
                         <div className="bg-gray-50 p-4 rounded-lg space-y-2 text-sm border border-gray-200">
                             <div className="flex justify-between text-gray-600">
                                 <span>Subtotal</span>
-                                <span>${order.itemsPrice?.toFixed(2)}</span>
+                                <span>{formatPrice(order.itemsPrice)}</span>
                             </div>
                             <div className="flex justify-between text-gray-600">
                                 <span>Shipping</span>
-                                <span>${order.shippingPrice?.toFixed(2)}</span>
+                                <span>{formatPrice(order.shippingPrice)}</span>
                             </div>
                             <div className="flex justify-between text-gray-600">
                                 <span>Tax</span>
-                                <span>${order.taxPrice?.toFixed(2)}</span>
+                                <span>{formatPrice(order.taxPrice)}</span>
                             </div>
                             <div className="pt-2 mt-2 border-t border-gray-200 flex justify-between font-semibold text-gray-900 text-base">
                                 <span>Total</span>
-                                <span>${order.totalPrice?.toFixed(2)}</span>
+                                <span>{formatPrice(order.totalPrice)}</span>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 import { ProductCardProps } from '@/features/products/types/product.types'
 import Image from 'next/image'
+import { ProductPrice } from '@/features/currency/components/ProductPrice'
 
 const RecentProductCard = ({ product }: { product: ProductCardProps }) => {
   return (
@@ -12,11 +13,11 @@ const RecentProductCard = ({ product }: { product: ProductCardProps }) => {
         <div>
           {product.discountPrice ? (
             <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-300 line-through">${product.price}</span>
-              <span className="text-xs font-medium">${product.discountPrice}</span>
+              <ProductPrice price={product.price} className="text-xs text-gray-300 line-through" />
+              <ProductPrice price={product.discountPrice} className="text-xs font-medium" />
             </div>
           ) : (
-            <span className="text-xs font-medium">${product.price}</span>
+            <ProductPrice price={product.price} className="text-xs font-medium" />
           )}
         </div>
       </div>

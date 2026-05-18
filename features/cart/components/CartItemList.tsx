@@ -6,6 +6,7 @@ import Image from "next/image";
 import { XCircle } from "lucide-react";
 import { useRemoveFromCart, useClearCart } from "../hooks/cart.hook";
 import { toast } from "sonner";
+import { useCurrency } from "@/features/currency/context/CurrencyContext";
 
 interface CartItemListProps {
   items: CartItem[];
@@ -14,6 +15,7 @@ interface CartItemListProps {
 const CartItemList: React.FC<CartItemListProps> = ({ items }) => {
   const { mutate: removeItem, isPending } = useRemoveFromCart();
   const { mutate: clearCart, isPending: isClearing } = useClearCart();
+  const { formatPrice } = useCurrency();
 
   return (
     <div className="w-full overflow-x-auto">
@@ -59,7 +61,7 @@ const CartItemList: React.FC<CartItemListProps> = ({ items }) => {
                 </div>
               </td>
               <td className="py-6 text-sm font-semibold text-gray-600">
-                ${item.product.price.toFixed(2)}
+                {formatPrice(item.product.price)}
               </td>
               <td className="py-6 text-center">
                 <span className="inline-block border px-4 py-2 text-sm">
@@ -67,7 +69,7 @@ const CartItemList: React.FC<CartItemListProps> = ({ items }) => {
                 </span>
               </td>
               <td className="py-6 text-right font-medium text-sm">
-                ${(item.product.price * item.quantity).toFixed(2)}
+                {formatPrice(item.product.price * item.quantity)}
               </td>
             </tr>
           ))}

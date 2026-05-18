@@ -3,7 +3,8 @@
 import { useFormContext, useWatch } from "react-hook-form";
 import { BillingDetailsType } from "../schema/checkout.schema";
 import { CartItem } from "../../cart/types/cart.types";
-import { Loader2 } from 'lucide-react';
+import { Loader2, Info } from 'lucide-react';
+import { useCurrency } from "@/features/currency/context/CurrencyContext";
 
 const OrderDetail = ({
   cartItems,
@@ -15,9 +16,10 @@ const OrderDetail = ({
   const { register } = useFormContext<BillingDetailsType>();
   const shipmentType = useWatch({ name: "shipmentType" });
   const isTermsAccepted = useWatch({name: 'terms'});
+  const { formatPrice, currency } = useCurrency();
 
   const methodTypes = [
-    { label: "Flat rate: $15.00", value: 15, id: "standard" },
+    { label: `Flat rate: ${formatPrice(15)}`, value: 15, id: "standard" },
     { label: "Local pickup", value: 0, id: "local_pickup" },
   ] as const;
 
@@ -60,14 +62,14 @@ const OrderDetail = ({
                 )}
               </div>
             </div>
-            <p>${item.product.price * item.quantity}</p>
+            <p>{formatPrice(item.product.price * item.quantity)}</p>
           </div>
         ))}
       </div>
       <div className="border-y py-3 text-xs">
         <div className="flex items-center justify-between">
           <p className="font-medium text-sm">Subtotal</p>
-          <p className="text-sm">${subtotal}</p>
+          <p className="text-sm">{formatPrice(subtotal)}</p>
         </div>
       </div>
       <div className="border-b py-4 text-xs flex items-center justify-between">
@@ -93,7 +95,7 @@ const OrderDetail = ({
       <div className="w-full flex text-sm items-center justify-between pb-3 border-b">
         <p className="text-sm font-medium">Total</p>
         <h2 className="font-semibold text-lg">
-          ${(subtotal + selectedShippingMethod.value).toFixed(2)}
+          {formatPrice(subtotal + selectedShippingMethod.value)}
         </h2>
       </div>
       <div className="w-full py-3 grid gap-4">
@@ -134,6 +136,14 @@ const OrderDetail = ({
             </button>
           </div>
         </div>
+        
+        {currency !== 'ngn' && (
+          <div className="bg-blue-50 text-blue-800 p-3 rounded text-xs flex items-start gap-2">
+            <Info size={16} className="shrink-0 mt-0.5" />
+            <p>Please note: All final payments are processed in Naira (NGN). Your card will be charged the equivalent amount in NGN based on current exchange rates.</p>
+          </div>
+        )}
+        
         <button
           type="submit"
           disabled={paying || !isTermsAccepted}

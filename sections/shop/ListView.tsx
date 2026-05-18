@@ -1,6 +1,7 @@
 import { ProductCardProps } from '@/features/products/types/product.types'
 import Image from 'next/image'
 import { Star } from 'lucide-react'
+import { ProductPrice } from '@/features/currency/components/ProductPrice'
 
 const ListView = ({ products }: { products: ProductCardProps[] }) => {
     return (
@@ -32,11 +33,11 @@ const ListView = ({ products }: { products: ProductCardProps[] }) => {
                         <div className="text-lg">
                             {product.discountPrice ? (
                                 <div className="flex items-center gap-3">
-                                    <p className="font-jost line-through text-gray-300 font-light">${product.price}</p>
-                                    <p className="font-jost font-medium text-red-600">${product.discountPrice}</p>
+                                    <ProductPrice price={product.price} className="font-jost line-through text-gray-300 font-light" />
+                                    <ProductPrice price={product.discountPrice} className="font-jost font-medium text-red-600" />
                                 </div>
                             ) : (
-                                <p className="font-jost">${product.price}</p>
+                                <ProductPrice price={product.price} className="font-jost" />
                             )}
                         </div>
                         <p className="text-sm text-gray-600 font-jost max-w-2xl line-clamp-2">

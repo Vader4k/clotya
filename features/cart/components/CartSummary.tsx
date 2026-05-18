@@ -1,9 +1,10 @@
 "use client"
 
-import React from 'react'
+import React, {useState} from 'react'
 import { CartItem } from '../types/cart.types'
 import { useMe } from '@/features/auth/hooks/auth.hooks'
 import Link from 'next/link'
+import { useCurrency } from '@/features/currency/context/CurrencyContext'
 
 interface CartSummaryProps {
     items: CartItem[]
@@ -11,11 +12,12 @@ interface CartSummaryProps {
 
 const CartSummary: React.FC<CartSummaryProps> = ({ items }) => {
     const { data: user } = useMe()
+    const { formatPrice } = useCurrency()
+    const [shipping,setShipping] = useState<number>(15.00)
     const subtotal = items.reduce(
         (acc, item) => acc + item.product.price * item.quantity,
         0
     );
-    const shipping = 15.00
     const total = subtotal + shipping
 
     return (
@@ -25,24 +27,21 @@ const CartSummary: React.FC<CartSummaryProps> = ({ items }) => {
             <div className="space-y-6">
                 <div className="flex justify-between items-center text-sm">
                     <span className="text-gray-600">Subtotal</span>
-                    <span className="font-medium text-black">${subtotal.toFixed(2)}</span>
+                    <span className="font-medium text-black">{formatPrice(subtotal)}</span>
                 </div>
 
                 <div className="border-t pt-4">
                     <div className="flex justify-between items-start mb-4">
-                        <span className="text-sm text-gray-600">Shipment 1</span>
+                        <span className="text-sm text-gray-600">Shipment</span>
                         <div className="text-right text-xs space-y-2">
                             <label className="flex items-center justify-end gap-2 cursor-pointer">
-                                <span>Flat rate: ${shipping.toFixed(2)}</span>
-                                <input type="radio" name="shipping" defaultChecked className="accent-blue-600" />
+                                <span>Flat rate: {formatPrice(shipping)}</span>
+                                <input type="radio" name="shipping" defaultChecked onChange={() => setShipping(15)} className="accent-blue-600" />
                             </label>
                             <label className="flex items-center justify-end gap-2 cursor-pointer">
                                 <span className="text-gray-400">Local pickup</span>
-                                <input type="radio" name="shipping" className="accent-blue-600" />
+                                <input type="radio" name="shipping" onChange={() => setShipping(0)} className="accent-blue-600" />
                             </label>
-                            <div className="text-gray-500 mt-2">
-                                Shipping to <span className="font-bold text-black uppercase">AL</span>.
-                            </div>
                             {user && (
                                 <Link href="/account/settings" className="text-red-400 hover:text-red-500 block mt-1">
                                     Change address
@@ -54,7 +53,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({ items }) => {
 
                 <div className="border-t pt-4 flex justify-between items-center">
                     <span className="text-sm">Total</span>
-                    <span className="text-xl font-bold">${total.toFixed(2)}</span>
+                    <span className="text-xl font-bold">{formatPrice(total)}</span>
                 </div>
             </div>
 

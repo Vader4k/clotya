@@ -6,9 +6,11 @@ import { Badge } from "@/components/ui/badge";
 import OrderLoading from "./OrderLoading";
 import OrderError from "./OrderError";
 import OrderEmpty from "./OrderEmpty";
+import { useCurrency } from "@/features/currency/context/CurrencyContext";
 
 export default function OrderList() {
   const { data: orders, isLoading, isError, refetch } = useGetOrders();
+  const { formatPrice } = useCurrency();
 
   if (isLoading) return <OrderLoading />;
   if (isError) return <OrderError refetch={refetch} />;
@@ -70,7 +72,7 @@ export default function OrderList() {
                    </div>
                 </TableCell>
                 <TableCell className="px-6 py-4 text-right font-semibold text-black">
-                  ${order.totalPrice.toFixed(2)}
+                  {formatPrice(order.totalPrice)}
                 </TableCell>
               </TableRow>
             ))}
@@ -108,7 +110,7 @@ export default function OrderList() {
                {order.items.map((item, idx) => (
                  <div key={idx} className="flex justify-between text-xs">
                     <span className="text-neutral-600">{item.quantity}x {item.name}</span>
-                    <span className="text-neutral-400">${(item.price * item.quantity).toFixed(2)}</span>
+                    <span className="text-neutral-400">{formatPrice(item.price * item.quantity)}</span>
                  </div>
                ))}
             </div>
@@ -118,7 +120,7 @@ export default function OrderList() {
                   <span className="text-neutral-500 capitalize">{order.paymentType.replace('_', ' ')} / {order.shipmentType.replace('_', ' ')}</span>
                   <div className="space-x-1">
                     <span className="text-neutral-500">Total: </span>
-                    <span className="font-bold text-black">${order.totalPrice.toFixed(2)}</span>
+                    <span className="font-bold text-black">{formatPrice(order.totalPrice)}</span>
                   </div>
                </div>
             </div>

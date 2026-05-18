@@ -16,7 +16,7 @@ A full-featured, modern e-commerce web application built with **Next.js 16**, **
 | 👁️ **Recently Viewed**     | Tracks and displays recently visited product pages                                    |
 | 📄 **Product Detail**      | Full product page with image gallery, size picker, color picker, and reviews          |
 | 🗂️ **Categories**          | Browsable category grid with dedicated category filtering                             |
-| 💱 **Currency Switcher**   | Client-side currency selection                                                        |
+| 💱 **Currency Switcher**   | Global UI currency formatting (USD, EUR, GBP, NGN, etc) with Context API & Local Storage |
 | 📰 **Blog**                | Blog listing and individual post pages                                                |
 | 📬 **Contact Page**        | Static contact page                                                                   |
 | ⚡ **Intercepting Routes** | Quick-view product modal using Next.js parallel/intercepting routes (`@product`)      |
@@ -145,6 +145,7 @@ Global client state is managed with **Zustand**, using the `persist` middleware 
 | --------------------------- | -------------------------------------------------------- |
 | `compareStore`              | Tracks products added to the comparison list (persisted) |
 | `cartStore`                 | Shopping cart items and quantities                       |
+| `CurrencyContext`           | React Context for active currency & formatting (persisted to localStorage) |
 | `wishlistStore` _(planned)_ | Saved/wishlisted products                                |
 
 ---

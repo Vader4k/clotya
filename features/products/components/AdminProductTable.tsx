@@ -6,6 +6,7 @@ import { calculateTotalStock, getProductStatus, getStatusStyles } from '../utils
 import MorphSkeleton from '@/shared/ui/MorphSkeleton'
 import AdminProductErrorState from './AdminProductErrorState'
 import Image from 'next/image'
+import { useCurrency } from '@/features/currency/context/CurrencyContext'
 
 export const AdminProductTable = ({
     products,
@@ -15,6 +16,7 @@ export const AdminProductTable = ({
     onEdit,
     onDelete
 }: AdminProductTableProps) => {
+    const { formatPrice } = useCurrency();
 
     if (isLoading) {
         return <MorphSkeleton variant="productTable" rows={5} />
@@ -65,14 +67,14 @@ export const AdminProductTable = ({
                                 <div className="flex flex-col">
                                     {product.isDiscount ? (
                                         <>
-                                            <span className="font-medium text-gray-900">${product.discountPrice?.toFixed(2)}</span>
+                                            <span className="font-medium text-gray-900">{formatPrice(product.discountPrice)}</span>
                                             <div className="flex items-center gap-2">
-                                                <span className="text-xs text-gray-400 line-through">${product.price.toFixed(2)}</span>
+                                                <span className="text-xs text-gray-400 line-through">{formatPrice(product.price)}</span>
                                                 <span className="text-[10px] font-bold text-red-600 bg-red-50 px-1 rounded">-{product.discountPercentage}%</span>
                                             </div>
                                         </>
                                     ) : (
-                                        <span className="font-medium text-gray-900">${product.price.toFixed(2)}</span>
+                                        <span className="font-medium text-gray-900">{formatPrice(product.price)}</span>
                                     )}
                                 </div>
                             </td>

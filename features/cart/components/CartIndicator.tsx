@@ -14,9 +14,11 @@ import {
 import MiniCart from "./MiniCart"
 import { ShoppingBag } from "lucide-react"
 import { useCartHook } from "../hooks/cart.hook"
+import { useCurrency } from "@/features/currency/context/CurrencyContext"
 
 const CartIndicator = ({ isMobile = false }: { isMobile?: boolean }) => {
     const { data: cart } = useCartHook()
+    const { formatPrice } = useCurrency()
 
     const totalPrice = cart?.items?.reduce((acc, item) => {
         const price = item.product.discountPrice || item.product.price
@@ -25,7 +27,7 @@ const CartIndicator = ({ isMobile = false }: { isMobile?: boolean }) => {
 
     const TriggerButton = (
         <button className="relative flex items-center gap-3 before:content-[''] before:absolute before:-inset-4 before:cursor-pointer">
-            <p className="text-xs">${totalPrice.toFixed(2)}</p>
+            <p className="text-xs">{formatPrice(totalPrice)}</p>
             {cart && cart.items.length > 0 && (
                 <div className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
                     {cart.items.length}
