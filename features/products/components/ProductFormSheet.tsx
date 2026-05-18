@@ -94,8 +94,14 @@ export const ProductFormSheet = ({
   const selectedCategories =
     categories?.filter((c) => selectedCategoryIds.includes(String(c._id))) ||
     [];
-  const availableTags = selectedCategories.flatMap(
-    (c) => (c.tags as { name: string; _id: string | number }[]) || [],
+  const availableTags = Array.from(
+    new Map(
+      selectedCategories
+        .flatMap(
+          (c) => (c.tags as { name: string; _id: string | number }[]) || [],
+        )
+        .map((tag) => [String(tag._id), tag]),
+    ).values(),
   );
 
   const currentTags = watch("tags");
@@ -156,13 +162,13 @@ export const ProductFormSheet = ({
           colors: initialData.colors || [],
           category: Array.isArray(initialData.category)
             ? initialData.category.map((c: string | { _id: string }) =>
-                typeof c === "string" ? c : String(c._id),
-              )
+              typeof c === "string" ? c : String(c._id),
+            )
             : [],
           tags: Array.isArray(initialData.tags)
             ? initialData.tags.map((t: string | { _id: string }) =>
-                typeof t === "string" ? t : String(t._id),
-              )
+              typeof t === "string" ? t : String(t._id),
+            )
             : [],
         });
       } else {
@@ -379,7 +385,7 @@ export const ProductFormSheet = ({
                   errors.description
                     ? "border-red-500"
                     : "" +
-                      "rounded-none w-full border border-gray-300 p-3 text-sm"
+                    "rounded-none w-full border border-gray-300 p-3 text-sm"
                 }
               />
               {errors.description && (
@@ -429,7 +435,7 @@ export const ProductFormSheet = ({
                     errors.category
                       ? "border-red-500"
                       : "" +
-                        "text-xs ring-1 ring-gray-300! mt-1 notranslate rounded-none"
+                      "text-xs ring-1 ring-gray-300! mt-1 notranslate rounded-none"
                   }
                 >
                   <SelectValue
@@ -439,7 +445,7 @@ export const ProductFormSheet = ({
                   />
                 </SelectTrigger>
                 <SelectContent>
-                  {categories?.map((c) => {
+                  {categories?.map((c, i) => {
                     const isSelected = selectedCategoryIds.includes(
                       String(c._id),
                     );
@@ -447,7 +453,7 @@ export const ProductFormSheet = ({
                       <SelectItem
                         className="notranslate"
                         translate="no"
-                        key={c._id}
+                        key={`${c._id}-${i}`}
                         value={String(c._id)}
                       >
                         <div className="flex items-center justify-between w-full pr-4">
@@ -516,13 +522,13 @@ export const ProductFormSheet = ({
                   />
                 </SelectTrigger>
                 <SelectContent>
-                  {availableTags.map((tag) => {
+                  {availableTags.map((tag, i) => {
                     const isSelected = currentTags.includes(String(tag._id));
                     return (
                       <SelectItem
                         className="notranslate"
                         translate="no"
-                        key={tag._id}
+                        key={`${tag._id}-${i}`}
                         value={String(tag._id)}
                       >
                         <div className="flex items-center justify-between w-full pr-4">

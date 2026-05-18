@@ -18,6 +18,10 @@ export const QUERIES = {
         blogs: {
             GETALL_N_ADD: '/blogs/',
             GET_N_EDIT_N_DEL: '/blogs/:id',
+        },
+        orders: {
+            GET: '/users/admin/orders',
+            UPDATE: '/users/admin/order/:id',
         }
     },
 

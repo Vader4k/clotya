@@ -152,5 +152,4 @@ Global client state is managed with **Zustand**, using the `persist` middleware 
 ## 🗺️ Roadmap
 
 - [ ] Wishlist with persistent storage
-- [ ] Checkout flow (address, payment, confirmation)
 - [ ] Order tracking page

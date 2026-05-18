@@ -15,7 +15,7 @@ const SizePicker = ({
         Size: <span className="capitalize">{selectedSize}</span>
       </p>
       <div className="flex items-center gap-2 my-4 flex-wrap">
-        {sizes.map((size) => (
+        {sizes.filter(size => size.quantity > 0).map(size => (
           <button
             key={size.size}
             className={`h-8 w-18 uppercase cursor-pointer ${selectedSize === size.size ? "bg-red-500 text-white" : ""} border transition`}

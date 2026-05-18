@@ -26,5 +26,5 @@ export function middleware(request: NextRequest) {
 
 //Only run middleware on account routes to keep the site fast
 export const config = {
-    matcher: ['/account/:path*'],
+    matcher: ['/account/:path*', '/admin/:path*'],
 };

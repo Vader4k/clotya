@@ -61,9 +61,7 @@ export const productServices = {
     // get product by slug
     getBySlug: async (slug: string): Promise<Product | undefined> => {
         const url = processUrlVariables(QUERIES.public.products.GET_BY_SLUG, { slug });
-        const data = await fetcher.get<{ product: Product }>(url, {
-            next: { revalidate: 3600 }
-        });
+        const data = await fetcher.get<{ product: Product }>(url);
         return data.product;
     },
 
@@ -86,9 +84,7 @@ export const productServices = {
 
     //get best seller products
     getBestSeller: async (): Promise<Product[]> => {
-        const data = await fetcher.get<{ products: Product[] }>(QUERIES.public.products.GET_BEST_SELLER, {
-            next: { revalidate: 3600 }
-        });
+        const data = await fetcher.get<{ products: Product[] }>(QUERIES.public.products.GET_BEST_SELLER);
         return data.products;
     },
 

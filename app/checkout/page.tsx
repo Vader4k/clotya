@@ -70,8 +70,24 @@ const page = () => {
       return false;
     }
 
+    const shippingAddress = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      companyName: data.company,
+      country: data.country,
+      address: data.address,
+      city: data.city,
+      state: data.state,
+      zip: data.zip,
+      phone: data.phone,
+      email: data.email,
+      notes: data.notes
+    }
+
     const orderItem = {
-      ...data,
+      paymentType: data.paymentType,
+      shipmentType: data.shipmentType,
+      shippingAddress,
       items: cartItems.items,
       cartId: cartItems.cartId || null,
     };
@@ -105,7 +121,7 @@ const page = () => {
             <BillingDetails />
           </div>
           <div className="flex-[2.5] w-full">
-            <OrderDetail cartItems={cartItems?.items} paying={paying}/>
+            <OrderDetail cartItems={cartItems?.items} paying={paying} />
           </div>
         </form>
       </FormProvider>

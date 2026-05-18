@@ -54,9 +54,8 @@ axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
         const isLoginRequest = error.config?.url?.includes("/login");
-        const isMeRequest = error.config?.url?.includes("/auth/me");
         
-        if (error.response?.status === 401 && !isLoginRequest && !isMeRequest) {
+        if (error.response?.status === 401 && !isLoginRequest) {
             if (typeof window !== "undefined") {
                 window.location.href = "/login";
             }
