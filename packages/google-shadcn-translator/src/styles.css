@@ -1,0 +1,18 @@
+.skiptranslate,
+.VIpgJd-ZVi9od-aZ2wEe,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf-ti6hGc,
+.google-shadcn-translator-hidden {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+  position: static !important;
+}
+
+.translated-ltr body,
+.translated-rtl body {
+  top: 0 !important;
+}
+

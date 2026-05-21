@@ -19,7 +19,13 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "google-shadcn-translator": [
+        "./packages/google-shadcn-translator/src"
+      ],
+      "google-shadcn-translator/styles.css": [
+        "./packages/google-shadcn-translator/src/styles.css"
+      ]
     }
   },
   "include": [

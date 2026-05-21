@@ -59,22 +59,6 @@ html {
   scrollbar-color: transparent;
 }
 
-.skiptranslate {
-  display: none !important;
-}
-
-.VIpgJd-ZVi9od-aZ2wEe {
-  display: none !important;
-}
-
-.VIpgJd-ZVi9od-aZ2wEe-wOHMyf {
-  display: none !important;
-}
-
-.VIpgJd-ZVi9od-aZ2wEe-wOHMyf-ti6hGc {
-  display: none !important;
-}
-
 /* * {
   outline: 1px solid red;
 } */
@@ -100,12 +84,6 @@ body {
   box-sizing: border-box;
 }
 
-
-/* Specific fix for Google Translate's body injection */
-.translated-ltr body,
-.translated-rtl body {
-  top: 0 !important;
-}
 
 .banner3 {
   background-image: url("/home/wide-banner.jpg");

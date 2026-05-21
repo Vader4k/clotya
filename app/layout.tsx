@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Inter, Jost } from "next/font/google";
 import "./globals.css";
+import "google-shadcn-translator/styles.css";
 import Navbar from "@/shared/ui/navbar/Navbar";
 import Footer from "@/shared/ui/Footer";
 import PageHeader from "@/shared/ui/PageHeader";
 import Providers from "./Provider";
 import BottomNav from "@/shared/ui/navbar/BottomNav";
-import GoogleTranslatorInit from "@/features/language-selector/utils/GoogleTranslatorInit";
+import { GoogleTranslatorProvider } from "google-shadcn-translator";
 import { Toaster } from "@/components/ui/sonner"
 const inter = Inter({
   subsets: ["latin"],
@@ -95,15 +96,16 @@ export default function RootLayout({
         className={`${inter.variable} ${jost.variable} antialiased`}
       >
         <Providers>
-          <PageHeader />
-          <GoogleTranslatorInit />
-          <Navbar />
-          {children}
-          {product} {/* this is the parallel route for the product page */}
-          <div className="xl:hidden">
-            <BottomNav />
-          </div>
-          <Footer />
+          <GoogleTranslatorProvider pageLanguage="en">
+            <PageHeader />
+            <Navbar />
+            {children}
+            {product} {/* this is the parallel route for the product page */}
+            <div className="xl:hidden">
+              <BottomNav />
+            </div>
+            <Footer />
+          </GoogleTranslatorProvider>
         </Providers>
         <Toaster />
       </body>
