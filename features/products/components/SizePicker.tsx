@@ -3,11 +3,13 @@ const SizePicker = ({
   selectedSize,
   setSize,
   setStock,
+  setQuantity
 }: {
   sizes: { size: string; quantity: number }[];
   selectedSize: string | null;
   setSize: (size: string) => void;
   setStock: (stock: number) => void;
+  setQuantity: (quantity: number) => void;
 }) => {
   return (
     <div>
@@ -21,6 +23,7 @@ const SizePicker = ({
             className={`h-8 w-18 uppercase cursor-pointer ${selectedSize === size.size ? "bg-red-500 text-white" : ""} border transition`}
             onClick={() => {
               setSize(size.size);
+              setQuantity(1)
               setStock(size.quantity);
             }}
           >

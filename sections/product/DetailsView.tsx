@@ -5,7 +5,7 @@ import { useState } from "react"
 import ReviewList from "./ReviewList"
 import ReviewForm from "./ReviewForm"
 
-const DetailsView = ({reviews, name, description}: {reviews:number, name:string, description: string}) => {
+const DetailsView = ({ reviews, name, description }: { reviews: number, name: string, description: string }) => {
 
   const [view, setView] = useState<"description" | "reviews">("description")
 
@@ -31,7 +31,7 @@ const DetailsView = ({reviews, name, description}: {reviews:number, name:string,
           </div>
         ) : (
           <div className="w-full h-full grid gap-5">
-            <ReviewIndicator reviews={reviews} name={name}/>
+            <ReviewIndicator reviews={reviews} name={name} />
             <ReviewList />
             <ReviewForm />
           </div>

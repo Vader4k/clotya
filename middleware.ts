@@ -6,13 +6,22 @@ export function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl
 
     //protected routes for logged in users
-    const isDashboardPath = pathname.startsWith('/account') && pathname.startsWith('/admin') && !pathname.includes('/login') && !pathname.includes('/register')
+    const isAdminPath = pathname.startsWith('/admin')
+    const isAccountDashboardPath =
+        pathname.startsWith('/account') &&
+        !pathname.startsWith('/account/login') &&
+        !pathname.startsWith('/account/register')
 
     //paths for guest users (login/register)
     const isAuthPath = pathname === '/account/login' || pathname === '/account/register'
 
-    if (isDashboardPath && !token) {
-        //user is on dashboard but not logged in -> redirect to login
+    if (isAdminPath && !token) {
+        //user is on admin dashboard but not logged in -> redirect to admin login
+        return NextResponse.redirect(new URL('/login', request.url))
+    }
+
+    if (isAccountDashboardPath && !token) {
+        //user is on account dashboard but not logged in -> redirect to account login
         return NextResponse.redirect(new URL('/account/login', request.url))
     }
 

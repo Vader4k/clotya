@@ -104,6 +104,7 @@ const DetailedInformation = ({ product }: { product: Product }) => {
         <div>
           <SizePicker
             sizes={product.inventory!}
+            setQuantity={setQuantity}
             selectedSize={size}
             setSize={setSize}
             setStock={setStock}

@@ -50,18 +50,18 @@ axiosRetry(axiosInstance, {
     shouldResetTimeout: true, // Reset timeout on each retry
 });
 
-axiosInstance.interceptors.response.use(
-    (response) => response,
-    (error) => {
-        const isLoginRequest = error.config?.url?.includes("/login");
+// axiosInstance.interceptors.response.use(
+//     (response) => response,
+//     (error) => {
+//         const isLoginRequest = error.config?.url?.includes("/login");
         
-        if (error.response?.status === 401 && !isLoginRequest) {
-            if (typeof window !== "undefined") {
-                window.location.href = "/login";
-            }
-        }
-        return Promise.reject(error);
-    }
-);
+//         if (error.response?.status === 401 && !isLoginRequest) {
+//             if (typeof window !== "undefined") {
+//                 window.location.href = "/login";
+//             }
+//         }
+//         return Promise.reject(error);
+//     }
+// );
 
 export default axiosInstance
