@@ -7,7 +7,7 @@ import Footer from "@/shared/ui/Footer";
 import PageHeader from "@/shared/ui/PageHeader";
 import Providers from "./Provider";
 import BottomNav from "@/shared/ui/navbar/BottomNav";
-import { GoogleTranslatorProvider } from "google-shadcn-translator";
+import GoogleTranslatorInit from "@/features/language-selector/utils/GoogleTranslatorInit";
 import { Toaster } from "@/components/ui/sonner"
 const inter = Inter({
   subsets: ["latin"],
@@ -96,7 +96,7 @@ export default function RootLayout({
         className={`${inter.variable} ${jost.variable} antialiased`}
       >
         <Providers>
-          <GoogleTranslatorProvider pageLanguage="en">
+          <GoogleTranslatorInit>
             <PageHeader />
             <Navbar />
             {children}
@@ -105,7 +105,7 @@ export default function RootLayout({
               <BottomNav />
             </div>
             <Footer />
-          </GoogleTranslatorProvider>
+          </GoogleTranslatorInit>
         </Providers>
         <Toaster />
       </body>
