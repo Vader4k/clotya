@@ -9,6 +9,7 @@ import Providers from "./Provider";
 import BottomNav from "@/shared/ui/navbar/BottomNav";
 import GoogleTranslatorInit from "@/features/language-selector/utils/GoogleTranslatorInit";
 import { Toaster } from "@/components/ui/sonner"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -107,6 +108,7 @@ export default function RootLayout({
             <Footer />
           </GoogleTranslatorInit>
         </Providers>
+        <SpeedInsights />
         <Toaster />
       </body>
     </html>
