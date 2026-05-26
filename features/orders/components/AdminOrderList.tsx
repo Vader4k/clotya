@@ -8,6 +8,7 @@ import { Order, OrderStatus } from '../types/order.types'
 import { OrderTable } from './OrderTable'
 import { OrderSheet } from './OrderSheet'
 import { OrderLoading, OrderError, OrderEmpty } from './OrderStates'
+import { toast } from 'sonner'
 
 export const AdminOrderList = () => {
     const [searchTerm, setSearchTerm] = useState('')
@@ -33,6 +34,7 @@ export const AdminOrderList = () => {
             onSuccess: () => {
                 if (selectedOrder && selectedOrder._id === orderId) {
                     setSelectedOrder(prev => prev ? { ...prev, status: newStatus } : null)
+                    toast.success("Order status updated")
                 }
             }
         })
