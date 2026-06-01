@@ -12,7 +12,7 @@ const QuantityPicker = ({
   decrease: () => void;
   increase: () => void;
   isDisabled: boolean;
-  addToCart: () => void;    
+  addToCart: () => void;
   isAdding: boolean;
 }) => {
   return (
@@ -20,14 +20,14 @@ const QuantityPicker = ({
       <div className="flex items-center justify-between h-12 w-full max-w-[40%] sm:max-w-1/4 border">
         <button
           disabled={isDisabled}
-          className="w-10 h-full flex items-center justify-center"
+          className={`${isDisabled ? 'cursor-not-allowed' : ''} w-10 h-full flex items-center justify-center`}
         >
           <Minus size={16} strokeWidth={1.5} onClick={decrease} />
         </button>
         <p>{quantity}</p>
         <button
           disabled={isDisabled}
-          className="w-10 h-full flex items-center justify-center"
+          className={`${isDisabled ? 'cursor-not-allowed' : ''} w-10 h-full flex items-center justify-center`}
         >
           <Plus size={16} strokeWidth={1.5} onClick={increase} />
         </button>

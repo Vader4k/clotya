@@ -31,7 +31,7 @@ export default function UserLoginForm() {
     try {
       const response = await authClientService.login(data);
       toast.success(response.message);
-      router.push("/account");
+      router.push("/account/orders");
     } catch (error) {
       toast.error(errorHandler(error));
     }

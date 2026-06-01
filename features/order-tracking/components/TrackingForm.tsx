@@ -29,7 +29,7 @@ const TrackingForm = () => {
                         value={trackingInfo.orderId}
                         className="py-5 rounded-none"
                         onChange={handleChange}
-                        placeholder="Found in your order confirmation email."
+                        placeholder="Found in your order confirmation email and dashboard."
                     />
                 </div>
                 <div>

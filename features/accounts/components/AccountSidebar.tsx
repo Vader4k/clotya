@@ -20,7 +20,7 @@ export default function AccountSidebar() {
     try {
       const res = await authClientService.logout();
       toast.success(res.message);
-      router.push("/account/login");
+      router.push("/");
     } catch {
       toast.error("Failed to log out");
     }
