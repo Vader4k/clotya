@@ -50,6 +50,7 @@ export const AdminProductList = () => {
             await adminProductServices.edit(currentProduct._id, data)
             toast.success("Product updated successfully")
             setIsEditModalOpen(false);
+            await refetch()
         } catch (error) {
             toast.error(errorHandler(error))
         }

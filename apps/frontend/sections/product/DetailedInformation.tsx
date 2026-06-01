@@ -46,8 +46,15 @@ const DetailedInformation = ({ product }: { product: Product }) => {
     }
   };
 
+  const hasColor = product.colors && product.colors.length > 0;
+  const hasSize = product.inventory && product.inventory.length > 0;
+
   const handleIncreaseQuantity = () => {
-    if (quantity < stock) {
+    if (hasSize) {
+      if (quantity < stock) {
+        setQuantity(quantity + 1);
+      }
+    } else {
       setQuantity(quantity + 1);
     }
   };
@@ -57,8 +64,9 @@ const DetailedInformation = ({ product }: { product: Product }) => {
     setQuantity(quantity - 1);
   };
 
-  const hasColor = product.colors && product.colors.length > 0;
-  const hasSize = product.inventory && product.inventory.length > 0;
+  const totalStock = hasSize ? product.inventory!.reduce((acc, item) => acc + item.quantity, 0) : 0;
+  const isOutOfStock = hasSize ? (size ? stock === 0 : totalStock === 0) : false;
+  const isMaxReached = hasSize && size ? quantity >= stock : false;
 
   const isDisabled =
     (hasColor && !selectedColor) ||
@@ -127,14 +135,21 @@ const DetailedInformation = ({ product }: { product: Product }) => {
         )}
       </AnimatePresence>
 
-      <QuantityPicker
-        quantity={quantity}
-        decrease={handleDecreaseQuantity}
-        increase={handleIncreaseQuantity}
-        isDisabled={isDisabled!}
-        addToCart={handleAddToCart}
-        isAdding={isAdding}
-      />
+      {isOutOfStock ? (
+        <div className="w-full bg-gray-50/50 text-gray-500 border h-12 flex items-center justify-center text-sm font-medium cursor-not-allowed">
+          Out of stock
+        </div>
+      ) : (
+        <QuantityPicker
+          quantity={quantity}
+          decrease={handleDecreaseQuantity}
+          increase={handleIncreaseQuantity}
+          isDisabled={isDisabled!}
+          addToCart={handleAddToCart}
+          isAdding={isAdding}
+          isMaxReached={isMaxReached}
+        />
+      )}
 
       <div className="flex items-center flex-wrap sm:flex-nowrap gap-5 my-2">
         <SizeGuide />
