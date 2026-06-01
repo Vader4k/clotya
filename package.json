@@ -1,57 +1,20 @@
 {
-  "name": "clotya",
-  "version": "0.1.0",
+  "name": "clotya-monorepo",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "@hookform/resolvers": "^5.2.2",
-    "@radix-ui/react-visually-hidden": "^1.2.4",
-    "@tanstack/react-query": "^5.85.5",
-    "@tanstack/react-query-devtools": "^5.81.5",
-    "@tiptap/extension-image": "^3.20.2",
-    "@tiptap/extension-link": "^3.20.2",
-    "@tiptap/extension-placeholder": "^3.20.2",
-    "@tiptap/pm": "^3.20.2",
-    "@tiptap/react": "^3.20.2",
-    "@tiptap/starter-kit": "^3.20.2",
-    "@vercel/speed-insights": "^2.0.0",
-    "axios": "^1.11.0",
-    "axios-retry": "^4.5.0",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "google-shadcn-translator": "^0.1.0",
-    "lucide": "^0.575.0",
-    "lucide-react": "^0.575.0",
-    "motion": "^12.23.24",
-    "next": "^16.2.6",
-    "next-themes": "^0.4.6",
-    "plaiceholder": "^3.0.0",
-    "radix-ui": "^1.4.3",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
-    "react-hook-form": "^7.71.2",
-    "sonner": "^2.0.7",
-    "swiper": "^12.1.2",
-    "tailwind-merge": "^3.5.0",
-    "tiptap-markdown": "^0.9.0",
-    "zod": "^4.3.6",
-    "zustand": "^5.0.11"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^10.0.0",
-    "eslint-config-next": "^0.2.4",
-    "shadcn": "^3.8.5",
-    "tailwindcss": "^4",
-    "tw-animate-css": "^1.4.0",
-    "typescript": "^5"
-  }
+    "turbo": "latest"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "bcrypt",
+      "msw",
+      "sharp"
+    ]
+  },
+  "packageManager": "pnpm@9.0.0"
 }
