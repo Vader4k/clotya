@@ -33,7 +33,6 @@ const cartSchema = new mongoose.Schema(
         },
         cartId: {
             type: String,
-            unique: true,
             default: null
         },
         items: [cartItemSchema]
@@ -41,6 +40,15 @@ const cartSchema = new mongoose.Schema(
     { timestamps: true }
 )
 
-cartSchema.index({ user: 1, cartId: 1 }, { unique: true })
+// Only enforce uniqueness on cartId when it actually has a value (guest carts)
+cartSchema.index(
+    { cartId: 1 },
+    { unique: true, partialFilterExpression: { cartId: { $type: "string" } } }
+)
+// Only enforce uniqueness on user when it actually has a value (logged-in carts)
+cartSchema.index(
+    { user: 1 },
+    { unique: true, partialFilterExpression: { user: { $exists: true, $ne: null } } }
+)
 
 export const Cart = mongoose.model("Cart", cartSchema);

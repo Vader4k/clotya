@@ -26,7 +26,7 @@ const Footer = () => {
   if (hideNavOnRoutes.some((page) => pathname.includes(page))) return null
 
   return (
-    <footer className='xl:h-[110vh] font-jost'>
+    <footer className='xl:h-[800px] font-jost'>
       <div className='w-full bg-black text-white h-1/2 flex items-center justify-start py-10 xl:py-0 px-3'>
         <div className='w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-start justify-between gap-10'>
           <div className='w-full flex-1 flex flex-col gap-3'>

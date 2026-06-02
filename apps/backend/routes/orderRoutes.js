@@ -1,5 +1,5 @@
 import express from "express";
-import { checkout, paystackWebhook, verifyOrder } from "../controllers/orderController.js";
+import { checkout, paystackWebhook, verifyOrder, trackOrder } from "../controllers/orderController.js";
 import { protectOptional } from "../middleware/protectOptional.js";
 import { attachCartId } from "../middleware/cart-session.js";
 
@@ -13,5 +13,8 @@ router.get("/verify/:reference", verifyOrder);
 
 // Paystack Webhook route (Public, but verified by signature in controller)
 router.post("/webhook/paystack", paystackWebhook);
+
+// Track order by order number and email (Public)
+router.get("/track", trackOrder);
 
 export default router;

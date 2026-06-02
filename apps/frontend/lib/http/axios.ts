@@ -14,7 +14,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
     (config) => {
         // Only prefix on the client and if it's a relative path starting with /
-        if (typeof window !== "undefined" && config.url?.startsWith("/")) {
+        if (typeof window !== "undefined" && config.url?.startsWith("/") && !config.url.startsWith("/api")) {
             // We don't use baseURL on the client anymore to avoid Axios path replacement issues
             config.baseURL = ""; 
             config.url = `/api${config.url}`;

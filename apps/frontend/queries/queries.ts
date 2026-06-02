@@ -62,5 +62,6 @@ export const QUERIES = {
     order: {
         CHECKOUT: '/orders/checkout',
         VERIFY_ORDER: '/orders/verify/:reference',
+        TRACK: '/orders/track',
     }
 }

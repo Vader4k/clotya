@@ -9,16 +9,17 @@ import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { errorHandler } from "@/lib/http/errorHandler";
-import { authClientService } from '../../auth/services/auth.client.service';
+import { useLogin } from "@/features/auth/hooks/auth.hooks";
 
 export default function UserLoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const { mutateAsync: login, isPending } = useLogin();
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<UserLoginSchemaType>({
     resolver: zodResolver(userLoginSchema),
     defaultValues: {
@@ -29,9 +30,11 @@ export default function UserLoginForm() {
 
   const onSubmit = async (data: UserLoginSchemaType) => {
     try {
-      const response = await authClientService.login(data);
+      const response = await login(data);
       toast.success(response.message);
-      router.push("/account/orders");
+      // Force Next.js to re-run middleware with the fresh auth cookie
+      router.refresh();
+      router.push("/account");
     } catch (error) {
       toast.error(errorHandler(error));
     }
@@ -51,7 +54,7 @@ export default function UserLoginForm() {
             id="email"
             type="email"
             placeholder="you@example.com"
-            disabled={isSubmitting}
+            disabled={isPending}
             className={`h-11 rounded-none border-neutral-300 ${errors.email ? "border-red-500" : ""}`}
             {...register("email")}
           />
@@ -80,7 +83,7 @@ export default function UserLoginForm() {
               id="password"
               type={showPassword ? "text" : "password"}
               placeholder="••••••••"
-              disabled={isSubmitting}
+              disabled={isPending}
               className={`h-11 pr-10 rounded-none border-neutral-300 ${errors.password ? "border-red-500" : ""}`}
               {...register("password")}
             />
@@ -105,10 +108,10 @@ export default function UserLoginForm() {
 
       <button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isPending}
         className="flex w-full items-center justify-center gap-2 bg-black px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70 rounded-none"
       >
-        {isSubmitting ? (
+        {isPending ? (
           <>
             <Loader2 className="size-4 animate-spin" />
             <span>Signing in...</span>

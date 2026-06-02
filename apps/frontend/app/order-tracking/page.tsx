@@ -1,19 +1,16 @@
-import TrackingForm from "@/features/order-tracking/components/TrackingForm"
+import OrderTrackingPage from "@/features/order-tracking/components/OrderTrackingPage"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Track Your Order",
-  description: "Check the status of your Clotya order. Simply enter your Order ID to get real-time tracking updates.",
+  description: "Check the status of your Clotya order. Enter your Order Number and email to get real-time tracking updates with live map visualization.",
 }
 
 const page = () => {
   return (
     <main>
-      <div className='w-full max-w-7xl mx-auto my-10 lg:my-20 font-jost px-5 xl:px-0'>
-        <p className='xl:pr-5 text-sm lg:text-base'>To track your order please enter your Order Id in the box below and press the "Track" button. This was given to you on your receipt and in the confirmation email you should have received.</p>
-        <div className="mt-5">
-          <TrackingForm />
-        </div>
+      <div className='w-full max-w-7xl mx-auto my-10 lg:my-20 px-5 xl:px-0'>
+        <OrderTrackingPage />
       </div>
     </main>
   )

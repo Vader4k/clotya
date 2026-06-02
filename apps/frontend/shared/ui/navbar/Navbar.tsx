@@ -10,6 +10,7 @@ import SearchModal from "@/features/search/components/SearchModal";
 import { hideNavOnRoutes } from "@/constants";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useMe } from "@/features/auth/hooks/auth.hooks";
 
 const NavbarLogo = ({ width, height }: { width: number; height: number }) => {
   return (
@@ -25,8 +26,25 @@ const NavbarLogo = ({ width, height }: { width: number; height: number }) => {
   );
 };
 
+const UserAvatar = ({ name }: { name: string }) => {
+  const initials = name
+    .split(" ")
+    .map((n) => n[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+
+  return (
+    <div className="flex items-center justify-center font-jost w-7 h-7 rounded-full bg-neutral-600 text-white text-xs font-semibold select-none">
+      {initials}
+    </div>
+  );
+};
+
 const Navbar = () => {
   const pathname = usePathname();
+  const { data: user } = useMe();
+
   if (hideNavOnRoutes.some((page) => pathname.includes(page))) return null;
 
   return (
@@ -50,7 +68,11 @@ const Navbar = () => {
         {/* controls */}
         <div className="hidden xl:flex items-center gap-4">
           <Link href={"/account"}>
-            <UserRound strokeWidth={1.5} size={22} />
+            {user ? (
+              <UserAvatar name={user.name} />
+            ) : (
+              <UserRound strokeWidth={1.5} size={22} />
+            )}
           </Link>
           <div>
             <Suspense fallback={null}>

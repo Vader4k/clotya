@@ -45,7 +45,7 @@ export const checkout = async (req, res) => {
         const orderItems = items.map(item => {
             const product = itemsFromDB.find(p => p._id.toString() === item.product._id)
             const price = product.discountPrice > 0 ? product.discountPrice : product.price
-            itemsPrice += (price * 1500) * item.quantity
+            itemsPrice += price * item.quantity  // keep in USD
 
             return {
                 product: product._id,
@@ -59,7 +59,7 @@ export const checkout = async (req, res) => {
             }
         })
 
-        const totalPrice = (itemsPrice + shipmentFee).toFixed(2)
+        const totalPrice = (itemsPrice + shipmentFee).toFixed(2)  // USD
 
         // 3. Create initial order in DB
         const order = new Order({
@@ -80,9 +80,11 @@ export const checkout = async (req, res) => {
 
         // 4. Handle Paystack Payment
         if (paymentType === 'paystack') {
+            // Paystack requires amount in NGN kobo — convert from USD to NGN
+            const totalPriceInNGN = (totalPrice * 1500).toFixed(2)
             const paystackData = await initializeTransaction(
                 shippingAddress.email,
-                totalPrice,
+                totalPriceInNGN,
                 { orderId: createdOrder._id, userId: req.user?._id || 'guest' }
             )
 
@@ -281,5 +283,72 @@ export const paystackWebhook = async (req, res) => {
     } catch (error) {
         console.error("Webhook Error:", error);
         res.status(500).json({ message: 'Internal server error' });
+    }
+}
+
+export const trackOrder = async (req, res) => {
+    try {
+        const { orderNumber, email } = req.query;
+
+        if (!orderNumber || !email) {
+            return res.status(400).json({
+                success: false,
+                message: "Order number and email are required"
+            });
+        }
+
+        const order = await Order.findOne({
+            orderNumber,
+            'shippingAddress.email': email.toLowerCase()
+        });
+
+        if (!order) {
+            return res.status(404).json({
+                success: false,
+                message: "No order found with this order number and email combination"
+            });
+        }
+
+        // Return sanitized order data (no internal IDs or sensitive payment info)
+        const trackedOrder = {
+            orderNumber: order.orderNumber,
+            status: order.status,
+            createdAt: order.createdAt,
+            updatedAt: order.updatedAt,
+            items: order.items.map(item => ({
+                name: item.name,
+                image: item.image,
+                quantity: item.quantity,
+                size: item.size,
+                color: item.color,
+                price: item.price
+            })),
+            shippingAddress: {
+                firstName: order.shippingAddress.firstName,
+                city: order.shippingAddress.city,
+                state: order.shippingAddress.state,
+                country: order.shippingAddress.country
+            },
+            shipmentType: order.shipmentType,
+            totalPrice: order.totalPrice,
+            shippingPrice: order.shippingPrice,
+            isPaid: order.isPaid,
+            paidAt: order.paidAt,
+            isDelivered: order.isDelivered,
+            deliveredAt: order.deliveredAt
+        };
+
+        res.status(200).json({
+            success: true,
+            order: trackedOrder
+        });
+
+    } catch (error) {
+        console.error("Track Order Error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Server error while tracking order",
+            error: error.message
+        });
     }
 }

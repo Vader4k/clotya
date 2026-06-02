@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { User, Package, Settings, LogOut } from "lucide-react";
-import { authClientService } from "../../auth/services/auth.client.service";
+import { useLogout } from "../../auth/hooks/auth.hooks";
 import { toast } from "sonner";
 
 const navigation = [
@@ -16,10 +16,13 @@ export default function AccountSidebar() {
   const pathname = usePathname();
   const router = useRouter();
 
+  const { mutateAsync: logout, isPending: isLoggingOut } = useLogout();
+
   const handleLogout = async () => {
     try {
-      const res = await authClientService.logout();
+      const res = await logout();
       toast.success(res.message);
+      router.refresh();
       router.push("/");
     } catch {
       toast.error("Failed to log out");
@@ -48,10 +51,11 @@ export default function AccountSidebar() {
         })}
         <button
           onClick={handleLogout}
-          className="flex w-full items-center gap-3 px-4 py-3 text-sm font-medium text-red-600 transition-colors hover:bg-red-50 hover:text-red-700"
+          disabled={isLoggingOut}
+          className="flex w-full items-center gap-3 px-4 py-3 text-sm font-medium text-red-600 transition-colors hover:bg-red-50 hover:text-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <LogOut className="size-5" />
-          Logout
+          {isLoggingOut ? "Logging out..." : "Logout"}
         </button>
       </nav>
     </aside>

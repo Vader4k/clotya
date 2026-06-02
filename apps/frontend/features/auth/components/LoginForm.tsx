@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, LoginSchemaType } from '@/schema/loginSchema';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { authClientService } from '../services/auth.client.service';
+import { useLogin } from '../hooks/auth.hooks';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { errorHandler } from '@/lib/http/errorHandler'
@@ -14,11 +14,12 @@ import { errorHandler } from '@/lib/http/errorHandler'
 export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
     const router = useRouter();
+    const { mutateAsync: login, isPending } = useLogin();
 
     const {
         register,
         handleSubmit,
-        formState: { errors, isSubmitting }
+        formState: { errors }
     } = useForm<LoginSchemaType>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
@@ -29,9 +30,9 @@ export default function LoginForm() {
 
     const onSubmit = async (data: LoginSchemaType) => {
         try {
-            const response = await authClientService.login(data);
-
+            const response = await login(data);
             toast.success(response.message || 'Logged in successfully');
+            router.refresh();
             router.push('/admin');
         } catch (error) {
             const errorMessage = errorHandler(error);
@@ -51,7 +52,7 @@ export default function LoginForm() {
                         id="email"
                         type="email"
                         placeholder="admin@company.com"
-                        disabled={isSubmitting}
+                        disabled={isPending}
                         className={`h-11 transition-all ${errors.email ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
                         {...register('email')}
                     />
@@ -74,7 +75,7 @@ export default function LoginForm() {
                             id="password"
                             type={showPassword ? 'text' : 'password'}
                             placeholder="••••••••"
-                            disabled={isSubmitting}
+                            disabled={isPending}
                             className={`h-11 pr-10 transition-all ${errors.password ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
                             {...register('password')}
                         />
@@ -99,13 +100,13 @@ export default function LoginForm() {
 
             <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isPending}
                 className="group relative flex h-11 w-full items-center justify-center gap-2 overflow-hidden rounded-md bg-neutral-900 dark:bg-white px-4 py-2 text-sm font-medium text-white dark:text-neutral-900 shadow-md transition-all hover:bg-neutral-800 dark:hover:bg-neutral-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-white focus:ring-offset-2 dark:focus:ring-offset-neutral-900 disabled:cursor-not-allowed disabled:opacity-70"
             >
                 <div className="absolute inset-0 flex h-full w-full justify-center transform-[skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:transform-[skew(-12deg)_translateX(100%)]">
                     <div className="relative h-full w-8 bg-white/20" />
                 </div>
-                {isSubmitting ? (
+                {isPending ? (
                     <>
                         <Loader2 className="size-5 animate-spin" />
                         <span>Signing in...</span>
