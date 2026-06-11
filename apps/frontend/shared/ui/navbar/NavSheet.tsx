@@ -9,6 +9,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
+    SheetClose,
 } from "@/components/ui/sheet"
 import { Menu } from "lucide-react"
 
@@ -34,11 +35,13 @@ export function NavSheet() {
                             <h3 className="text-sm font-medium capitalize">{key}</h3>
                             <div className="grid gap-4">
                                 {value.map((link) => (
-                                    <Link key={link.name} href={link.href} className="capitalize w-full flex items-center justify-between">{link.name} {link.tag && (
-                                        <span className={`text-xs text-white px-3 py-0.3 rounded-lg font-semibold opacity-50 ${link.tag === 'hot' ? 'bg-red-500' :
-                                            link.tag === 'new' ? 'bg-yellow-500' :
-                                                link.tag.includes('save') ? 'bg-red-500' : ''}`}>{link.tag}</span>
-                                    )}</Link>
+                                    <SheetClose asChild key={link.name}>
+                                        <Link href={link.href} className="capitalize w-full flex items-center justify-between">{link.name} {link.tag && (
+                                            <span className={`text-xs text-white px-3 py-0.3 rounded-lg font-semibold opacity-50 ${link.tag === 'hot' ? 'bg-red-500' :
+                                                link.tag === 'new' ? 'bg-yellow-500' :
+                                                    link.tag.includes('save') ? 'bg-red-500' : ''}`}>{link.tag}</span>
+                                        )}</Link>
+                                    </SheetClose>
                                 ))}
                             </div>
                             {key !== 'categories' && <div className="w-full h-px bg-gray-200 mt-4" />}
