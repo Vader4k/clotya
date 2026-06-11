@@ -4,7 +4,7 @@ import { hashPassword, comparePassword } from "../utils/utils.js";
 
 export const getOrders = async (req, res) => {
     try {
-        const orders = await Order.find({ user: req.user.id })
+        const orders = await Order.find({ user: req.user.id }).sort({ createdAt: -1 });
         res.status(200).json({ status: 'success', orders, message: "orders fetched successfully" })
     } catch (error) {
         res.status(500).json({ status: 'fail', message: "internal server error" })
