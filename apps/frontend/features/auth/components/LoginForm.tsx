@@ -33,7 +33,7 @@ export default function LoginForm() {
             const response = await login(data);
             toast.success(response.message || 'Logged in successfully');
             router.refresh();
-            router.push('/admin');
+            window.location.replace('/admin')
         } catch (error) {
             const errorMessage = errorHandler(error);
             toast.error(errorMessage);
