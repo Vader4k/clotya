@@ -48,10 +48,10 @@ const Navbar = () => {
   if (hideNavOnRoutes.some((page) => pathname.includes(page))) return null;
 
   return (
-    <nav className="w-full border-b border-gray-200 font-jost px-3 sticky xl:relative top-0 bg-white z-50">
+    <nav className="w-full border-b border-gray-200 font-jost px-3 sticky xl:relative top-0 bg-white z-50 overflow-x-clip">
       <div className="w-full max-w-7xl mx-auto flex items-center justify-between py-4 lg:py-6">
-        {/* links */}
-        <div className="flex items-center gap-8 w-full flex-1">
+        {/* Left — NavSheet always visible, logo+links on xl */}
+        <div className="flex items-center gap-8 flex-1">
           <NavSheet />
           <div className="hidden xl:block">
             <NavbarLogo width={120} height={120} />
@@ -61,11 +61,12 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="xl:hidden w-full flex-1 flex items-center justify-center">
+        {/* Center logo — mobile only */}
+        <div className="xl:hidden flex items-center justify-center">
           <NavbarLogo width={100} height={100} />
         </div>
 
-        {/* controls */}
+        {/* Desktop controls */}
         <div className="hidden xl:flex items-center gap-4">
           <Link href={"/account"}>
             {user ? (
@@ -85,7 +86,8 @@ const Navbar = () => {
           <CartIndicator isMobile={false} />
         </div>
 
-        <div className="xl:hidden w-full flex-1 flex items-center justify-end">
+        {/* Mobile cart — right side */}
+        <div className="xl:hidden flex-1 flex items-center justify-end">
           <CartIndicator isMobile={true} />
         </div>
       </div>

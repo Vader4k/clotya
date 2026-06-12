@@ -4,17 +4,12 @@ import {
     HoverCardTrigger,
     HoverCardContent,
 } from "@/components/ui/hover-card"
-import {
-    Sheet,
-    SheetContent,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
-} from "@/components/ui/sheet"
 import MiniCart from "./MiniCart"
 import { ShoppingBag } from "lucide-react"
 import { useCartHook } from "../hooks/cart.hook"
 import { useCurrency } from "@/features/currency/context/CurrencyContext"
+import { NativeSheet } from "@/shared/ui/navbar/NativeSheet"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 const CartIndicator = ({ isMobile = false }: { isMobile?: boolean }) => {
     const { data: cart } = useCartHook()
@@ -39,19 +34,18 @@ const CartIndicator = ({ isMobile = false }: { isMobile?: boolean }) => {
 
     if (isMobile) {
         return (
-            <Sheet>
-                <SheetTrigger asChild>
-                    {TriggerButton}
-                </SheetTrigger>
-                <SheetContent side="right" className="w-[85vw] max-w-[400px]">
-                    <SheetHeader>
-                        <SheetTitle className="text-left font-jost text-lg border-b pb-4">Shopping Cart</SheetTitle>
-                    </SheetHeader>
+            <NativeSheet
+                side="right"
+                title="Shopping Cart"
+                trigger={TriggerButton}
+                className="w-[85vw] max-w-[400px]"
+            >
+                <ScrollArea className="flex-1 min-h-0">
                     <div className="h-full -mt-5">
                         <MiniCart />
                     </div>
-                </SheetContent>
-            </Sheet>
+                </ScrollArea>
+            </NativeSheet>
         )
     }
 

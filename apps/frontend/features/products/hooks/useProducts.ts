@@ -19,4 +19,3 @@ export const useGetProductsBySearch = (search: string) => {
         enabled: !!search,
     })
 }
-
