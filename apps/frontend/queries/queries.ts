@@ -22,6 +22,13 @@ export const QUERIES = {
         orders: {
             GET: '/users/admin/orders',
             UPDATE: '/users/admin/order/:id',
+        },
+        overview: {
+            GET: '/users/admin/revenue',
+            QUICK_STATS: '/users/admin/quick-stats',
+        },
+        users: {
+            GET_ALL: '/users/admin/all-users',
         }
     },
 

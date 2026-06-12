@@ -1,10 +1,9 @@
-import { DollarSign, ShoppingBag, Users, Activity } from 'lucide-react'
+import { DollarSign, ShoppingBag, Users } from 'lucide-react'
 
 const STATS = [
     { title: "Total Revenue", value: "$45,231.89", change: "+20.1%", isPositive: true, icon: DollarSign },
     { title: "Active Orders", value: "356", change: "+12.5%", isPositive: true, icon: ShoppingBag },
     { title: "Total Customers", value: "2,405", change: "+4.3%", isPositive: true, icon: Users },
-    { title: "Active Now", value: "48", change: "-1.2%", isPositive: false, icon: Activity },
 ]
 
 export const Overview = () => {
@@ -16,7 +15,7 @@ export const Overview = () => {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {STATS.map((stat) => {
                     const Icon = stat.icon
                     return (
