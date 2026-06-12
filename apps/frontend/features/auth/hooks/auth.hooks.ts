@@ -31,15 +31,10 @@ export const useRegister = () => {
 }
 
 export const useLogout = () => {
-    const queryClient = useQueryClient()
     return useMutation({
         mutationFn: async () => {
             const response = await authClientService.logout()
             return response
-        },
-        onSuccess: () => {
-            queryClient.setQueryData([QUERIES.ME], null)
-            queryClient.removeQueries({ queryKey: [QUERIES.ME] })
         }
     })
 }
