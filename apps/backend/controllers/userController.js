@@ -233,7 +233,6 @@ export const toggleUserStatus = async (req, res) => {
 
     res.status(200).json({
       status: "success",
-      user,
       message: `user account ${isActive ? 'activated' : 'suspended'} successfully`,
     });
   } catch (error) {
