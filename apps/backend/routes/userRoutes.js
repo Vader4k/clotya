@@ -1,5 +1,5 @@
 import express from 'express'
-import { getOrders, updateProfile, updatePassword, getAdminOrders, updateOrderStatus, getAllUsers } from '../controllers/userController.js'
+import { getOrders, updateProfile, updatePassword, getAdminOrders, updateOrderStatus, getAllUsers, toggleUserStatus } from '../controllers/userController.js'
 import { protect } from '../middleware/verify-token.middleware.js'
 import { admin } from '../middleware/admin.middleware.js'
 import { getQuickStats, revenueOverview } from '../controllers/overviewController.js'
@@ -14,5 +14,6 @@ router.put('/update-password', protect, updatePassword)
 router.get('/admin/revenue', protect, admin, revenueOverview)
 router.get('/admin/quick-stats', protect, admin, getQuickStats)
 router.get('/admin/all-users', protect, admin, getAllUsers)
+router.put('/admin/user/:id/status', protect, admin, toggleUserStatus)
 
 export default router

@@ -10,6 +10,9 @@ import publicRoute from './routes/publicRoutes.js'
 import orderRoute from './routes/orderRoutes.js'
 import userRoute from './routes/userRoutes.js'
 import helmet from "helmet";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express()
 

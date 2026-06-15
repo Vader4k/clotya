@@ -2,6 +2,8 @@ import { Order } from "../models/order.schema.js";
 import { Product } from "../models/product.model.js";
 import { Cart } from "../models/cart.model.js";
 import { initializeTransaction, verifySignature, verifyTransaction } from "../utils/paystack.js";
+import { sendEmail } from "../utils/mail.js";
+import { orderConfirmationEmail } from "../emails/orderConfirmation.js";
 
 export const checkout = async (req, res) => {
     try {
@@ -104,6 +106,12 @@ export const checkout = async (req, res) => {
         } else if (req.cartId) {
             await Cart.findOneAndUpdate({ cartId: req.cartId }, { items: [] })
         }
+
+        sendEmail({
+            to: shippingAddress.email,
+            subject: `Order Received - ${createdOrder.orderNumber}`,
+            html: orderConfirmationEmail(createdOrder),
+        });
 
         res.status(201).json({
             success: true,
@@ -275,6 +283,12 @@ export const paystackWebhook = async (req, res) => {
                 await Cart.findOneAndUpdate({ _id: order.cartId }, { items: [] });
             }
 
+
+            sendEmail({
+                to: order.shippingAddress.email,
+                subject: `Order Received - ${order.orderNumber}`,
+                html: orderConfirmationEmail(order),
+            });
 
             console.log(`Order ${orderId} fulfilled successfully via Paystack`);
         }

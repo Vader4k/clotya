@@ -1,6 +1,12 @@
 import { Order } from "../models/order.schema.js";
 import { User } from "../models/user.js";
 import { hashPassword, comparePassword } from "../utils/utils.js";
+import { sendEmail } from "../utils/mail.js";
+import { orderProcessingEmail } from "../emails/orderProcessing.js";
+import { orderShippedEmail } from "../emails/orderShipped.js";
+import { orderDeliveredEmail } from "../emails/orderDelivered.js";
+import { orderCancelledEmail } from "../emails/orderCancelled.js";
+import { accountSuspendedEmail, accountReactivatedEmail } from "../emails/accountSuspended.js";
 
 export const getOrders = async (req, res) => {
   try {
@@ -142,6 +148,22 @@ export const updateOrderStatus = async (req, res) => {
     order.status = status;
     await order.save();
 
+    // Send status update email (skip pending — that's the default)
+    const statusEmails = {
+      processing: { subject: `Order Processing - ${order.orderNumber}`, html: orderProcessingEmail(order) },
+      shipped: { subject: `Order Shipped - ${order.orderNumber}`, html: orderShippedEmail(order) },
+      delivered: { subject: `Order Delivered - ${order.orderNumber}`, html: orderDeliveredEmail(order) },
+      cancelled: { subject: `Order Cancelled - ${order.orderNumber}`, html: orderCancelledEmail(order) },
+    };
+
+    if (statusEmails[status]) {
+      sendEmail({
+        to: order.shippingAddress.email,
+        subject: statusEmails[status].subject,
+        html: statusEmails[status].html,
+      });
+    }
+
     res.status(200).json({
       status: "success",
       order,
@@ -155,16 +177,25 @@ export const updateOrderStatus = async (req, res) => {
 export const getAllUsers = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
+  const search = req.query.search || "";
   const skip = (page - 1) * limit;
 
   try {
-    const users = await User.find()
+    const query = {};
+    if (search) {
+      query.$or = [
+        { name: { $regex: search, $options: "i" } },
+        { email: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    const users = await User.find(query)
       .select("-password")
       .sort({ createdAt: -1 })
       .limit(limit)
       .skip(skip);
 
-    const total = await User.countDocuments();
+    const total = await User.countDocuments(query);
     res.status(200).json({
       status: "success",
       users,
@@ -175,6 +206,35 @@ export const getAllUsers = async (req, res) => {
         limit: limit,
       },
       message: "all users fetched successfully",
+    });
+  } catch (error) {
+    res.status(500).json({ status: "fail", message: "internal server error" });
+  }
+};
+
+export const toggleUserStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { isActive } = req.body;
+
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ status: "fail", message: "user not found" });
+    }
+
+    user.isActive = isActive;
+    await user.save();
+
+    sendEmail({
+      to: user.email,
+      subject: isActive ? "Your Account Has Been Reactivated" : "Your Account Has Been Suspended",
+      html: isActive ? accountReactivatedEmail(user.name) : accountSuspendedEmail(user.name),
+    });
+
+    res.status(200).json({
+      status: "success",
+      user,
+      message: `user account ${isActive ? 'activated' : 'suspended'} successfully`,
     });
   } catch (error) {
     res.status(500).json({ status: "fail", message: "internal server error" });

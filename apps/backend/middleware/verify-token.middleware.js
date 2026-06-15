@@ -16,6 +16,10 @@ export const protect = async (req, res, next) => {
             return res.status(401).json({message: "User not found"})
         }
 
+        if(req.user.isActive === false){
+            return res.status(401).json({message: "User is not active"})
+        }
+
         next()
     } catch (error) {
         return res.status(401).json({message: "Token invalid or expired"})

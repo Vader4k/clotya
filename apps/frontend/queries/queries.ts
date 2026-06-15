@@ -29,6 +29,7 @@ export const QUERIES = {
         },
         users: {
             GET_ALL: '/users/admin/all-users',
+            TOGGLE_STATUS: '/users/admin/user/:id/status',
         }
     },
 

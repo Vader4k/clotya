@@ -167,6 +167,7 @@ export const hideNavOnRoutes = ['/admin', '/admin/products', '/admin/orders', '/
 export const SIDEBAR_LINKS = [
     { name: "Overview", href: "/admin", icon: LayoutDashboard },
     { name: "Categories", href: "/admin/categories", icon: Tags },
+    { name: "Users", href: '/admin/users', icon: User },
     { name: "Products", href: "/admin/products", icon: Package },
     { name: "Orders", href: "/admin/orders", icon: ShoppingCart },
     { name: "Blogs", href: "/admin/blogs", icon: Library },
