@@ -19,7 +19,7 @@ export const accountSuspendedEmail = (name) => {
       Account Suspended
     </h1>
     <p style="font-size: 15px; color: #6b7280; text-align: center; margin: 0 0 32px 0; line-height: 1.6;">
-      Hi ${name}, your stylr account has been suspended. You will not be able to log in or place orders until your account is reactivated.
+      Hi ${name}, your Stylr account has been suspended. You will not be able to log in or place orders until your account is reactivated.
     </p>
 
     <div style="border-top: 1px solid #e5e7eb; margin: 0 0 24px 0;"></div>
@@ -63,7 +63,7 @@ export const accountReactivatedEmail = (name) => {
       Your Account Has Been Reactivated
     </h1>
     <p style="font-size: 15px; color: #6b7280; text-align: center; margin: 0 0 32px 0; line-height: 1.6;">
-      Hi ${name}, great news! Your stylrr account has been reactivated. You can now log in and continue shopping as usual.
+      Hi ${name}, great news! Your Stylr account has been reactivated. You can now log in and continue shopping as usual.
     </p>
 
     <div style="border-top: 1px solid #e5e7eb; margin: 0 0 24px 0;"></div>

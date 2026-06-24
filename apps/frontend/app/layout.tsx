@@ -45,12 +45,12 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://stylr.vercel.app",
+    canonical: "https://stylrr.vercel.app",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://stylr.vercel.app",
+    url: "https://stylrr.vercel.app",
     siteName: "Stylr",
     title: "Stylr | Modern Fashion & Accessories",
     description: "Stylr - Premium quality fashion and accessories for all genders and occasions.",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/site.webmanifest',
-  metadataBase: new URL('https://stylr.vercel.app'),
+  metadataBase: new URL('https://stylrr.vercel.app'),
   category: 'fashion',
   classification: 'Fashion Store',
   other: {
