@@ -1,4 +1,4 @@
-const SITE_URL = process.env.FRONTEND_URL || "https://clotya.vercel.app";
+const SITE_URL = process.env.FRONTEND_URL || "https://stylrr.vercel.app";
 const LOGO_URL = `${SITE_URL}/logo.png`;
 const SUPPORT_EMAIL = "info@gmail.com";
 const SUPPORT_PHONE = "(+800) 1234 5678 90";
@@ -8,7 +8,7 @@ export const emailHeader = () => `
     <a href="${SITE_URL}" style="text-decoration: none;">
       <img 
         src="${LOGO_URL}" 
-        alt="Clotya" 
+        alt="Stylr" 
         width="120" 
         height="auto" 
         style="display: inline-block; filter: invert(1);"
@@ -34,14 +34,14 @@ export const emailFooter = () => `
     </p>
     <div style="border-top: 1px solid #e5e7eb; margin-top: 20px; padding-top: 20px;">
       <p style="color: #d1d5db; font-size: 11px; margin: 0;">
-        &copy; ${new Date().getFullYear()} Clotya. All rights reserved.
+        &copy; ${new Date().getFullYear()} Stylr. All rights reserved.
       </p>
     </div>
   </div>
 `;
 
 /**
- * Wraps email body content with the standard Clotya header, footer, and base styles.
+ * Wraps email body content with the standard Stylr header, footer, and base styles.
  * @param {string} bodyContent - The inner HTML content of the email.
  * @returns {string} Full HTML email string.
  */
@@ -52,7 +52,7 @@ export const emailLayout = (bodyContent) => `
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Clotya</title>
+  <title>Stylr</title>
   <!--[if mso]>
   <noscript>
     <xml>

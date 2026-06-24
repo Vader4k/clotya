@@ -1,5 +1,5 @@
 {
-  "name": "clotya-monorepo",
+  "name": "stylr-monorepo",
   "private": true,
   "scripts": {
     "build": "turbo run build",

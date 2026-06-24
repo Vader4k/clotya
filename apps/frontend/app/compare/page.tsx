@@ -3,7 +3,7 @@ import { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Compare Products",
-  description: "Compare features, prices, and ratings of your favorite fashion items at Clotya to make the best choice.",
+  description: "Compare features, prices, and ratings of your favorite fashion items at stylr to make the best choice.",
 }
 
 const ComparePage = () => {

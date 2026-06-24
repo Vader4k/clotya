@@ -2,20 +2,20 @@
 
 ## Short Description
 
-Clotya is a full-stack fashion e-commerce platform built with Next.js, React, TypeScript, Express.js, MongoDB, Cloudinary, and Paystack. It includes a modern storefront, customer accounts, cart, checkout, admin management, product filtering, blog, order tracking, and a VPS-ready deployment guide.
+Stylr is a full-stack fashion e-commerce platform built with Next.js, React, TypeScript, Express.js, MongoDB, Cloudinary, and Paystack. It includes a modern storefront, customer accounts, cart, checkout, admin management, product filtering, blog, order tracking, and a VPS-ready deployment guide.
 
 ## Long Description
 
-Clotya is a complete e-commerce solution for fashion stores, boutiques, clothing brands, and online retail businesses. It ships with a polished customer storefront, a powerful backend API, and admin tools for managing products, categories, orders, blogs, and users.
+Stylr is a complete e-commerce solution for fashion stores, boutiques, clothing brands, and online retail businesses. It ships with a polished customer storefront, a powerful backend API, and admin tools for managing products, categories, orders, blogs, and users.
 
 The frontend is built with Next.js, React, TypeScript, Tailwind CSS, shadcn-style UI components, Zustand, and TanStack Query. The backend is built with Express.js, MongoDB/Mongoose, JWT authentication, Cloudinary uploads, Paystack payments, SMTP emails, and production-ready middleware.
 
-Buyers can use Clotya as a ready-made fashion store, customize the branding, connect their own database and payment gateway credentials, and deploy it to a VPS using aaPanel, PM2, Nginx, or a similar hosting panel.
+Buyers can use Stylr as a ready-made fashion store, customize the branding, connect their own database and payment gateway credentials, and deploy it to a VPS using aaPanel, PM2, Nginx, or a similar hosting panel.
 
 Live demo:
 
 ```text
-https://clotya.vercel.app
+https://stylrr.vercel.app
 ```
 
 ## Key Features

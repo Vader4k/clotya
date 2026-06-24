@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: product.name,
     description: product.shortDescription,
     openGraph: {
-      title: `${product.name} | Clotya`,
+      title: `${product.name} | Stylr`,
       description: product.shortDescription,
       images: [
         {

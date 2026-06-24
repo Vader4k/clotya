@@ -22,7 +22,7 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
 
   useEffect(() => {
     setIsMounted(true);
-    const stored = localStorage.getItem("clotya_currency") as CurrencyCode;
+    const stored = localStorage.getItem("stylr_currency") as CurrencyCode;
     if (stored && CURRENCIES[stored]) {
       setCurrencyState(stored);
     }
@@ -30,7 +30,7 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
 
   const setCurrency = (newCurrency: CurrencyCode) => {
     setCurrencyState(newCurrency);
-    localStorage.setItem("clotya_currency", newCurrency);
+    localStorage.setItem("stylr_currency", newCurrency);
   };
 
   const formatPrice = (priceInUSD: number | undefined | null) => {

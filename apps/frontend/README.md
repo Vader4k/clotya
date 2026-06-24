@@ -1,6 +1,6 @@
-# Clotya — Modern E-Commerce Storefront
+# Stylr — Modern E-Commerce Storefront
 
-A full-featured, modern e-commerce web application built with **Next.js 16**, **React 19**, and **TypeScript**. Clotya is a fashion-focused storefront with a feature-sliced architecture, rich product browsing experience, and a growing suite of commerce features.
+A full-featured, modern e-commerce web application built with **Next.js 16**, **React 19**, and **TypeScript**. Stylr is a fashion-focused storefront with a feature-sliced architecture, rich product browsing experience, and a growing suite of commerce features.
 
 ---
 
@@ -31,10 +31,10 @@ A full-featured, modern e-commerce web application built with **Next.js 16**, **
 
 ## 🏗️ Project Architecture
 
-Clotya uses a **feature-sliced** architecture: each domain is self-contained under `features/`, with its own components, hooks, services, stores, types, and utils.
+Stylr uses a **feature-sliced** architecture: each domain is self-contained under `features/`, with its own components, hooks, services, stores, types, and utils.
 
 ```text
-clotya/
+Stylr/
 ├── app/                        # Next.js App Router
 │   ├── @product/               # Intercepting route (quick-view modal)
 │   ├── blog/                   # Blog listing & post pages
@@ -109,8 +109,8 @@ clotya/
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/clotya.git
-cd clotya
+git clone https://github.com/your-username/Stylr.git
+cd Stylr
 npm install
 ```
 

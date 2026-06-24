@@ -22,10 +22,10 @@ const jost = Jost({
 
 export const metadata: Metadata = {
   title: {
-    default: "Clotya | Modern Fashion & Accessories Store",
-    template: "%s | Clotya"
+    default: "Stylr | Modern Fashion & Accessories Store",
+    template: "%s | Stylr"
   },
-  description: "Clotya - Your one-stop shop for high-quality fashion, accessories, and shoes for every occasion. Discover latest trends with worldwide shipping.",
+  description: "Stylr - Your one-stop shop for high-quality fashion, accessories, and shoes for every occasion. Discover latest trends with worldwide shipping.",
   keywords: [
     'fashion', 'clothing', 'shoes', 'accessories', 'bags', 'jewelry', 'watches',
     'sunglasses', 'hats', 'scarves', 'gloves', 'belts', 'wallets', 'keychains',
@@ -45,36 +45,36 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://clotya.vercel.app",
+    canonical: "https://stylr.vercel.app",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://clotya.vercel.app",
-    siteName: "Clotya",
-    title: "Clotya | Modern Fashion & Accessories",
-    description: "Clotya - Premium quality fashion and accessories for all genders and occasions.",
+    url: "https://stylr.vercel.app",
+    siteName: "Stylr",
+    title: "Stylr | Modern Fashion & Accessories",
+    description: "Stylr - Premium quality fashion and accessories for all genders and occasions.",
     images: [
       {
         url: "https://res.cloudinary.com/dpwljfhgl/image/upload/v1772491120/shop-banner_jmggvz.webp",
         width: 1200,
         height: 630,
-        alt: "Clotya | Fashion Store",
+        alt: "Stylr | Fashion Store",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Clotya | Modern Fashion & Accessories",
+    title: "Stylr | Modern Fashion & Accessories",
     description: "Your one-stop shop for high-quality fashion, accessories, and shoes.",
-    creator: "@clotya",
-    site: "@clotya",
+    creator: "@stylr",
+    site: "@stylr",
     images: [
       "https://res.cloudinary.com/dpwljfhgl/image/upload/v1772491120/shop-banner_jmggvz.webp",
     ],
   },
   manifest: '/site.webmanifest',
-  metadataBase: new URL('https://clotya.vercel.app'),
+  metadataBase: new URL('https://stylr.vercel.app'),
   category: 'fashion',
   classification: 'Fashion Store',
   other: {

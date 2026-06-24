@@ -15,12 +15,12 @@ import { useMe } from "@/features/auth/hooks/auth.hooks";
 const NavbarLogo = ({ width, height }: { width: number; height: number }) => {
   return (
     <Image
-      src="/logo.png"
+      src="/logo-black.png"
       alt="logo"
       width={width}
       height={height}
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      className="aspect-[4.49]"
+      className="h-auto"
       priority
     />
   );

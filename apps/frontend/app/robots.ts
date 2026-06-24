@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 
-const BASE_URL = 'https://clotya-chi.vercel.app';
+const BASE_URL = 'https://stylrr.vercel.app';
 
 export default function robots(): MetadataRoute.Robots {
   return {

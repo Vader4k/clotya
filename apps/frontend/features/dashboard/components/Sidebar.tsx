@@ -17,7 +17,7 @@ export const Sidebar = () => {
                 <div className="mb-6 px-3">
                     <Link href="/admin" className="flex items-center">
                         <span className="self-center whitespace-nowrap text-xl font-bold dark:text-white">
-                            Clotya <span className="text-primary">Admin</span>
+                            Stylr <span className="text-primary">Admin</span>
                         </span>
                     </Link>
                 </div>

@@ -299,7 +299,7 @@ export const addProduct = async (req, res) => {
     // Handle multiple images from files (FormData)
     if (req.files && Array.isArray(req.files)) {
       for (const file of req.files) {
-        const uploadedUrl = await uploadFromBuffer(file.buffer, "clotya");
+        const uploadedUrl = await uploadFromBuffer(file.buffer, "stylr");
         if (uploadedUrl) imageUrls.push(uploadedUrl);
       }
     }
@@ -383,7 +383,7 @@ export const updateProduct = async (req, res) => {
     // Handle new image uploads from files (FormData)
     if (req.files && Array.isArray(req.files)) {
       for (const file of req.files) {
-        const uploadedUrl = await uploadFromBuffer(file.buffer, "clotya");
+        const uploadedUrl = await uploadFromBuffer(file.buffer, "stylr");
         if (uploadedUrl) newImageUrls.push(uploadedUrl);
       }
     }

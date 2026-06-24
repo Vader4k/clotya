@@ -79,7 +79,7 @@ const CheckoutStatusView = ({ status, reference, message }: CheckoutStatusViewPr
           className="text-gray-500 mb-10 font-inter leading-relaxed"
         >
           {isSuccess
-            ? message || "Thank you for shopping with Clotya. Your order has been placed successfully and we'll notify you once it ships."
+            ? message || "Thank you for shopping with Stylr. Your order has been placed successfully and we'll notify you once it ships."
             : message || "We were unable to process your payment. Please check your card details or try an alternative payment method."}
         </motion.p>
 

@@ -31,7 +31,7 @@ const FilterSheet = () => {
 
             {/* Footer */}
             <div className="mt-auto px-6 py-4 shrink-0">
-                <p className="text-xs text-gray-500">Copyright © 2026 Clotya. All rights reserved.</p>
+                <p className="text-xs text-gray-500">Copyright © 2026 Stylr. All rights reserved.</p>
             </div>
         </NativeSheet>
     )

@@ -1,6 +1,6 @@
-# Clotya Installation Guide
+# Stylr Installation Guide
 
-This guide explains how a buyer can run Clotya locally after downloading the marketplace ZIP.
+This guide explains how a buyer can run Stylr locally after downloading the marketplace ZIP.
 
 ## Requirements
 
@@ -38,7 +38,7 @@ Edit `apps/backend/.env`:
 ```env
 PORT=5000
 NODE_ENV=development
-MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/clotya
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/stylr
 JWT_SECRET=replace_with_a_long_random_secret
 FRONTEND_URL=http://localhost:3000
 PAYSTACK_SECRET_KEY=sk_test_xxxxxxxxxxxxxxxxxxxxx
@@ -76,8 +76,8 @@ pnpm dev
 Or run each app separately:
 
 ```bash
-pnpm --filter @clotya/backend dev
-pnpm --filter @clotya/frontend dev
+pnpm --filter @Stylr/backend dev
+pnpm --filter @Stylr/frontend dev
 ```
 
 Open:
@@ -96,13 +96,13 @@ pnpm build
 Start backend:
 
 ```bash
-pnpm --filter @clotya/backend start
+pnpm --filter @Stylr/backend start
 ```
 
 Start frontend:
 
 ```bash
-pnpm --filter @clotya/frontend start
+pnpm --filter @Stylr/frontend start
 ```
 
 ## 6. Common Setup Notes

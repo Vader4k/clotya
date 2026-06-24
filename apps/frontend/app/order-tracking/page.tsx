@@ -3,7 +3,7 @@ import { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Track Your Order",
-  description: "Check the status of your Clotya order. Enter your Order Number and email to get real-time tracking updates with live map visualization.",
+  description: "Check the status of your Stylr order. Enter your Order Number and email to get real-time tracking updates with live map visualization.",
 }
 
 const page = () => {

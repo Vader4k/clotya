@@ -1,6 +1,6 @@
-# Clotya VPS Deployment Guide
+# stylr VPS Deployment Guide
 
-This guide is for buyers who want to host Clotya on a VPS instead of Vercel, Railway, or Render. It covers aaPanel first, then a generic PM2/Nginx setup that also applies to many control panels.
+This guide is for buyers who want to host stylr on a VPS instead of Vercel, Railway, or Render. It covers aaPanel first, then a generic PM2/Nginx setup that also applies to many control panels.
 
 ## Recommended VPS Requirements
 
@@ -23,7 +23,7 @@ Recommended production domains:
 The existing live demo is available at:
 
 ```text
-https://clotya.vercel.app
+https://stylrr.vercel.app
 ```
 
 ## Environment Values For VPS
@@ -33,7 +33,7 @@ Backend `apps/backend/.env`:
 ```env
 PORT=5000
 NODE_ENV=production
-MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/clotya
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/stylr
 JWT_SECRET=replace_with_a_long_random_secret
 FRONTEND_URL=https://yourdomain.com
 PAYSTACK_SECRET_KEY=sk_live_or_sk_test_key
@@ -77,15 +77,15 @@ MongoDB can be installed separately, but MongoDB Atlas is recommended because it
 Upload the project ZIP and extract it to a directory such as:
 
 ```text
-/www/wwwroot/clotya
+/www/wwwroot/stylr
 ```
 
 Or clone from your private repository:
 
 ```bash
 cd /www/wwwroot
-git clone your-repository-url clotya
-cd clotya
+git clone your-repository-url stylr
+cd stylr
 ```
 
 ### 4. Install Node.js And pnpm
@@ -101,7 +101,7 @@ npm install -g pnpm
 ### 5. Install Dependencies
 
 ```bash
-cd /www/wwwroot/clotya
+cd /www/wwwroot/stylr
 pnpm install
 ```
 
@@ -110,8 +110,8 @@ pnpm install
 Create:
 
 ```text
-/www/wwwroot/clotya/apps/backend/.env
-/www/wwwroot/clotya/apps/frontend/.env
+/www/wwwroot/stylr/apps/backend/.env
+/www/wwwroot/stylr/apps/frontend/.env
 ```
 
 Use the production values shown above.
@@ -119,23 +119,23 @@ Use the production values shown above.
 ### 7. Build The Frontend
 
 ```bash
-cd /www/wwwroot/clotya
-pnpm --filter @clotya/frontend build
+cd /www/wwwroot/stylr
+pnpm --filter @stylr/frontend build
 ```
 
 ### 8. Start Backend With PM2
 
 ```bash
-cd /www/wwwroot/clotya/apps/backend
-pm2 start server.js --name clotya-backend
+cd /www/wwwroot/stylr/apps/backend
+pm2 start server.js --name stylr-backend
 pm2 save
 ```
 
 ### 9. Start Frontend With PM2
 
 ```bash
-cd /www/wwwroot/clotya/apps/frontend
-pm2 start "pnpm start" --name clotya-frontend
+cd /www/wwwroot/stylr/apps/frontend
+pm2 start "pnpm start" --name stylr-frontend
 pm2 save
 ```
 
@@ -202,8 +202,8 @@ npm install -g pnpm pm2
 
 ```bash
 cd /var/www
-git clone your-repository-url clotya
-cd clotya
+git clone your-repository-url stylr
+cd stylr
 pnpm install
 ```
 
@@ -212,8 +212,8 @@ pnpm install
 Create:
 
 ```text
-/var/www/clotya/apps/backend/.env
-/var/www/clotya/apps/frontend/.env
+/var/www/stylr/apps/backend/.env
+/var/www/stylr/apps/frontend/.env
 ```
 
 Use the production env values above.
@@ -221,18 +221,18 @@ Use the production env values above.
 ### 4. Build Frontend
 
 ```bash
-cd /var/www/clotya
-pnpm --filter @clotya/frontend build
+cd /var/www/stylr
+pnpm --filter @stylr/frontend build
 ```
 
 ### 5. Start Apps With PM2
 
 ```bash
-cd /var/www/clotya/apps/backend
-pm2 start server.js --name clotya-backend
+cd /var/www/stylr/apps/backend
+pm2 start server.js --name stylr-backend
 
-cd /var/www/clotya/apps/frontend
-pm2 start "pnpm start" --name clotya-frontend
+cd /var/www/stylr/apps/frontend
+pm2 start "pnpm start" --name stylr-frontend
 
 pm2 save
 pm2 startup
@@ -242,7 +242,7 @@ Run the command printed by `pm2 startup` so PM2 restarts after server reboot.
 
 ### 6. Nginx Config For Frontend
 
-Create `/etc/nginx/sites-available/clotya-frontend`:
+Create `/etc/nginx/sites-available/stylr-frontend`:
 
 ```nginx
 server {
@@ -262,7 +262,7 @@ server {
 
 ### 7. Nginx Config For Backend API
 
-Create `/etc/nginx/sites-available/clotya-api`:
+Create `/etc/nginx/sites-available/stylr-api`:
 
 ```nginx
 server {
@@ -286,8 +286,8 @@ server {
 Enable both sites:
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/clotya-frontend /etc/nginx/sites-enabled/
-sudo ln -s /etc/nginx/sites-available/clotya-api /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/stylr-frontend /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/stylr-api /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 ```
@@ -310,10 +310,10 @@ NEXT_PUBLIC_API_URL=https://api.yourdomain.com/api
 Then rebuild and restart:
 
 ```bash
-cd /var/www/clotya
-pnpm --filter @clotya/frontend build
-pm2 restart clotya-frontend
-pm2 restart clotya-backend
+cd /var/www/stylr
+pnpm --filter @stylr/frontend build
+pm2 restart stylr-frontend
+pm2 restart stylr-backend
 ```
 
 ## Option 3: Other Control Panels
@@ -325,8 +325,8 @@ For cPanel, CyberPanel, HestiaCP, CloudPanel, Plesk, or similar panels:
 3. Set backend port to `5000` or the port assigned by the panel.
 4. Add backend environment variables from `apps/backend/.env.example`.
 5. Create another Node.js app for the frontend.
-6. Build the frontend with `pnpm --filter @clotya/frontend build`.
-7. Start frontend with `pnpm --filter @clotya/frontend start`.
+6. Build the frontend with `pnpm --filter @stylr/frontend build`.
+7. Start frontend with `pnpm --filter @stylr/frontend start`.
 8. Point the main domain to the frontend app.
 9. Point `api.yourdomain.com` to the backend app.
 10. Enable SSL for both domains.
@@ -336,12 +336,12 @@ If the panel only supports one Node.js app, run both apps with PM2 and use the p
 ## Updating The App On VPS
 
 ```bash
-cd /var/www/clotya
+cd /var/www/stylr
 git pull
 pnpm install
-pnpm --filter @clotya/frontend build
-pm2 restart clotya-backend
-pm2 restart clotya-frontend
+pnpm --filter @stylr/frontend build
+pm2 restart stylr-backend
+pm2 restart stylr-frontend
 ```
 
 ## Troubleshooting
@@ -357,7 +357,7 @@ FRONTEND_URL=https://yourdomain.com
 Then restart backend:
 
 ```bash
-pm2 restart clotya-backend
+pm2 restart stylr-backend
 ```
 
 ### Frontend cannot reach API
@@ -371,8 +371,8 @@ NEXT_PUBLIC_API_URL=https://api.yourdomain.com/api
 Then rebuild frontend:
 
 ```bash
-pnpm --filter @clotya/frontend build
-pm2 restart clotya-frontend
+pnpm --filter @stylr/frontend build
+pm2 restart stylr-frontend
 ```
 
 ### Images do not upload

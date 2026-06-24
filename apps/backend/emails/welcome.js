@@ -1,6 +1,6 @@
 import { emailLayout } from "./layout.js";
 
-const SITE_URL = process.env.FRONTEND_URL || "https://clotya.vercel.app";
+const SITE_URL = process.env.FRONTEND_URL || "https://stylrr.vercel.app";
 
 /**
  * Generates the welcome email HTML for a newly registered user.
@@ -18,7 +18,7 @@ export const welcomeEmail = (name) => {
 
     <!-- Heading -->
     <h1 style="font-size: 24px; font-weight: 700; color: #111827; text-align: center; margin: 0 0 8px 0;">
-      Welcome to Clotya, ${name}!
+      Welcome to Stylr, ${name}!
     </h1>
     <p style="font-size: 15px; color: #6b7280; text-align: center; margin: 0 0 32px 0; line-height: 1.6;">
       Your account has been created successfully. We're thrilled to have you join our community of fashion enthusiasts.

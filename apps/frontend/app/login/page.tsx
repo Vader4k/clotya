@@ -1,11 +1,10 @@
 import LoginForm from "@/features/auth/components/LoginForm";
-import Image from "next/image";
 import { ShieldCheck } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Admin Login",
-  description: "Secure login for the Clotya Admin Portal. Access platform management and operation tools.",
+  description: "Secure login for the Stylr Admin Portal. Access platform management and operation tools.",
   robots: {
     index: false,
     follow: false,

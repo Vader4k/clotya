@@ -21,7 +21,7 @@ const Hero = async () => {
         <div className="relative w-full xl:w-1/2 h-full flex items-center justify-center text-white overflow-hidden">
           <Image
             src={srcMen.replace('./public', '')}
-            alt="A man wearing a black hoodie from Clotya"
+            alt="A man wearing a black hoodie from Stylr"
             title="Men's Banner"
             fill
             priority
@@ -39,7 +39,7 @@ const Hero = async () => {
         <div className="relative w-full xl:w-1/2 h-full flex items-center justify-center text-white overflow-hidden">
           <Image
             src={srcWomen.replace('./public', '')}
-            alt="A woman wearing a gown from Clotya"
+            alt="A woman wearing a gown from Stylr"
             title="Women's Banner"
             fill
             priority

@@ -1,6 +1,6 @@
 import { emailLayout } from "./layout.js";
 
-const SITE_URL = process.env.FRONTEND_URL || "https://clotya.vercel.app";
+const SITE_URL = process.env.FRONTEND_URL || "https://stylrr.vercel.app";
 
 /**
  * Generates an order processing email.

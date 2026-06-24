@@ -1,8 +1,8 @@
-# Clotya - Full Stack Fashion E-Commerce Platform
+# Stylr - Full Stack Fashion E-Commerce Platform
 
-Clotya is a modern fashion e-commerce application with a Next.js storefront, an Express.js API, MongoDB data storage, Cloudinary image uploads, Paystack checkout, customer accounts, admin management, cart, blog, product comparison, and order tracking.
+Stylr is a modern fashion e-commerce application with a Next.js storefront, an Express.js API, MongoDB data storage, Cloudinary image uploads, Paystack checkout, customer accounts, admin management, cart, blog, product comparison, and order tracking.
 
-Live demo: https://clotya.vercel.app
+Live demo: https://stylrr.vercel.app
 
 ## What Is Included
 
@@ -20,7 +20,7 @@ Live demo: https://clotya.vercel.app
 ## Project Structure
 
 ```text
-clotya/
+Stylr/
 +-- apps/
 |   +-- frontend/      # Next.js storefront and admin dashboard
 |   +-- backend/       # Express.js REST API

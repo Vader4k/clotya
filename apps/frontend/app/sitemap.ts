@@ -3,8 +3,8 @@ import { QUERIES } from '@/queries/queries';
 import { Product } from '@/features/products/types/product.types';
 import { BlogCardProps } from '@/features/blogs/types/blog.types';
 
-const BASE_URL = 'https://clotya-chi.vercel.app';
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://clotya-api.vercel.app'; // Fallback if not defined
+const BASE_URL = 'https://stylrr.vercel.app';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://stylrr.vercel.app'; // Fallback if not defined
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 1. Static Routes

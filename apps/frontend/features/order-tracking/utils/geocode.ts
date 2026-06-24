@@ -52,7 +52,7 @@ export async function geocodeCity(city: string, state?: string, country?: string
             `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1`,
             {
                 headers: {
-                    'User-Agent': 'Clotya-OrderTracking/1.0'
+                    'User-Agent': 'Stylr-OrderTracking/1.0'
                 }
             }
         );

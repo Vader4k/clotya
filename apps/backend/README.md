@@ -1,6 +1,6 @@
-# Clotya Backend API
+# stylr Backend API
 
-This is the backend RESTful API for **Clotya**, a modern e-commerce clothing and fashion application. The API manages user authentication, product catalogs, shopping carts (both guest and authenticated), order processing, Paystack payment integration, automated inventory checks, order tracking, and content management (blogs & categories).
+This is the backend RESTful API for **stylr**, a modern e-commerce clothing and fashion application. The API manages user authentication, product catalogs, shopping carts (both guest and authenticated), order processing, Paystack payment integration, automated inventory checks, order tracking, and content management (blogs & categories).
 
 ---
 
@@ -88,9 +88,9 @@ Create a `.env` file in the root of `/apps/backend` matching the configuration b
 ### 1. Install Dependencies
 Run the install command from either the repository root (under pnpm workspaces) or inside the backend directory:
 ```bash
-# In clotya/apps/backend
+# In stylr/apps/backend
 npm install
-# Or from clotya/ root
+# Or from stylr/ root
 pnpm install
 ```
 

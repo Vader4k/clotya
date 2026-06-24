@@ -1,6 +1,6 @@
 import { emailLayout } from "./layout.js";
 
-const SITE_URL = process.env.FRONTEND_URL || "https://clotya.vercel.app";
+const SITE_URL = process.env.FRONTEND_URL || "https://stylrr.vercel.app";
 
 /**
  * Generates an order delivered email.
@@ -50,7 +50,7 @@ export const orderDeliveredEmail = (order) => {
     </table>
 
     <p style="font-size: 14px; color: #6b7280; text-align: center; margin: 28px 0 0 0; line-height: 1.6;">
-      Thank you for shopping with Clotya! We'd love to see you again.
+      Thank you for shopping with Stylrr! We'd love to see you again.
     </p>
 
     <div style="text-align: center; margin-top: 24px;">

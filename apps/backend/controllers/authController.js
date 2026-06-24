@@ -46,7 +46,7 @@ export const registerUser = async (req, res) => {
 
     sendEmail({
       to: user.email,
-      subject: "Welcome to Clotya!",
+      subject: "Welcome to Stylr!",
       html: welcomeEmail(user.name),
     })
 
