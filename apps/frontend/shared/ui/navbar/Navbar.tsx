@@ -20,7 +20,7 @@ const NavbarLogo = ({ width, height }: { width: number; height: number }) => {
       width={width}
       height={height}
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      className="h-auto"
+      className=""
       priority
     />
   );
@@ -63,7 +63,7 @@ const Navbar = () => {
 
         {/* Center logo — mobile only */}
         <div className="xl:hidden flex items-center justify-center">
-          <NavbarLogo width={100} height={100} />
+          <NavbarLogo width={100} height={30} />
         </div>
 
         {/* Desktop controls */}

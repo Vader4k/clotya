@@ -25,7 +25,7 @@ const page = async ({ searchParams }: PageProp) => {
   const currentPage = Number(resolvedSearchParams.page) || 1;
 
   return (
-    <main className="w-full max-w-7xl mx-auto my-6 xl:my-14 px-3 sm:px-5 xl:px-3">
+    <main className="w-full max-w-7xl mx-auto my-6 2xl:my-14 px-3 sm:px-5 xl:px-5">
       <div className="flex items-start gap-20">
         <div className="w-full flex-1 min-h-screen hidden xl:block">
           <FiltersPanel categories={categories} />

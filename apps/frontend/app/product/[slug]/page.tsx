@@ -53,7 +53,7 @@ const ProductPage = async ({ params }: { params: Promise<{ slug: string }> }) =>
   const relatedProducts = await productServices.getRelated(product._id)
 
   return (
-    <main className='w-full max-w-7xl mx-auto px-3 sm:px-10 lg:px-14 xl:px-3'>
+    <main className='w-full max-w-7xl mx-auto px-3 sm:px-10 lg:px-14 xl:px-5'>
       <RecentlyViewedTracker product={product} />
       <div className="mb-8 mt-4">
         {product.category && product.tags &&
